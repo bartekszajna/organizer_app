@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://picsum.photos/50/50" />
+    <title>Organizzzer App</title>
+  </head>
+  <body>
+    <h1>Your account data</h1>
+
+    <form method="POST" action="">
+      <div>
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" value="" />
+        <p></p>
+      </div>
+      <div>
+        <label for="email">Email address</label>
+        <input type="email" name="email" id="email" value="" />
+        <p></p>
+      </div>
+      <div>
+        <label for="password">Change password</label>
+        <input type="password" name="password" id="password" value="" />
+        <p></p>
+      </div>
+      <div>
+        <label for="repeat_password">Repeat new password</label>
+        <input
+          type="password"
+          name="repeat_password"
+          id="repeat_password"
+          value=""
+          ;
+        />
+        <p></p>
+      </div>
+      <button type="submit" name="update_account" value="update">
+        Update account
+      </button>
+    </form>
+    <form method="POST" action="">
+      <div>
+        <label for="delete"
+          >Want to delete account? Confirm with your password</label
+        >
+        <input type="password" name="delete" id="delete" value="" />
+        <p></p>
+      </div>
+      <button type="submit" name="delete_account" value="delete">
+        Delete account
+      </button>
+    </form>
+
+    <a href="profile.html">Back</a>
+  </body>
+</html>

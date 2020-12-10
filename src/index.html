@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://picsum.photos/50/50" />
+    <title>Organizzzer App</title>
+  </head>
+  <body>
+    <h1>
+      <a href="index.html">
+        LOGO
+        <p>Organi<span>zzz</span>er</p>
+      </a>
+    </h1>
+
+    <p>Your <span>work routine</span> now improved.</p>
+    <p>
+      Take notes, add things that you prioritize, manage them and get more stuff
+      done.
+    </p>
+
+    <a href="signup.html">Create account for free</a>
+
+    <button type="button">Log In</button>
+
+    <div aria-label="modal closed">
+      <p></p>
+      <form method="POST" action="">
+        <div>
+          <label for="username">username</label>
+          <input
+            autocomplete="username"
+            type="text"
+            name="username"
+            id="username"
+            value=""
+          />
+          <p></p>
+        </div>
+        <div>
+          <!-- minlength, maxlength, pattern
+                    :valid :invalid CSS pseudo classes
+                    atrybur aria-invalid jeśli niepoprawnie wypełnione pole
+                -->
+          <label for="password">password</label>
+          <input type="password" name="password" id="password" value="" />
+          <p></p>
+        </div>
+        <button type="button">Back</button>
+        <button type="submit" name="submit" value="login">Log in</button>
+      </form>
+    </div>
+  </body>
+</html>

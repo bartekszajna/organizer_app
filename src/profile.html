@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://picsum.photos/50/50" />
+    <title>Organizzzer App</title>
+  </head>
+  <body>
+    <nav role="navigation" aria-label="site links">
+      <ul>
+        <li>
+          <a href="index.html"> Organi<span>zzz</span>er </a>
+        </li>
+        <li>
+          <a href="account.html">Account</a>
+        </li>
+        <li>
+          <a href="tasks.html">Your tasks</a>
+        </li>
+        <li>
+          <a href="logout.html">Log out</a>
+        </li>
+      </ul>
+    </nav>
+
+    <h1>Hey, <span>user</span></h1>
+    <p1>What is the plan for today?</p1>
+
+    <button type="button">Add new task</button>
+
+    <form method="POST" action="">
+      <div>
+        <label for="title">Task title</label>
+        <input type="text" name="title" id="title" value="" />
+        <p></p>
+      </div>
+      <div>
+        <p>Priority level</p>
+        <div>
+          <label for="priority_choice_1">Low</label>
+          <input
+            type="radio"
+            id="priority_choice_1"
+            name="priority"
+            value="1"
+          />
+        </div>
+        <div>
+          <label for="priority_choice_2">Medium</label>
+          <input
+            type="radio"
+            id="priority_choice_2"
+            name="priority"
+            value="2"
+            checked
+          />
+        </div>
+        <div>
+          <label for="priority_choice_3">High</label>
+          <input
+            type="radio"
+            id="priority_choice_3"
+            name="priority"
+            value="3"
+          />
+        </div>
+        <p><?php echo $priority_error ?></p>
+      </div>
+      <div>
+        <label for="deadline">Deadline (yyyy-mm-dd)</label>
+        <input type="text" id="deadline" name="deadline" value="" />
+        <p><?php echo $deadline_error ?></p>
+      </div>
+      <div>
+        <label for="Description">Description</label>
+        <textarea
+          name="description"
+          id="description"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+      <button type="button">Back</button>
+      <button type="submit" name="submit" value="add">Add task</button>
+    </form>
+  </body>
+</html>

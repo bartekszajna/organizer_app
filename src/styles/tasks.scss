@@ -1,0 +1,29 @@
+@import 'reset';
+:root {
+  --background: linear-gradient(
+    45deg,
+    #325316,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888
+  );
+}
+body {
+  background: var(--background);
+}
+.container {
+  height: 100vh;
+  font-size: 50px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #27223a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pic {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+}

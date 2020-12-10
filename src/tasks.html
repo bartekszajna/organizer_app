@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://picsum.photos/50/50" />
+    <title>Organizzzer App</title>
+    <style>
+      article {
+        width: 200px;
+        margin: 20px;
+        background: blue;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Your current tasks</h1>
+    <p></p>
+    <main>
+      <article>
+        <header data-priority="">Task title</header>
+        <time datetime>2020-11-20</time>
+        <p>Description</p>
+        <form method="POST" action="">
+          <button type="submit" name="delete_task" value="">Delete</button>
+        </form>
+      </article>
+    </main>
+
+    <div aria-label="toolbar">
+      <h2>Sort by:</h2>
+      <form action="" method="POST">
+        <div>
+          <label for="alphabetical">alphabetical order</label>
+          <input
+            type="radio"
+            name="sort"
+            id="alphabetical"
+            value="alphabetical"
+          />
+        </div>
+        <div>
+          <label for="newest">newest first</label>
+          <input type="radio" name="sort" id="newest" value="newest" />
+        </div>
+        <div>
+          <label for="oldest">oldest first</label>
+          <input type="radio" name="sort" id="oldest" value="oldest" />
+        </div>
+        <div>
+          <label for="least">least important</label>
+          <input type="radio" name="sort" id="least" value="least" />
+        </div>
+        <div>
+          <label for="most">most important</label>
+          <input type="radio" name="sort" id="most" value="most" />
+        </div>
+        <button type="submit" name="sort_tasks" value="sort">Sort</button>
+      </form>
+      <h2>Change view:</h2>
+      <div>
+        <label for="vertical">Vertical View</label>
+        <input
+          type="radio"
+          name="view"
+          id="vertical"
+          value="vertical"
+          checked
+        />
+        <label for="horizontal">Horizontal View</label>
+        <input type="radio" name="view" id="horizontal" value="horizontal" />
+      </div>
+    </div>
+
+    <a href="profile.html">Back</a>
+  </body>
+</html>

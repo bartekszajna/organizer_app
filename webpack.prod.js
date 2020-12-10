@@ -10,7 +10,13 @@ let config = {};
 
 config.mode = 'production';
 
-config.entry = { main: './src/scripts/main.js' };
+config.entry = {
+  index: './src/scripts/index.js',
+  signup: './src/scripts/signup.js',
+  profile: './src/scripts/profile.js',
+  account: './src/scripts/account.js',
+  tasks: './src/scripts/tasks.js',
+};
 
 config.output = {
   filename: '[name].[contenthash].js',
@@ -24,18 +30,7 @@ config.performance = {
 };
 
 config.optimization = {
-  minimizer: [
-    new OptimizeCssAssetsPlugin(),
-    new TerserPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/template.html',
-      minify: {
-        removeAttributeQuotes: true,
-        collapseWhitespace: true,
-        removeComments: true,
-      },
-    }),
-  ],
+  minimizer: [new OptimizeCssAssetsPlugin(), new TerserPlugin()],
 };
 
 config.module = {
@@ -84,7 +79,34 @@ config.module = {
 config.plugins = [
   new CleanWebpackPlugin(),
   new HtmlWebpackPlugin({
-    template: './src/template.html',
+    filename: 'index.html',
+    template: './src/index.html',
+    inject: true,
+    chunks: ['index'],
+  }),
+  new HtmlWebpackPlugin({
+    filename: 'signup.html',
+    template: './src/signup.html',
+    inject: true,
+    chunks: ['signup'],
+  }),
+  new HtmlWebpackPlugin({
+    filename: 'profile.html',
+    template: './src/profile.html',
+    inject: true,
+    chunks: ['profile'],
+  }),
+  new HtmlWebpackPlugin({
+    filename: 'account.html',
+    template: './src/account.html',
+    inject: true,
+    chunks: ['account'],
+  }),
+  new HtmlWebpackPlugin({
+    filename: 'tasks.html',
+    template: './src/tasks.html',
+    inject: true,
+    chunks: ['tasks'],
   }),
   new MiniCssExtractPlugin({
     filename: '[name].[contentHash].css',
