@@ -7,48 +7,65 @@
     <title>Organizzzer App</title>
   </head>
   <body>
-    <h1>
-      <a href="index.html">
-        LOGO
+    <h1 class="header">
+      <a href="index.html" class="logo">
+        <span logo></span>
         <p>Organi<span>zzz</span>er</p>
       </a>
     </h1>
 
-    <p>Your <span>work routine</span> now improved.</p>
-    <p>
+    <p class="title">
+      Your <span><br />work routine</span> now improved.
+    </p>
+    <p class="subtitle">
       Take notes, add things that you prioritize, manage them and get more stuff
       done.
     </p>
 
-    <a href="signup.html">Create account for free</a>
+    <a class="signup-button" href="signup.html">Create account for free</a>
 
-    <button type="button">Log In</button>
+    <button class="login-button" type="button">Log In</button>
 
-    <div aria-label="modal closed">
+    <div aria-label="modal closed" class="modal">
       <p></p>
-      <form method="POST" action="">
-        <div>
-          <label for="username">username</label>
+      <form class="login-form" method="POST" action="">
+        <div class="input">
           <input
             autocomplete="username"
             type="text"
             name="username"
             id="username"
             value=""
+            required
           />
-          <p></p>
+          <label for="username">username</label>
+          <p class="error-message">Something went wrong...</p>
         </div>
-        <div>
+        <div class="input">
           <!-- minlength, maxlength, pattern
                     :valid :invalid CSS pseudo classes
                     atrybur aria-invalid jeśli niepoprawnie wypełnione pole
                 -->
+
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value=""
+            required
+          />
           <label for="password">password</label>
-          <input type="password" name="password" id="password" value="" />
-          <p></p>
+          <p class="error-message">sad sadsadsad</p>
         </div>
-        <button type="button">Back</button>
-        <button type="submit" name="submit" value="login">Log in</button>
+        <button
+          class="login-submit-button"
+          type="submit"
+          name="submit"
+          value="login"
+        >
+          Log in
+        </button>
+        <button class="back-button" type="button">Back</button>
       </form>
     </div>
   </body>
