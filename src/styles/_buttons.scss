@@ -1,8 +1,10 @@
 %button {
   display: block;
   height: 4.5rem;
+  min-height: 4.5rem;
   color: white;
-  border-radius: 2rem;
+  outline: none;
+  border-radius: 3rem;
   line-height: 4.5rem;
   text-align: center;
   font-family: 'Poppins', 'sans-serif';
@@ -27,11 +29,10 @@
   line-height: 50%;
   border: 2px solid white;
   width: $width;
-  outline: none;
   &:focus,
   &:active,
   &:hover {
-    background-color: $button_hover;
+    background: rgba(255, 255, 255, 0.2);
   }
 }
 
