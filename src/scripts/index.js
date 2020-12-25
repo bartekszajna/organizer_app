@@ -1,5 +1,7 @@
 import '../styles/index.scss';
 
+let flag = true;
+
 const loginButton = document.querySelector('.login-button');
 const backButton = document.querySelector('.back-button');
 const modal = document.querySelector('.modal');
@@ -7,6 +9,10 @@ const firstEl = modal.querySelector('#username');
 const lastEl = modal.querySelector('.back-button');
 const form = document.querySelector('.login-form');
 const logo = document.querySelector('.logo');
+
+// window.addEventListener('load', () => {
+//   modal.classList.add('open');
+// });
 
 loginButton.addEventListener('click', openModal);
 
@@ -16,28 +22,23 @@ backButton.addEventListener('click', closeModal);
 
 modal.addEventListener('click', detectClickOutsideModal);
 
-let flag = false;
+modal.addEventListener('transitionend', (e) => {
+  if (flag) {
+    flag = false;
+    firstEl.focus();
+  }
+});
 
-function openModal(e) {
-  //modal.style.display = 'flex';
+function openModal() {
+  modal.classList.add('open');
   modal.classList.add('modal-open');
-  form.classList.add('login-form-open');
-
-  // modal.addEventListener('transitionend', () => {
-  //   if (flag) {
-  //     flag = true;
-  //     firstEl.focus();
-  //   }
-  // });
-  logo.style.zIndex = 1;
   loginButton.setAttribute('aria-expanded', 'true');
   firstEl.addEventListener('focus', handleFirstEl);
   lastEl.addEventListener('focus', handleLastEl);
 }
 
-function closeModal(e) {
+function closeModal() {
   modal.classList.remove('modal-open');
-  logo.style.zIndex = 0;
   loginButton.focus();
   loginButton.setAttribute('aria-expanded', 'false');
   firstEl.removeEventListener('focus', handleFirstEl);

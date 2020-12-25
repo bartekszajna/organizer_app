@@ -4,28 +4,26 @@ a:link {
   text-decoration: none;
   font-weight: 500;
 }
-
 a:visited {
   color: white;
 }
 
 a:active {
   color: $orange;
-  & > svg {
+  & path {
     fill: $orange;
   }
 }
 
 a:focus {
   color: $orange;
-  & > svg {
+  & path {
     fill: $orange;
   }
 }
-
 a:hover {
   color: $orange;
-  & > svg {
+  & path {
     fill: $orange;
   }
 }
