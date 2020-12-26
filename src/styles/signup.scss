@@ -24,6 +24,7 @@ body {
 }
 
 .header {
+  flex-grow: 2;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
@@ -47,19 +48,21 @@ body {
 
 .signup-form {
   flex-grow: 1;
+  position: relative;
   display: flex;
   flex-direction: column;
   .input {
     display: flex;
     flex-direction: column;
-    &:first-of-type {
-      flex-grow: 2;
-      flex-shrink: 1;
-      justify-content: flex-end;
-    }
+    padding-bottom: 1rem;
+    // &:first-of-type {
+    //   // flex-grow: 1;
+    //   // flex-shrink: 1;
+    //   // justify-content: flex-end;
+    // }
     &:last-of-type {
+      padding: 0;
       flex-grow: 1;
-      flex-shrink: 5;
     }
   }
 
@@ -80,7 +83,7 @@ body {
     color: rgba(255, 255, 255, 0.7);
   }
   .first_label {
-    transition: transform 0.35s ease;
+    transition: transform 0.5s ease;
   }
 }
 

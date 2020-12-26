@@ -1,35 +1,41 @@
 import '../styles/index.scss';
 
-let flag = true;
+let isModalOpening = false;
 
+const body = document.querySelector('body');
 const loginButton = document.querySelector('.login-button');
 const backButton = document.querySelector('.back-button');
 const modal = document.querySelector('.modal');
 const firstEl = modal.querySelector('#username');
 const lastEl = modal.querySelector('.back-button');
 const form = document.querySelector('.login-form');
-const logo = document.querySelector('.logo');
 
-// window.addEventListener('load', () => {
-//   modal.classList.add('open');
-// });
+hideBody();
+
+document.fonts.ready.then(function () {
+  showBody();
+});
+
+function hideBody() {
+  body.style.visibility = 'hidden';
+}
+
+function showBody() {
+  body.style.visibility = 'visible';
+}
 
 loginButton.addEventListener('click', openModal);
 
-document.addEventListener('keydown', detectEscapeEvent);
+modal.addEventListener('transitionend', focusOnFirstInput);
 
 backButton.addEventListener('click', closeModal);
 
 modal.addEventListener('click', detectClickOutsideModal);
 
-modal.addEventListener('transitionend', (e) => {
-  if (flag) {
-    flag = false;
-    firstEl.focus();
-  }
-});
+document.addEventListener('keydown', detectEscapeKeyEvent);
 
 function openModal() {
+  isModalOpening = true;
   modal.classList.add('open');
   modal.classList.add('modal-open');
   loginButton.setAttribute('aria-expanded', 'true');
@@ -45,14 +51,14 @@ function closeModal() {
   lastEl.removeEventListener('focus', handleLastEl);
 }
 
-function detectEscapeEvent(e) {
-  if (e.code === 'Escape') {
+function detectClickOutsideModal(e) {
+  if (!form.contains(e.target)) {
     backButton.click();
   }
 }
 
-function detectClickOutsideModal(e) {
-  if (!form.contains(e.target)) {
+function detectEscapeKeyEvent(e) {
+  if (e.code === 'Escape') {
     backButton.click();
   }
 }
@@ -73,4 +79,11 @@ function handleLastEl(e) {
       firstEl.focus();
     }
   });
+}
+
+function focusOnFirstInput() {
+  if (isModalOpening) {
+    isModalOpening = false;
+    firstEl.focus();
+  }
 }

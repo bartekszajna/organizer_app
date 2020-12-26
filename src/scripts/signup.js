@@ -3,8 +3,8 @@ const inputLabels = document.querySelectorAll('.input > label');
 
 window.addEventListener('load', addTransitionToLabels);
 
-addTransitionToLabels = function () {
+function addTransitionToLabels() {
   inputLabels.forEach((label) => {
-    label.style.transition = 'transform 0.35s ease';
+    label.style.transition = 'transform 0.5s ease';
   });
-};
+}
