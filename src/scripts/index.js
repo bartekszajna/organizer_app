@@ -1,28 +1,33 @@
 import '../styles/index.scss';
 
 let isModalOpening = false;
-
+const links = document.querySelectorAll('a');
 const body = document.querySelector('body');
+const signupButton = document.querySelector('.signup-button');
 const loginButton = document.querySelector('.login-button');
 const backButton = document.querySelector('.back-button');
 const modal = document.querySelector('.modal');
 const firstEl = modal.querySelector('#username');
 const lastEl = modal.querySelector('.back-button');
 const form = document.querySelector('.login-form');
-
-hideBody();
-
-document.fonts.ready.then(function () {
-  showBody();
+console.log(links);
+let address = '';
+body.addEventListener('transitionend', (e) => {
+  if (address) {
+    window.location.href = address;
+  }
+  address = '';
 });
 
-function hideBody() {
-  body.style.visibility = 'hidden';
-}
+links.forEach((link) =>
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    address = e.currentTarget.href;
+    hideBody();
+  })
+);
 
-function showBody() {
-  body.style.visibility = 'visible';
-}
+document.fonts.ready.then(showBody);
 
 loginButton.addEventListener('click', openModal);
 
@@ -33,6 +38,14 @@ backButton.addEventListener('click', closeModal);
 modal.addEventListener('click', detectClickOutsideModal);
 
 document.addEventListener('keydown', detectEscapeKeyEvent);
+
+function showBody() {
+  body.classList.add('visible');
+}
+
+function hideBody() {
+  body.classList.remove('visible');
+}
 
 function openModal() {
   isModalOpening = true;

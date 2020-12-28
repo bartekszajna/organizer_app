@@ -10,6 +10,8 @@
 }
 
 body {
+  opacity: 0;
+  visibility: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -21,6 +23,12 @@ body {
   background-image: linear-gradient(to top, #95bdef 70%, #558cd2);
   background-repeat: no-repeat;
   overflow-x: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
 }
 
 .header {
@@ -82,9 +90,10 @@ body {
     transform: translateY(-100%);
     color: rgba(255, 255, 255, 0.7);
   }
-  .first_label {
-    transition: transform 0.5s ease;
-  }
+}
+
+.transition {
+  transition: transform 0.5s ease;
 }
 
 .error-message {

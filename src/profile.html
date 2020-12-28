@@ -2,87 +2,111 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="https://picsum.photos/50/50" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
     <title>Organizzzer App</title>
   </head>
   <body>
-    <nav role="navigation" aria-label="site links">
-      <ul>
-        <li>
+    <nav class="navigation">
+      <button
+        class="hamburger"
+        aria-expanded="false"
+        aria-label="open menu"
+        type="button"
+      >
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+        <div class="line line-3"></div>
+      </button>
+      <ul class="list">
+        <li class="list-item">
           <a href="index.html"> Organi<span>zzz</span>er </a>
         </li>
-        <li>
+        <li class="list-item">
           <a href="account.html">Account</a>
         </li>
-        <li>
+        <li class="list-item">
           <a href="tasks.html">Your tasks</a>
         </li>
-        <li>
+        <li class="list-item">
           <a href="logout.html">Log out</a>
         </li>
       </ul>
     </nav>
 
-    <h1>Hey, <span>user</span></h1>
-    <p1>What is the plan for today?</p1>
+    <p class="title">Hey, <span>bartek1234sadasdsa</span></p>
+    <p class="subtitle">What is the plan for today?</p>
 
-    <button type="button">Add new task</button>
-
-    <form method="POST" action="">
-      <div>
-        <label for="title">Task title</label>
-        <input type="text" name="title" id="title" value="" />
-        <p></p>
-      </div>
-      <div>
-        <p>Priority level</p>
-        <div>
-          <label for="priority_choice_1">Low</label>
+    <button aria-label="open modal" aria-expanded="false" type="button">
+      Add new task
+    </button>
+    <div role="dialog" aria-modal="true" aria-label="login modal" class="modal">
+      <form method="POST" action="" class="addtask-form">
+        <div class="input">
           <input
-            type="radio"
-            id="priority_choice_1"
-            name="priority"
-            value="1"
+            type="text"
+            name="title"
+            id="title"
+            value=""
+            required
+            placeholder=" "
+            aria-invalid="false"
+            aria-errormessage="title-error"
           />
+          <label for="title">Task title</label>
+          <p aria-live="polite" id="title-error" class="error-message"></p>
         </div>
-        <div>
-          <label for="priority_choice_2">Medium</label>
-          <input
-            type="radio"
-            id="priority_choice_2"
-            name="priority"
-            value="2"
-            checked
-          />
+        <div class="input">
+          <p>Priority level</p>
+          <div>
+            <label for="priority_choice_1">Low</label>
+            <input
+              type="radio"
+              id="priority_choice_1"
+              name="priority"
+              value="1"
+            />
+          </div>
+          <div>
+            <label for="priority_choice_2">Medium</label>
+            <input
+              type="radio"
+              id="priority_choice_2"
+              name="priority"
+              value="2"
+              checked
+            />
+          </div>
+          <div>
+            <label for="priority_choice_3">High</label>
+            <input
+              type="radio"
+              id="priority_choice_3"
+              name="priority"
+              value="3"
+            />
+          </div>
+          <p></p>
         </div>
-        <div>
-          <label for="priority_choice_3">High</label>
-          <input
-            type="radio"
-            id="priority_choice_3"
-            name="priority"
-            value="3"
-          />
+        <div class="input">
+          <label for="deadline">Deadline (yyyy-mm-dd)</label>
+          <input type="text" id="deadline" name="deadline" value="" />
+          <p></p>
         </div>
-        <p><?php echo $priority_error ?></p>
-      </div>
-      <div>
-        <label for="deadline">Deadline (yyyy-mm-dd)</label>
-        <input type="text" id="deadline" name="deadline" value="" />
-        <p><?php echo $deadline_error ?></p>
-      </div>
-      <div>
-        <label for="Description">Description</label>
-        <textarea
-          name="description"
-          id="description"
-          cols="30"
-          rows="10"
-        ></textarea>
-      </div>
-      <button type="button">Back</button>
-      <button type="submit" name="submit" value="add">Add task</button>
-    </form>
+        <div class="input">
+          <label for="Description">Description</label>
+          <textarea
+            name="description"
+            id="description"
+            cols="30"
+            rows="10"
+          ></textarea>
+        </div>
+        <button type="button">Back</button>
+        <button type="submit" name="submit" value="add">Add task</button>
+      </form>
+    </div>
   </body>
 </html>
