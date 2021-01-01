@@ -36,12 +36,18 @@
       </ul>
     </nav>
 
-    <p class="title">Hey, <span>bartek1234sadasdsa</span></p>
+    <p class="title">Hey, <span>explosion95</span></p>
     <p class="subtitle">What is the plan for today?</p>
 
-    <button aria-label="open modal" aria-expanded="false" type="button">
+    <button
+      aria-label="open modal"
+      aria-expanded="false"
+      type="button"
+      class="addtask-button"
+    >
       Add new task
     </button>
+
     <div role="dialog" aria-modal="true" aria-label="login modal" class="modal">
       <form method="POST" action="" class="addtask-form">
         <div class="input">
@@ -56,56 +62,83 @@
             aria-errormessage="title-error"
           />
           <label for="title">Task title</label>
-          <p aria-live="polite" id="title-error" class="error-message"></p>
+          <p aria-live="polite" id="title-error" class="error-message">
+            Lorem ipsum dolor sit amet.
+          </p>
         </div>
         <div class="input">
           <p>Priority level</p>
-          <div>
-            <label for="priority_choice_1">Low</label>
-            <input
-              type="radio"
-              id="priority_choice_1"
-              name="priority"
-              value="1"
-            />
+          <div class="radio-group">
+            <div class="radio-input">
+              <input
+                type="radio"
+                id="priority_choice_1"
+                name="priority"
+                value="1"
+              />
+              <label for="priority_choice_1">Low</label>
+            </div>
+            <div class="radio-input">
+              <input
+                type="radio"
+                id="priority_choice_2"
+                name="priority"
+                value="2"
+                checked
+              />
+              <label for="priority_choice_2">Medium</label>
+            </div>
+            <div class="radio-input">
+              <input
+                type="radio"
+                id="priority_choice_3"
+                name="priority"
+                value="3"
+              />
+              <label for="priority_choice_3">High</label>
+            </div>
           </div>
-          <div>
-            <label for="priority_choice_2">Medium</label>
-            <input
-              type="radio"
-              id="priority_choice_2"
-              name="priority"
-              value="2"
-              checked
-            />
-          </div>
-          <div>
-            <label for="priority_choice_3">High</label>
-            <input
-              type="radio"
-              id="priority_choice_3"
-              name="priority"
-              value="3"
-            />
-          </div>
-          <p></p>
+          <p aria-live="polite" id="priority-error" class="error-message">
+            Lorem ipsum dolor sit amet.
+          </p>
         </div>
         <div class="input">
+          <input
+            type="text"
+            id="deadline"
+            name="deadline"
+            value=""
+            placeholder=" "
+            aria-invalid="false"
+            aria-errormessage="deadline-error"
+          />
           <label for="deadline">Deadline (yyyy-mm-dd)</label>
-          <input type="text" id="deadline" name="deadline" value="" />
-          <p></p>
+          <p aria-live="polite" id="deadline-error" class="error-message">
+            Lorem ipsum dolor sit amet.
+          </p>
         </div>
         <div class="input">
           <label for="Description">Description</label>
           <textarea
+            maxlength="100"
             name="description"
             id="description"
-            cols="30"
-            rows="10"
+            placeholder="Optional, up to 100 characters..."
           ></textarea>
         </div>
-        <button type="button">Back</button>
-        <button type="submit" name="submit" value="add">Add task</button>
+        <div class="button-group">
+          <button
+            type="submit"
+            name="submit"
+            value="add"
+            class="task-submit-button"
+          >
+            Add task
+          </button>
+          <button aria-label="close modal" class="back-button" type="button">
+            Back
+          </button>
+        </div>
       </form>
     </div>
   </body>

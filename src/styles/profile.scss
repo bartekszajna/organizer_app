@@ -19,11 +19,10 @@ body {
   opacity: 0;
   visibility: hidden;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   font-size: 1.8rem;
   min-height: 100vh;
-  font-weight: 500;
   padding: 0 10%;
   background-color: #95bdef;
   background-image: linear-gradient(to top, #95bdef 70%, #558cd2);
@@ -42,7 +41,7 @@ body {
   top: 0;
   right: 0;
   width: 100%;
-  height: 8rem;
+  height: 7rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -57,11 +56,11 @@ body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  z-index: 10;
+  z-index: 5;
   .line {
     width: 4rem;
     height: 0.4rem;
-    background: white;
+    background: $white;
     border-radius: 0.2rem;
     transition: transform 0.7s ease, opacity 0.5s ease;
     left: 1rem;
@@ -111,26 +110,32 @@ body {
   visibility: visible;
 }
 
-.list-item:first-child {
-  display: none;
+.list-item > a {
+  padding: 1rem 2rem;
+  margin: 0 4rem;
 }
 
-.addtask-form {
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  pointer-events: none;
+.list-item:first-child {
+  font-size: 3.2rem;
+  display: none;
+  font-family: 'Oleo Script', cursive;
+  span {
+    color: $orange;
+  }
+}
+
+.list-item:last-child {
+  font-weight: 500;
 }
 
 .title {
   overflow-wrap: break-word;
   width: 100%;
+  font-weight: 500;
   text-align: center;
   font-size: 3.8rem;
-  margin-bottom: 3rem;
+  margin: calc(50vh - 6rem) 0 3rem 0;
+
   span {
     color: $orange;
   }
@@ -139,4 +144,347 @@ body {
 .subtitle {
   text-align: center;
   font-size: 2rem;
+  flex-grow: 1;
+}
+
+.addtask-button {
+  @include secondary-button(18rem);
+  margin: 0 auto 4rem;
+}
+
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  background: linear-gradient(to top, #95bdef 70%, #558cd2);
+  position: absolute;
+  font-weight: 500;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  pointer-events: none;
+  &-open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+.open {
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.addtask-form {
+  color: $faded_white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 80%;
+  font-weight: 300;
+  height: 100%;
+  margin: 0 auto;
+  .input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    &:first-of-type {
+      flex-grow: 1;
+      margin-top: 4rem;
+      margin-bottom: -1rem;
+      justify-content: flex-end;
+    }
+    &:nth-child(3) {
+      margin-bottom: -2rem;
+    }
+    &:nth-child(4) {
+      flex-grow: 1;
+      margin: 0;
+    }
+
+    .radio-group {
+      display: flex;
+      justify-content: space-evenly;
+      margin: 1rem 0 0.5rem;
+      & + p {
+        transform: none;
+      }
+    }
+    textarea {
+      box-sizing: border-box;
+      resize: none;
+      font-weight: 300;
+      outline: none;
+      color: $faded_white;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      height: 8rem;
+      border-radius: 1rem;
+      background: rgba($blue, 0.3);
+      font-family: 'Poppins', sans-serif;
+      border: 2px solid transparent;
+      transition: border 0.5s ease;
+      &::placeholder {
+        color: $faded_white;
+      }
+      &:focus {
+        border: 2px solid $faded_white;
+      }
+    }
+  }
+
+  input[type='text'] {
+    @include text-input;
+    font-size: 1.4rem;
+    &:focus + label {
+      transform: translateY(-200%);
+      color: $white;
+    }
+    &:not(:placeholder-shown) + label {
+      transform: translateY(-200%);
+      color: $white;
+    }
+  }
+  .radio-input {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    color: $faded_white;
+    font-size: 1.4rem;
+    & > input {
+      margin: 0;
+      appearance: none;
+      width: 2.4rem;
+      height: 2.4rem;
+      border: none;
+      border-radius: 50%;
+      outline: none;
+    }
+    & > #priority_choice_1 {
+      background: $green;
+    }
+    & > #priority_choice_2 {
+      background: $yellow;
+    }
+    & > #priority_choice_3 {
+      background: $red;
+    }
+    & > input:checked {
+      transform: scale(1.2);
+      border: 0.2rem solid $faded_white;
+    }
+    & > input:checked + label {
+      color: $white;
+      font-size: 1.6rem;
+      font-weight: 500;
+    }
+    label {
+      margin-bottom: 0.5rem;
+    }
+  }
+  input[type='text'] + label {
+    line-height: 1.4;
+    transform: translateY(-100%);
+    color: $faded_white;
+    transition: transform 0.5s ease;
+  }
+}
+
+.error-message {
+  transform: translateY(-120%);
+  color: $red;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+.task-submit-button {
+  @include primary-button(15rem);
+  margin: 2rem auto;
+}
+.back-button {
+  @include secondary-button(15rem);
+  margin: 0 auto 4rem;
+}
+
+///////////////////////////////////////////
+// media queries
+
+@media (min-width: 520px) {
+  body {
+    font-size: 2rem;
+  }
+
+  .title {
+    font-size: 4.4rem;
+  }
+
+  .subtitle {
+    font-size: 2.6rem;
+  }
+
+  .addtask-form {
+    width: 70%;
+    .input:nth-child(3) {
+      margin-top: 1rem;
+    }
+    .radio-input > input {
+      width: 3rem;
+      height: 3rem;
+      & + label {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  .error-message {
+    font-size: 1.4rem;
+  }
+
+  .addtask-form .input textarea {
+    height: 6rem;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 2.4rem;
+  }
+
+  .title {
+    font-size: 7.2rem;
+  }
+
+  .subtitle {
+    font-size: 3.6rem;
+  }
+
+  .addtask-form {
+    width: 60%;
+
+    .radio-input {
+      font-size: 1.6rem;
+
+      & > input:checked + label {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  %button {
+    min-height: 5.5rem;
+  }
+
+  .task-submit-button {
+    width: 18rem;
+    margin: 0;
+  }
+
+  .back-button {
+    width: 18rem;
+    margin: 0;
+  }
+
+  .addtask-button {
+    width: 23rem;
+    margin-top: 6rem;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    margin-bottom: 4rem;
+    justify-content: space-between;
+  }
+  .error-message {
+    line-height: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: block;
+    background-color: $profile_blue;
+    background-size: cover;
+    background-image: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0.8)
+      ),
+      url('../assets/desktop_background2.jpg');
+    //background-position-x: right;
+  }
+
+  .navigation {
+    background: rgba($blue, 0.75);
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .list {
+    visibility: visible;
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: none;
+    flex-direction: row;
+    height: unset;
+    transform: none;
+  }
+
+  .list-item:first-child {
+    display: block;
+    flex-grow: 1;
+  }
+
+  .error-message {
+    color: $orange;
+  }
+
+  .modal {
+    background: rgba($profile_blue, 0.6);
+    backdrop-filter: blur(0.5rem);
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+  .addtask-form {
+    display: block;
+    box-sizing: border-box;
+    //padding-top: 7rem;
+    width: 80rem;
+    height: 55rem;
+    border-radius: 2rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    .input {
+      width: 50rem;
+      margin: 0 auto;
+      &:first-of-type {
+        margin-top: 7rem;
+        margin-bottom: -2rem;
+      }
+      &:nth-child(3) {
+        margin-bottom: -2rem;
+        margin-top: 4rem;
+      }
+      &:nth-child(4) {
+        margin: 0 auto;
+        textarea {
+          background: rgba(0, 0, 0, 0.6);
+        }
+      }
+    }
+
+    .button-group {
+      width: 50rem;
+      margin: 2rem auto;
+    }
+  }
 }

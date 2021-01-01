@@ -39,7 +39,7 @@ body {
   align-items: flex-start;
   padding-top: 1rem;
   z-index: 2;
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   font-family: 'Oleo Script', cursive;
   .logo {
     display: flex;
@@ -73,7 +73,7 @@ body {
 
 .subtitle {
   line-height: 2;
-  color: rgba(255, 255, 255, 0.8);
+  color: $faded_white;
   flex-grow: 2;
 }
 
@@ -91,7 +91,6 @@ body {
   opacity: 0;
   visibility: hidden;
   display: flex;
-  justify-content: space-between;
   background: linear-gradient(to top, #95bdef 70%, #558cd2);
   position: absolute;
   top: 0;
@@ -110,11 +109,11 @@ body {
 }
 
 .error-message {
-  transform: translateY(-100%);
+  transform: translateY(-120%);
   color: $red;
   font-size: 1.2rem;
   font-weight: 500;
-  line-height: 3rem;
+  line-height: 1.8;
 }
 
 .login-form {
@@ -141,17 +140,17 @@ body {
     @include text-input;
     &:focus + label {
       transform: translateY(-200%);
-      color: white;
+      color: $white;
     }
     &:not(:placeholder-shown) + label {
       transform: translateY(-200%);
-      color: white;
+      color: $white;
     }
   }
   label {
     line-height: 1.4;
     transform: translateY(-100%);
-    color: rgba(255, 255, 255, 0.7);
+    color: $faded_white;
     transition: transform 0.5s ease;
   }
 }
@@ -168,17 +167,6 @@ body {
 ///////////////////////////////////////////
 // media queries
 
-@media (max-width: 325px) {
-  .signup-button {
-    font-size: 1.6rem;
-    width: 22rem;
-  }
-  .login-button {
-    font-size: 1.6rem;
-    width: 14rem;
-  }
-}
-
 @media (min-width: 520px) {
   body {
     font-size: 2.4rem;
@@ -190,6 +178,7 @@ body {
 
   .error-message {
     font-size: 1.4rem;
+    line-height: 2;
   }
   .signup-button {
     width: 35rem;
@@ -203,7 +192,6 @@ body {
 
   .header {
     font-size: 3.4rem;
-    padding-top: 3rem;
   }
 
   .title {
@@ -212,13 +200,15 @@ body {
       font-size: 5rem;
     }
   }
-}
-
-@media (min-width: 768px) {
   .login-form {
     width: 70%;
   }
+  .input {
+    padding-bottom: 1rem;
+  }
+}
 
+@media (min-width: 768px) {
   .back-button,
   .login-submit-button {
     margin: 0;
@@ -234,7 +224,7 @@ body {
 
 @media (min-width: 1024px) {
   body {
-    background-color: #312102;
+    background-color: $signup_brown;
     background-size: cover;
     background-image: linear-gradient(
         -45deg,
@@ -242,17 +232,20 @@ body {
         rgba(0, 0, 0, 0) 35%,
         rgba(0, 0, 0, 1)
       ),
-      url('../assets/desktop_background.png');
+      url('../assets/desktop_background1.jpg');
+    background-position-x: right;
   }
 
   .header {
     font-size: 4.2rem;
     justify-content: flex-start;
+    padding-top: 3rem;
+    flex-grow: 2;
   }
 
   .title {
     font-size: 6rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     span {
       font-size: 7.2rem;
       color: $light_blue;
@@ -261,12 +254,13 @@ body {
 
   .subtitle {
     font-size: 2.6rem;
-    color: white;
-    width: 70%;
+    color: $white;
+    flex-grow: 2;
+    width: 60%;
   }
 
   .signup-button {
-    margin: 0 0 2rem 0;
+    margin: 0 0 4rem 0;
   }
 
   .login-button {
