@@ -3,7 +3,6 @@ import '../styles/index.scss';
 let isModalOpening = false;
 const links = document.querySelectorAll('a');
 const body = document.querySelector('body');
-const signupButton = document.querySelector('.signup-button');
 const loginButton = document.querySelector('.login-button');
 const backButton = document.querySelector('.back-button');
 const modal = document.querySelector('.modal');
