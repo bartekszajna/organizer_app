@@ -73,7 +73,8 @@ body {
       transition: transform 0.7s ease;
     }
   }
-  &:focus .line {
+  &:focus .line,
+  &:hover .line {
     background: $orange;
   }
 }
@@ -91,26 +92,26 @@ body {
 }
 
 .list {
-  font-size: 1.8rem;
   visibility: hidden;
   backdrop-filter: blur(0.5rem);
   position: absolute;
   top: 0;
-  left: 0;
+  left: 100%;
   width: 100%;
   height: 100vh;
-  background: rgba($blue, 0.6);
+  background: none;
+  background-color: rgba($blue, 0.6);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   transform: translateX(100%);
-  transition: transform 0.4s 0.1s ease-in-out, visibility 0s 0.5s;
+  transition: transform 0.6s 0.1s ease-in-out, visibility 0s 0.5s;
 }
 
 .list-open {
-  transform: translateX(0px);
-  transition: transform 0.4s 0.1s ease-in-out, visibility 0s 0s;
+  transform: translateX(-100%);
+  transition: transform 0.6s 0.1s ease-in-out, visibility 0s 0s;
   visibility: visible;
 }
 
@@ -162,7 +163,6 @@ body {
   display: flex;
   background: linear-gradient(to top, #95bdef 70%, #558cd2);
   position: absolute;
-  font-weight: 500;
   top: 0;
   left: 0;
   width: 100%;
@@ -185,13 +185,13 @@ body {
   flex-direction: column;
   justify-content: space-between;
   width: 80%;
-  font-weight: 300;
   height: 100%;
   margin: 0 auto;
   .input {
     display: flex;
     flex-direction: column;
     margin-bottom: 3rem;
+    font-size: 2rem;
     &:first-of-type {
       flex-grow: 1;
       margin-top: 4rem;
@@ -245,11 +245,11 @@ body {
   #deadline {
     @include text-input;
     &:focus + label {
-      transform: translateY(-200%);
+      transform: translateY(-180%);
       color: $white;
     }
     &:not(:placeholder-shown) + label {
-      transform: translateY(-200%);
+      transform: translateY(-180%);
       color: $white;
     }
     & + label {
@@ -321,7 +321,7 @@ body {
 
 @media (min-width: 520px) {
   body {
-    font-size: 2rem;
+    font-size: 2.4rem;
   }
 
   .list {
@@ -348,6 +348,13 @@ body {
         margin-bottom: 1rem;
       }
     }
+    .input {
+      font-size: 2.4rem;
+    }
+    #title,
+    #deadline {
+      font-size: 1.8rem;
+    }
   }
 
   .error-message {
@@ -357,13 +364,25 @@ body {
   .addtask-form .input textarea {
     height: 6rem;
   }
+
+  %button {
+    min-height: 5.5rem;
+  }
+
+  .task-submit-button {
+    width: 18rem;
+  }
+
+  .back-button {
+    width: 18rem;
+  }
+
+  .addtask-button {
+    width: 23rem;
+  }
 }
 
 @media (min-width: 768px) {
-  body {
-    font-size: 2.4rem;
-  }
-
   .title {
     font-size: 7.2rem;
   }
@@ -384,22 +403,15 @@ body {
     }
   }
 
-  %button {
-    min-height: 5.5rem;
-  }
-
   .task-submit-button {
-    width: 18rem;
     margin: 0;
   }
 
   .back-button {
-    width: 18rem;
     margin: 0;
   }
 
   .addtask-button {
-    width: 23rem;
     margin-top: 6rem;
   }
 
@@ -444,6 +456,7 @@ body {
     align-items: center;
     justify-content: space-around;
     background: none;
+    backdrop-filter: none;
     flex-direction: row;
     height: unset;
     transform: none;
@@ -471,7 +484,7 @@ body {
     width: 80rem;
     height: 55rem;
     border-radius: 2rem;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     align-items: center;
     .input {
       width: 50rem;

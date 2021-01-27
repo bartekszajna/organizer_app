@@ -39,6 +39,11 @@
 
 @mixin delete-button($width) {
   @extend %button;
-  background-color: $red;
+  background-color: $faded_red;
   width: $width;
+  &:focus,
+  &:active,
+  &:hover {
+    background: $red;
+  }
 }

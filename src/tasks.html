@@ -3,64 +3,181 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="https://picsum.photos/50/50" />
     <title>Organizzzer App</title>
-    <style>
-      article {
-        width: 200px;
-        margin: 20px;
-        background: blue;
-        color: white;
-      }
-    </style>
   </head>
   <body>
-    <h1>Your current tasks</h1>
-    <p></p>
-    <main>
-      <article>
-        <header data-priority="">Task title</header>
-        <time datetime>2020-11-20</time>
-        <p>Description</p>
-        <form method="POST" action="">
-          <button type="submit" name="delete_task" value="">Delete</button>
-        </form>
+    <h1 class="title">Your current tasks</h1>
+    <main class="tasks-list">
+      <article class="task">
+        <header class="task-title">Task title</header>
+        <time datetime class="task-time">2020-11-20</time>
+        <p class="task-description">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore
+          ducimus illum quis sit incidunt,
+        </p>
+        <div class="group">
+          <form method="POST" action="">
+            <button
+              type="submit"
+              name="delete_task"
+              class="delete-button"
+              value=""
+            >
+              Delete
+            </button>
+          </form>
+          <div class="priority" data-priority="2">Medium</div>
+        </div>
+      </article>
+      <article class="task">
+        <header data-priority="" class="task-title">Task title</header>
+        <time datetime class="task-time">2020-11-20</time>
+        <p class="task-description">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore
+          ducimus illum quis sit incidunt, explicabo adipisci odio eveniet
+          officiis expedita amet!
+        </p>
+        <div class="group">
+          <form method="POST" action="">
+            <button
+              type="submit"
+              name="delete_task"
+              class="delete-button"
+              value=""
+            >
+              Delete
+            </button>
+          </form>
+          <div class="priority">Medium</div>
+        </div>
+      </article>
+      <article class="task">
+        <header data-priority="" class="task-title">Task title</header>
+        <time datetime class="task-time">2020-11-20</time>
+        <p class="task-description">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore
+          ducimus illum quis sit incidunt, explicabo adipisci odio eveniet
+          officiis expedita amet!
+        </p>
+        <div class="group">
+          <form method="POST" action="">
+            <button
+              type="submit"
+              name="delete_task"
+              class="delete-button"
+              value=""
+            >
+              Delete
+            </button>
+          </form>
+          <div class="priority">Medium</div>
+        </div>
+      </article>
+      <article class="task">
+        <header data-priority="" class="task-title">Task title</header>
+        <time datetime class="task-time">2020-11-20</time>
+        <p class="task-description">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore
+          ducimus illum quis sit incidunt, sadsa sdsads sdass dsdasdsadsad sads
+          ur, adipisicing elit. Tempore ducimus illum quis sit incidunt, sadsa
+          sdsads sdass dsdasdsadsad sads
+        </p>
+        <div class="group">
+          <form method="POST" action="">
+            <button
+              type="submit"
+              name="delete_task"
+              class="delete-button"
+              value=""
+            >
+              Delete
+            </button>
+          </form>
+          <div class="priority">Medium</div>
+        </div>
+      </article>
+      <article class="task">
+        <header data-priority="" class="task-title">Task title</header>
+        <time datetime class="task-time">2020-11-20</time>
+        <p class="task-description"></p>
+        <div class="group">
+          <form method="POST" action="">
+            <button
+              type="submit"
+              name="delete_task"
+              class="delete-button"
+              value=""
+            >
+              Delete
+            </button>
+          </form>
+          <div class="priority">Medium</div>
+        </div>
+      </article>
+      <article class="task">
+        <header data-priority="" class="task-title">Task title</header>
+        <time datetime class="task-time">2020-11-20</time>
+        <p class="task-description">Lorem ipsum dolor sit amet</p>
+        <div class="group">
+          <form method="POST" action="">
+            <button
+              type="submit"
+              name="delete_task"
+              class="delete-button"
+              value=""
+            >
+              Delete
+            </button>
+          </form>
+          <div class="priority">Medium</div>
+        </div>
       </article>
     </main>
 
-    <div aria-label="toolbar">
-      <h2>Sort by:</h2>
+    <div
+      aria-label="toolbar"
+      role="toolbar"
+      aria-orientation="vertical"
+      class="toolbar"
+    >
+      <h2 class="toolbar-header">Sort by:</h2>
       <form action="" method="POST">
-        <div>
-          <label for="alphabetical">alphabetical order</label>
+        <div class="input">
           <input
             type="radio"
             name="sort"
             id="alphabetical"
             value="alphabetical"
           />
+          <label for="alphabetical">alphabetical order</label>
         </div>
-        <div>
-          <label for="newest">newest first</label>
+        <div class="input">
           <input type="radio" name="sort" id="newest" value="newest" />
+          <label for="newest">newest first</label>
         </div>
-        <div>
+        <div class="input">
+          <input type="radio" name="sort" id="oldest" value="oldest" checked />
           <label for="oldest">oldest first</label>
-          <input type="radio" name="sort" id="oldest" value="oldest" />
         </div>
-        <div>
-          <label for="least">least important</label>
+        <div class="input">
           <input type="radio" name="sort" id="least" value="least" />
+          <label for="least">least important</label>
         </div>
-        <div>
-          <label for="most">most important</label>
+        <div class="input">
           <input type="radio" name="sort" id="most" value="most" />
+          <label for="most">most important</label>
         </div>
-        <button type="submit" name="sort_tasks" value="sort">Sort</button>
+        <button
+          type="submit"
+          name="sort_tasks"
+          value="sort"
+          class="sort-button"
+        >
+          Sort
+        </button>
       </form>
-      <h2>Change view:</h2>
-      <div>
-        <label for="vertical">Vertical View</label>
+      <h2 class="toolbar-header">Change view:</h2>
+      <div class="tasks-view">
         <input
           type="radio"
           name="view"
@@ -68,11 +185,14 @@
           value="vertical"
           checked
         />
-        <label for="horizontal">Horizontal View</label>
+        <label for="vertical">One column view</label>
+
         <input type="radio" name="view" id="horizontal" value="horizontal" />
+        <label for="horizontal">Two column view</label>
       </div>
     </div>
-
-    <a href="profile.html">Back</a>
+    <div class="back-button-background">
+      <a class="back-button" href="profile.html">Back</a>
+    </div>
   </body>
 </html>

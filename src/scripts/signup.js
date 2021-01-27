@@ -4,14 +4,13 @@ const body = document.querySelector('body');
 const links = document.querySelectorAll('a');
 const inputLabels = document.querySelectorAll('.input > label');
 const firstEl = document.querySelector('input');
-const form = document.querySelector('.signup-form');
 
 let address = '';
-let inputToFocus = true;
+let pageRefreshed = true;
 body.addEventListener('transitionend', (e) => {
-  if (inputToFocus) {
+  if (pageRefreshed) {
     firstEl.focus();
-    inputToFocus = false;
+    pageRefreshed = false;
   }
   if (address) {
     window.location.href = address;

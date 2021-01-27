@@ -3,56 +3,112 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="https://picsum.photos/50/50" />
     <title>Organizzzer App</title>
   </head>
   <body>
-    <h1>Your account data</h1>
+    <h1 class="title">Your account data</h1>
 
-    <form method="POST" action="">
-      <div>
+    <form method="POST" action="" class="account-form">
+      <div class="input">
+        <input
+          type="text"
+          name="username"
+          id="username"
+          value=""
+          required
+          placeholder=" "
+          aria-invalid="false"
+          aria-errormessage="username-error"
+        />
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" value="" />
-        <p></p>
+        <p class="error-message" aria-live="polite" id="username-error">
+          Lorem ipsum dolor sit amet.
+        </p>
       </div>
-      <div>
+      <div class="input">
+        <input
+          type="email"
+          name="email"
+          id="email"
+          value=""
+          required
+          placeholder=" "
+          aria-invalid="false"
+          aria-errormessage="email-error"
+        />
         <label for="email">Email address</label>
-        <input type="email" name="email" id="email" value="" />
-        <p></p>
+        <p class="error-message" aria-live="polite" id="email-error">
+          Lorem ipsum dolor sit amet.
+        </p>
       </div>
-      <div>
+      <div class="input">
+        <input
+          type="password"
+          name="password"
+          id="password"
+          value=""
+          required
+          placeholder=" "
+          aria-invalid="false"
+          aria-errormessage="password-error"
+        />
         <label for="password">Change password</label>
-        <input type="password" name="password" id="password" value="" />
-        <p></p>
+        <p class="error-message" aria-live="polite" id="password-error">
+          Lorem ipsum dolor sit amet.
+        </p>
       </div>
-      <div>
-        <label for="repeat_password">Repeat new password</label>
+      <div class="input">
         <input
           type="password"
           name="repeat_password"
           id="repeat_password"
           value=""
-          ;
+          required
+          placeholder=" "
+          aria-invalid="false"
+          aria-errormessage="repeat-password-error"
         />
-        <p></p>
+        <label for="repeat_password">Repeat new password</label>
+        <p class="error-message" aria-live="polite" id="repeat-password-error">
+          Lorem ipsum dolor sit amet.
+        </p>
       </div>
-      <button type="submit" name="update_account" value="update">
+      <button
+        type="submit"
+        name="update_account"
+        value="update"
+        class="update-button"
+      >
         Update account
       </button>
     </form>
-    <form method="POST" action="">
-      <div>
-        <label for="delete"
-          >Want to delete account? Confirm with your password</label
-        >
-        <input type="password" name="delete" id="delete" value="" />
-        <p></p>
+    <form method="POST" action="" class="delete-form">
+      <div class="input">
+        <input
+          type="password"
+          name="delete"
+          id="delete"
+          value=""
+          required
+          placeholder=" "
+          aria-invalid="false"
+          aria-errormessage="delete-account-error"
+        />
+        <label for="delete">Want to delete account?</label>
+        <p class="error-message" aria-live="polite" id="delete-account-error">
+          Lorem ipsum dolor sit amet.
+        </p>
       </div>
-      <button type="submit" name="delete_account" value="delete">
+      <button
+        type="submit"
+        name="delete_account"
+        value="delete"
+        class="delete-button"
+      >
         Delete account
       </button>
     </form>
 
-    <a href="profile.html">Back</a>
+    <a class="back-button" href="profile.html">Back</a>
   </body>
 </html>

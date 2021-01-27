@@ -1,29 +1,362 @@
 @import 'reset';
-:root {
-  --background: linear-gradient(
-    45deg,
-    #325316,
-    #e6683c 25%,
-    #dc2743 50%,
-    #cc2366 75%,
-    #bc1888
-  );
+@import 'colors';
+@import 'fonts';
+@import 'links';
+@import 'buttons';
+@import 'inputs';
+
+::selection {
+  background-color: $red;
 }
+
 body {
-  background: var(--background);
+  display: flex;
+  //opacity: 0;
+  //visibility: hidden;
+  flex-direction: column;
+  font-size: 1.8rem;
+  min-height: 100vh;
+  width: 80%;
+  margin: 0 auto;
+  background-color: #95bdef;
+  background-image: linear-gradient(to top, #95bdef 70%, #558cd2);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  //transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-.container {
-  height: 100vh;
-  font-size: 50px;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: #27223a;
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.tasks-list-multicolumn {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.task-multicolumn {
+  width: 48%;
+}
+
+.task {
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba($blue, 0.3);
+  border-radius: 2.5rem;
+}
+.task:last-of-type {
+  margin-bottom: 10.5rem;
+}
+
+.task-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.task-time {
+  color: rgba($white, 0.7);
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+.task-description {
+  font-size: 1.4rem;
+  margin: 1rem 0 2rem;
+  line-height: 1.5;
+  color: rgba($white, 0.8);
+  flex-grow: 1;
+}
+.group {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.8rem;
+}
+.delete-button {
+  color: $faded_red;
+  background: none;
+  border: none;
+  font-weight: 500;
+  outline: none;
+  &:hover,
+  &:active,
+  &:focus,
+  &:visited {
+    color: $red;
+    font-weight: 700;
+  }
+}
+
+.priority {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  margin-right: 3rem;
+  &::after {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: $yellow;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -3rem;
+  }
 }
-.pic {
-  display: block;
-  width: 200px;
-  margin: 0 auto;
+
+.toolbar {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 31rem;
+  height: 50rem;
+  z-index: 10;
+  padding: 0 3rem;
+}
+
+.toolbar-header {
+  font-weight: 500;
+  font-size: 2.6rem;
+  margin: 3rem 0 1rem;
+}
+.input {
+  font-size: 1.8rem;
+  margin: 2rem 1rem;
+  display: flex;
+  align-items: center;
+
+  input {
+    appearance: none;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    background: $white;
+    margin-right: 1rem;
+  }
+  input:checked {
+    background: $orange;
+  }
+  input:checked + label {
+    color: $orange;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+}
+.sort-button {
+  @include primary-button(13.5rem);
+  margin: 1rem auto 1rem;
+}
+
+.tasks-view {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 3rem 0;
+  input {
+    appearance: none;
+    width: 2.6rem;
+    height: 2.6rem;
+    border: none;
+    outline: none;
+  }
+  #vertical {
+    background-image: url('../assets/vertical_icon.svg');
+    &:checked {
+      background-image: url('../assets/vertical_icon_checked.svg');
+    }
+  }
+  #horizontal {
+    background-image: url('../assets/horizontal_icon.svg');
+    &:checked {
+      background-image: url('../assets/horizontal_icon_checked.svg');
+    }
+  }
+  label {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+}
+
+.back-button-background {
+  height: 8.5rem;
+  background-image: linear-gradient(to top, rgba($blue, 0.5) 97%, transparent);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  backdrop-filter: blur(0.5rem);
+}
+
+.back-button {
+  @include secondary-button(15rem);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto 1.8rem;
+  line-height: 4.1rem;
+}
+
+///////////////////////////////////////////
+// media queries
+
+@media (min-width: 520px) {
+  body {
+    font-size: 2.4rem;
+  }
+  .title {
+    font-size: 3.2rem;
+    margin: 3rem 0;
+  }
+
+  .tasks-list {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .task:last-of-type {
+    margin-bottom: 13.5rem;
+  }
+  .task-title {
+    font-size: 2.4rem;
+  }
+  .task-time {
+    font-size: 1.6rem;
+  }
+  .task-description {
+    font-size: 1.6rem;
+  }
+  .group {
+    font-size: 2rem;
+  }
+
+  .back-button-background {
+    height: 11.5rem;
+  }
+
+  .back-button {
+    height: 5.5rem;
+    min-height: 5.5rem;
+    line-height: 5.1rem;
+    margin-bottom: 2.8rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 4rem;
+    margin: 4rem 0;
+  }
+  .tasks-list {
+    width: 75%;
+  }
+
+  .priority::after {
+    width: 2.4rem;
+    height: 2.4rem;
+    right: -3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    background-color: $profile_blue;
+    background-size: cover;
+    background-image: linear-gradient(
+        rgba($profile_blue, 0.6),
+        rgba($profile_blue, 0.6)
+      ),
+      url('../assets/desktop_background2.jpg');
+    background-attachment: fixed;
+  }
+  body {
+    box-sizing: border-box;
+    background: none;
+    //backdrop-filter: blur(1rem);
+    width: 100%;
+    padding-left: 31rem;
+    &::before {
+      width: 100%;
+      position: fixed;
+      content: '';
+      display: block;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: -10;
+      backdrop-filter: blur(1rem);
+    }
+  }
+  .title {
+    font-size: 4.8rem;
+    font-weight: 500;
+    text-align: left;
+    margin-left: 4rem;
+  }
+  .tasks-list {
+    width: 85%;
+    margin: 0 auto;
+  }
+  .task {
+    background-color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 3rem;
+    padding: 2rem 2.5rem;
+  }
+  .task-title {
+    text-align: left;
+  }
+
+  .task:last-of-type {
+    margin-bottom: 3rem;
+  }
+  .task-description {
+    color: $white;
+    font-size: 2rem;
+  }
+  .group {
+    font-size: 2.4rem;
+  }
+  .delete-button {
+    font-size: 2.4rem;
+  }
+
+  .toolbar {
+    display: block;
+  }
+
+  .back-button-background {
+    background: none;
+    backdrop-filter: unset;
+    position: static;
+    height: 1px;
+  }
+  .back-button {
+    position: fixed;
+    transform: none;
+    left: 3rem;
+    bottom: 3rem;
+    margin: 0;
+  }
 }

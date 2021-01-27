@@ -63,6 +63,7 @@ body {
   .input {
     display: flex;
     flex-direction: column;
+    font-size: 2rem;
     &:last-of-type {
       padding: 0;
       flex-grow: 1;
@@ -73,11 +74,11 @@ body {
   input {
     @include text-input;
     &:focus + label {
-      transform: translateY(-200%);
+      transform: translateY(-180%);
       color: $white;
     }
     &:not(:placeholder-shown) + label {
-      transform: translateY(-200%);
+      transform: translateY(-180%);
       color: $white;
     }
   }
@@ -126,6 +127,12 @@ body {
   .signup-form {
     width: 90%;
     align-self: center;
+    .input {
+      font-size: 2.4rem;
+    }
+    input {
+      font-size: 1.8rem;
+    }
   }
 
   .error-message {
@@ -188,6 +195,9 @@ body {
     color: $orange;
   }
 
+  .signup-submit-button {
+    margin-bottom: 0;
+  }
   .back-button {
     margin: 0 0 3rem 3rem;
   }
