@@ -11,8 +11,8 @@
 
 body {
   display: flex;
-  //opacity: 0;
-  //visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
   flex-direction: column;
   font-size: 1.8rem;
   min-height: 100vh;
@@ -23,7 +23,8 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   overflow-x: hidden;
-  //transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  backdrop-filter: blur(1rem);
 }
 
 .visible {
@@ -55,6 +56,7 @@ body {
   justify-content: space-between;
   background-color: rgba($blue, 0.3);
   border-radius: 2.5rem;
+  backdrop-filter: blur(1rem);
 }
 .task:last-of-type {
   margin-bottom: 10.5rem;
@@ -127,6 +129,7 @@ body {
   height: 50rem;
   z-index: 10;
   padding: 0 3rem;
+  border-bottom-right-radius: 2.5rem;
 }
 
 .toolbar-header {
@@ -294,7 +297,6 @@ body {
   body {
     box-sizing: border-box;
     background: none;
-    //backdrop-filter: blur(1rem);
     width: 100%;
     padding-left: 31rem;
     &::before {

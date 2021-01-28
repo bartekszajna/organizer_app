@@ -29,6 +29,7 @@ function closeMenuWithEscape(e) {
     }
   }
 }
+
 navigation.addEventListener('transitionend', (e) => {
   if (isMenuClosing) {
     hamburgerButton.focus();
@@ -98,6 +99,8 @@ backButton.addEventListener('click', closeModal);
 
 modal.addEventListener('click', detectClickOutsideModal);
 
+body.addEventListener('click', detectClickOutsideMenu);
+
 document.addEventListener('keydown', detectEscapeKeyEvent);
 
 function openModal() {
@@ -120,6 +123,14 @@ function closeModal() {
 function detectClickOutsideModal(e) {
   if (!form.contains(e.target)) {
     backButton.click();
+  }
+}
+
+function detectClickOutsideMenu(e) {
+  if (hamburgerButton.ariaExpanded === 'true') {
+    if (e.target !== navigation && e.target !== hamburgerButton) {
+      hamburgerButton.click();
+    }
   }
 }
 

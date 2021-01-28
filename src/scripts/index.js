@@ -9,7 +9,7 @@ const modal = document.querySelector('.modal');
 const firstEl = modal.querySelector('#username');
 const lastEl = modal.querySelector('.back-button');
 const form = document.querySelector('.login-form');
-console.log(links);
+
 let address = '';
 body.addEventListener('transitionend', (e) => {
   if (address) {

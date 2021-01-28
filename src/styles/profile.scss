@@ -390,6 +390,9 @@ body {
   .subtitle {
     font-size: 3.6rem;
   }
+  .list {
+    width: 50%;
+  }
 
   .addtask-form {
     width: 60%;
@@ -460,6 +463,7 @@ body {
     flex-direction: row;
     height: unset;
     transform: none;
+    width: 100%;
   }
 
   .list-item:first-child {
@@ -509,5 +513,12 @@ body {
       width: 50rem;
       margin: 2rem auto;
     }
+  }
+}
+
+@media (min-aspect-ratio: 16/9) {
+  body {
+    background-color: black;
+    background-image: linear-gradient(black, black);
   }
 }
