@@ -1,14 +1,32 @@
 import '../styles/index.scss';
 
 let isModalOpening = false;
-const links = document.querySelectorAll('a');
 const body = document.querySelector('body');
+const links = document.querySelectorAll('a');
+
 const loginButton = document.querySelector('.login-button');
 const backButton = document.querySelector('.back-button');
+
 const modal = document.querySelector('.modal');
 const firstEl = modal.querySelector('#username');
 const lastEl = modal.querySelector('.back-button');
-const form = document.querySelector('.login-form');
+
+const form = modal.querySelector('.login-form');
+const usernameInput = form.querySelector('#username');
+const usernameError = form.querySelector('#username-error');
+const passwordInput = form.querySelector('#password');
+const passwordError = form.querySelector('#password-error');
+const inputsList = document.querySelectorAll('input');
+
+let vh = window.innerHeight * 0.01;
+// Then we set the value in the --vh custom property to the root of the document
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+window.addEventListener('resize', () => {
+  // We execute the same script as before
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+  console.log(vh);
+});
 
 let address = '';
 body.addEventListener('transitionend', (e) => {
@@ -99,3 +117,37 @@ function focusOnFirstInput() {
     firstEl.focus();
   }
 }
+form.setAttribute('novalidate', 'true');
+
+form.addEventListener('submit', checkEmptyInputValues);
+
+function checkEmptyInputValues(e) {
+  e.preventDefault();
+  if (!usernameInput.value) {
+    usernameInput.setAttribute('aria-invalid', 'true');
+    usernameError.innerText = "You need to provide user's name";
+  } else {
+    usernameError.innerText = '';
+  }
+  if (!passwordInput.value) {
+    passwordInput.setAttribute('aria-invalid', 'true');
+    passwordError.innerText = 'You need to enter the password';
+  } else {
+    passwordError.innerText = '';
+  }
+  if (usernameInput.value && passwordInput.value) {
+    // simple e.target.submit() won't work in this case
+    // because our submit button has a name="submit"
+    // which somewhat overshadows this method
+    // best solution would be to simply change that name attribute
+    // to something else but I wanted to try this hacky solution
+
+    Object.getPrototypeOf(e.target).submit.call(e.target);
+  }
+}
+
+inputsList.forEach((input) =>
+  input.addEventListener('input', function (e) {
+    e.target.parentNode.lastElementChild.innerText = '';
+  })
+);

@@ -21,6 +21,11 @@
   &:hover {
     color: $orange;
   }
+  &:disabled {
+    background-color: $disabled_button;
+    color: white;
+    cursor: not-allowed;
+  }
 }
 
 @mixin secondary-button($width) {
@@ -45,5 +50,9 @@
   &:active,
   &:hover {
     background: $red;
+  }
+  &:disabled {
+    background-color: $disabled_button;
+    cursor: not-allowed;
   }
 }

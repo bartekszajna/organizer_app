@@ -15,15 +15,14 @@
           name="username"
           id="username"
           value=""
-          required
+          pattern="(\w| ){3,}"
+          minlength="3"
           placeholder=" "
           aria-invalid="false"
           aria-errormessage="username-error"
         />
         <label for="username">Username</label>
-        <p class="error-message" aria-live="polite" id="username-error">
-          Lorem ipsum dolor sit amet.
-        </p>
+        <p class="error-message" aria-live="polite" id="username-error"></p>
       </div>
       <div class="input">
         <input
@@ -31,15 +30,12 @@
           name="email"
           id="email"
           value=""
-          required
           placeholder=" "
           aria-invalid="false"
           aria-errormessage="email-error"
         />
         <label for="email">Email address</label>
-        <p class="error-message" aria-live="polite" id="email-error">
-          Lorem ipsum dolor sit amet.
-        </p>
+        <p class="error-message" aria-live="polite" id="email-error"></p>
       </div>
       <div class="input">
         <input
@@ -47,35 +43,39 @@
           name="password"
           id="password"
           value=""
-          required
+          pattern="(\w| ){8,30}"
+          minlength="8"
+          maxlength="30"
           placeholder=" "
           aria-invalid="false"
           aria-errormessage="password-error"
         />
         <label for="password">Change password</label>
-        <p class="error-message" aria-live="polite" id="password-error">
-          Lorem ipsum dolor sit amet.
-        </p>
+        <p class="error-message" aria-live="polite" id="password-error"></p>
       </div>
       <div class="input">
         <input
           type="password"
-          name="repeat_password"
-          id="repeat_password"
+          name="repeat-password"
+          id="repeat-password"
           value=""
-          required
+          pattern="(\w| ){8,30}"
+          minlength="8"
+          maxlength="30"
           placeholder=" "
           aria-invalid="false"
           aria-errormessage="repeat-password-error"
         />
-        <label for="repeat_password">Repeat new password</label>
-        <p class="error-message" aria-live="polite" id="repeat-password-error">
-          Lorem ipsum dolor sit amet.
-        </p>
+        <label for="repeat-password">Repeat new password</label>
+        <p
+          class="error-message"
+          aria-live="polite"
+          id="repeat-password-error"
+        ></p>
       </div>
       <button
         type="submit"
-        name="update_account"
+        name="update-account"
         value="update"
         class="update-button"
       >
@@ -89,19 +89,24 @@
           name="delete"
           id="delete"
           value=""
+          pattern="(\w| ){8,30}"
+          minlength="8"
+          maxlength="30"
           required
           placeholder=" "
           aria-invalid="false"
           aria-errormessage="delete-account-error"
         />
-        <label for="delete">Want to delete account?</label>
-        <p class="error-message" aria-live="polite" id="delete-account-error">
-          Lorem ipsum dolor sit amet.
-        </p>
+        <label for="delete">Delete with password</label>
+        <p
+          class="error-message"
+          aria-live="polite"
+          id="delete-account-error"
+        ></p>
       </div>
       <button
         type="submit"
-        name="delete_account"
+        name="delete-account"
         value="delete"
         class="delete-button"
       >

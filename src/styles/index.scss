@@ -8,6 +8,10 @@
 ::selection {
   background-color: $red;
 }
+html,
+body {
+  height: 100%;
+}
 
 body {
   display: flex;
@@ -16,7 +20,6 @@ body {
   flex-direction: column;
   justify-content: space-between;
   font-size: 1.8rem;
-  min-height: 100vh;
   width: 80%;
   max-width: 1400px;
   margin: 0 auto;
@@ -96,7 +99,8 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  z-index: 10;
   pointer-events: none;
   &-open {
     visibility: visible;
@@ -114,6 +118,7 @@ body {
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.8;
+  min-height: 2.1rem;
 }
 
 .login-form {
@@ -180,6 +185,7 @@ body {
   .error-message {
     font-size: 1.4rem;
     line-height: 2;
+    min-height: 2.8rem;
   }
   .signup-button {
     width: 35rem;
@@ -187,8 +193,12 @@ body {
   }
 
   .login-submit-button {
-    width: 20rem;
+    width: 18rem;
     line-height: 5.5rem;
+  }
+
+  .back-button {
+    width: 18rem;
   }
 
   .header {
@@ -261,15 +271,16 @@ body {
     color: $white;
     flex-grow: 2;
     width: 60%;
+    margin-bottom: 3rem;
   }
 
   .signup-button {
-    margin: 0 0 4rem 0;
+    margin: 0 0 3rem 0;
   }
 
   .login-button {
     margin: 0;
-    margin-bottom: 10%;
+    margin-bottom: 8%;
   }
 
   .error-message {

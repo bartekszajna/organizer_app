@@ -117,6 +117,21 @@ body {
     transform: translateY(-50%);
     right: -3rem;
   }
+  &-low {
+    &::after {
+      background-color: $green;
+    }
+  }
+  &-medium {
+    &::after {
+      background-color: $yellow;
+    }
+  }
+  &-high {
+    &::after {
+      background-color: $red;
+    }
+  }
 }
 
 .toolbar {
@@ -180,14 +195,16 @@ body {
   }
   #vertical {
     background-image: url('../assets/vertical_icon.svg');
+    background-position: bottom;
     &:checked {
-      background-image: url('../assets/vertical_icon_checked.svg');
+      background-position: top;
     }
   }
   #horizontal {
     background-image: url('../assets/horizontal_icon.svg');
+    background-position: bottom;
     &:checked {
-      background-image: url('../assets/horizontal_icon_checked.svg');
+      background-position: top;
     }
   }
   label {

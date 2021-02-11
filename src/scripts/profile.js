@@ -3,24 +3,46 @@ import '../styles/profile.scss';
 let isModalOpening = false;
 let isMenuClosing = false;
 
-const links = document.querySelectorAll('a');
-const hamburgerButton = document.querySelector('.hamburger');
-const navigation = document.querySelector('.list');
 const body = document.querySelector('body');
-const modal = document.querySelector('.modal');
-const backButton = document.querySelector('.back-button');
-const addTaskButton = document.querySelector('.addtask-button');
-const firstEl = document.querySelector('#title');
-const lastEl = backButton;
-const form = document.querySelector('.addtask-form');
+const links = document.querySelectorAll('a');
+
+const navigation = document.querySelector('.list');
+const hamburgerButton = document.querySelector('.hamburger');
 const firstListEl = hamburgerButton;
 const lastListEl = document.querySelector('.list-item:last-child a');
+
+const title = document.querySelector('.title');
+const subtitle = document.querySelector('.subtitle');
+
+const modal = document.querySelector('.modal');
+const addTaskButton = document.querySelector('.addtask-button');
+const backButton = document.querySelector('.back-button');
+const firstEl = document.querySelector('#title');
+const lastEl = backButton;
+
+const form = document.querySelector('.addtask-form');
+const inputsList = form.querySelectorAll('input[type="text"]');
+const titleInput = form.querySelector('#title');
+const titleError = form.querySelector('#title-error');
+const deadlineInput = form.querySelector('#deadline');
+const deadlineError = form.querySelector('#deadline-error');
+
+const messagesList = form.querySelectorAll('p.error-message');
 
 firstListEl.addEventListener('keydown', handleFirstListEl);
 
 lastListEl.addEventListener('keydown', handleLastListEl);
 
 document.addEventListener('keydown', closeMenuWithEscape);
+
+let vh = window.innerHeight * 0.01;
+// Then we set the value in the --vh custom property to the root of the document
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+// window.addEventListener('resize', () => {
+//   // We execute the same script as before
+//   let vh = window.innerHeight * 0.01;
+//   document.documentElement.style.setProperty('--vh', `${vh}px`);
+// });
 
 function closeMenuWithEscape(e) {
   if (hamburgerButton.ariaExpanded === 'true') {
@@ -82,6 +104,9 @@ function hideBody() {
 }
 
 hamburgerButton.addEventListener('click', (e) => {
+  // addTaskButton.classList.toggle('blurred');
+  // title.classList.toggle('blurred');
+  // subtitle.classList.toggle('blurred');
   hamburgerButton.classList.toggle('hamburger-open');
   hamburgerButton.setAttribute(
     'aria-expanded',
@@ -164,3 +189,55 @@ function focusOnFirstInput() {
     firstEl.focus();
   }
 }
+////////////////////////////////////
+
+form.setAttribute('novalidate', 'true');
+
+const regexPatterns = {
+  usernamePattern: '^[a-zA-Z0-9_ ]{3,12}$',
+  emailPattern: '^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+).([a-zA-Z]{2,5})$',
+  passwordPattern: '[a-zA-Z0-9_ ]{8,30}',
+  titlePattern: '^.{1,50}$',
+  deadlinePattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$',
+};
+
+form.addEventListener('submit', generalValidation);
+
+function generalValidation(e) {
+  e.preventDefault();
+  inputsList.forEach((input) => {
+    validateInput(input, input.getAttribute('name'));
+  });
+
+  if ([...messagesList].every((message) => message.innerText === '')) {
+    Object.getPrototypeOf(e.target).submit.call(e.target);
+  }
+}
+
+function validateInput(input, inputName) {
+  //task title validation
+  if (inputName === 'title') {
+    if (!input.value) {
+      titleError.innerText = 'Task title is required';
+    } else if (!input.value.trim().match(regexPatterns.titlePattern)) {
+      titleError.innerText = 'Please make it 50 chars at most';
+      input.value = input.value.trim();
+    } else {
+      titleError.innerText = '';
+    }
+  }
+  //deadline validation
+  if (inputName === 'deadline') {
+    if (input.value && !input.value.match(regexPatterns.deadlinePattern)) {
+      deadlineError.innerText = 'Please keep the given format';
+    } else {
+      deadlineError.innerText = '';
+    }
+  }
+}
+
+inputsList.forEach((input) =>
+  input.addEventListener('input', function (e) {
+    e.target.parentNode.lastElementChild.innerText = '';
+  })
+);

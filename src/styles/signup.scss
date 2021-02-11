@@ -8,15 +8,18 @@
 ::selection {
   background-color: $red;
 }
-
+html,
 body {
+  height: 100%;
+}
+body {
+  display: flex;
   opacity: 0;
   visibility: hidden;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   font-size: 1.8rem;
-  min-height: 100vh;
+  //min-height: 100vh;
   width: 80%;
   margin: 0 auto;
   background-color: #95bdef;
@@ -99,6 +102,7 @@ body {
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.8;
+  min-height: 2.1rem;
 }
 
 .signup-submit-button {
@@ -138,6 +142,7 @@ body {
   .error-message {
     font-size: 1.4rem;
     line-height: 2;
+    min-height: 2.8rem;
   }
   .signup-submit-button {
     width: 28rem;

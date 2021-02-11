@@ -40,15 +40,15 @@
           name="username"
           id="username"
           value=""
+          pattern="(\w| ){3,}"
+          minlength="3"
           required
           placeholder=" "
           aria-invalid="false"
           aria-errormessage="username-error"
         />
         <label for="username" class="first_label">Username</label>
-        <p aria-live="polite" id="username-error" class="error-message">
-          Lorem ipsum dolor sit amet.
-        </p>
+        <p aria-live="polite" id="username-error" class="error-message"></p>
       </div>
       <div class="input">
         <input
@@ -56,15 +56,14 @@
           name="email"
           id="email"
           value=""
+          inputmode="email"
           required
           placeholder=" "
           aria-invalid="false"
           aria-errormessage="email-error"
         />
         <label for="email">E-mail address</label>
-        <p aria-live="polite" id="email-error" class="error-message">
-          Lorem ipsum dolor sit amet.
-        </p>
+        <p aria-live="polite" id="email-error" class="error-message"></p>
       </div>
       <div class="input">
         <input
@@ -72,31 +71,37 @@
           name="password"
           id="password"
           value=""
+          pattern="(\w| ){8,30}"
           required
+          minlength="8"
+          maxlength="30"
           placeholder=" "
           aria-invalid="false"
           aria-errormessage="password-error"
         />
         <label for="password">Password</label>
-        <p aria-live="polite" id="password-error" class="error-message">
-          Lorem ipsum dolor sit amet.
-        </p>
+        <p aria-live="polite" id="password-error" class="error-message"></p>
       </div>
       <div class="input">
         <input
           type="password"
-          name="repeat_password"
-          id="repeat_password"
+          name="repeat-password"
+          id="repeat-password"
           value=""
+          pattern="(\w| ){8,30}"
+          minlength="8"
+          maxlength="30"
           required
           placeholder=" "
           aria-invalid="false"
           aria-errormessage="repeat-password-error"
         />
-        <label for="repeat_password">Repeat password</label>
-        <p aria-live="polite" id="repeat-password-error" class="error-message">
-          Lorem ipsum dolor sit amet.
-        </p>
+        <label for="repeat-password">Repeat password</label>
+        <p
+          aria-live="polite"
+          id="repeat-password-error"
+          class="error-message"
+        ></p>
       </div>
       <button
         class="signup-submit-button"

@@ -7,6 +7,9 @@ const tasksList = document.querySelector('.tasks-list');
 const tasks = document.querySelectorAll('.task');
 const links = document.querySelectorAll('a');
 const body = document.querySelector('body');
+const priorityIndicators = document.querySelectorAll('.priority');
+
+console.log(priorityIndicators);
 
 document.fonts.ready.then(showBody);
 
@@ -17,6 +20,17 @@ body.addEventListener('transitionend', (e) => {
   }
   address = '';
   removeBackdropFromBody();
+});
+
+priorityIndicators.forEach((indicator) => {
+  const priority = indicator.dataset.priority;
+  if (priority === '1') {
+    indicator.classList.add('priority-low');
+  } else if (priority === '2') {
+    indicator.classList.add('priority-medium');
+  } else {
+    indicator.classList.add('priority-high');
+  }
 });
 
 links.forEach((link) =>
@@ -46,19 +60,6 @@ tasksView.addEventListener('change', (e) => {
     tasks.forEach((task) => task.classList.add('task-multicolumn'));
   }
 });
-
-// verticalInput.addEventListener('click', (e) => {
-//   if (horizontalInput.checked == 'checked') {
-//     horizontalInput.removeAttribute('checked');
-//     verticalInput.setAttribute('checked', 'checked');
-//   }
-// });
-// horizontalInput.addEventListener('click', (e) => {
-//   if (verticalInput.checked == 'checked') {
-//     verticalInput.removeAttribute('checked');
-//     horizontalInput.setAttribute('checked', 'checked');
-//   }
-// });
 
 function showBody() {
   body.classList.add('visible');

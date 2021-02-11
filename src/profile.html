@@ -2,10 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+    <!--
+
+      <meta property="og:image" content="https://developer.cdn.mozilla.net/static/img/opengraph-logo.dc4e08e2f6af.png">
+      <meta property="og:description" content="The Mozilla Developer Network (MDN) provides
+      information about Open Web technologies including HTML, CSS, and APIs for both Web sites
+      and HTML5 Apps. It also documents Mozilla products, like Firefox OS.">
+      <meta property="og:title" content="Mozilla Developer Network">
+
+      https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/The_head_metadata_in_HTML#other_types_of_metadata
+    -->
     <title>Organizzzer App</title>
   </head>
   <body>
@@ -57,50 +66,50 @@
             id="title"
             value=""
             required
+            maxlength="35"
+            minlength="1"
             placeholder=" "
             aria-invalid="false"
             aria-errormessage="title-error"
           />
           <label for="title">Task title</label>
-          <p aria-live="polite" id="title-error" class="error-message">
-            Lorem ipsum dolor sit amet.
-          </p>
+          <p aria-live="polite" id="title-error" class="error-message"></p>
         </div>
         <div class="input">
-          <p>Priority level</p>
-          <div class="radio-group">
-            <div class="radio-input">
-              <input
-                type="radio"
-                id="priority_choice_1"
-                name="priority"
-                value="1"
-              />
-              <label for="priority_choice_1">Low</label>
+          <fieldset>
+            <legend>Priority level</legend>
+            <div class="radio-group">
+              <div class="radio-input">
+                <input
+                  type="radio"
+                  id="priority_choice_1"
+                  name="priority"
+                  value="1"
+                />
+                <label for="priority_choice_1">Low</label>
+              </div>
+              <div class="radio-input">
+                <input
+                  type="radio"
+                  id="priority_choice_2"
+                  name="priority"
+                  value="2"
+                  checked
+                />
+                <label for="priority_choice_2">Medium</label>
+              </div>
+              <div class="radio-input">
+                <input
+                  type="radio"
+                  id="priority_choice_3"
+                  name="priority"
+                  value="3"
+                />
+                <label for="priority_choice_3">High</label>
+              </div>
             </div>
-            <div class="radio-input">
-              <input
-                type="radio"
-                id="priority_choice_2"
-                name="priority"
-                value="2"
-                checked
-              />
-              <label for="priority_choice_2">Medium</label>
-            </div>
-            <div class="radio-input">
-              <input
-                type="radio"
-                id="priority_choice_3"
-                name="priority"
-                value="3"
-              />
-              <label for="priority_choice_3">High</label>
-            </div>
-          </div>
-          <p aria-live="polite" id="priority-error" class="error-message">
-            Lorem ipsum dolor sit amet.
-          </p>
+            <!-- <p aria-live="polite" id="priority-error" class="error-message"></p> -->
+          </fieldset>
         </div>
         <div class="input">
           <input
@@ -108,22 +117,21 @@
             id="deadline"
             name="deadline"
             value=""
+            inputmode="numeric"
             placeholder=" "
             aria-invalid="false"
             aria-errormessage="deadline-error"
           />
           <label for="deadline">Deadline <span>(yyyy-mm-dd)</span></label>
-          <p aria-live="polite" id="deadline-error" class="error-message">
-            Lorem ipsum dolor sit amet.
-          </p>
+          <p aria-live="polite" id="deadline-error" class="error-message"></p>
         </div>
         <div class="input">
           <label for="Description">Description</label>
           <textarea
-            maxlength="100"
+            maxlength="120"
             name="description"
             id="description"
-            placeholder="Optional, up to 100 characters..."
+            placeholder="Optional, up to 120 characters..."
           ></textarea>
         </div>
         <div class="button-group">
