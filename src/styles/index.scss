@@ -8,8 +8,10 @@
 ::selection {
   background-color: $red;
 }
+
 html,
 body {
+  min-height: 43rem;
   height: 100%;
 }
 
@@ -18,7 +20,6 @@ body {
   opacity: 0;
   visibility: hidden;
   flex-direction: column;
-  justify-content: space-between;
   font-size: 1.8rem;
   width: 80%;
   max-width: 1400px;
@@ -81,12 +82,12 @@ body {
 }
 
 .signup-button {
-  @include primary-button(26rem);
+  @include primary-button(25rem);
   margin: 0 auto 2rem;
 }
 
 .login-button {
-  @include secondary-button(18rem);
+  @include secondary-button(14rem);
   margin: 0 auto 4rem;
 }
 
@@ -99,7 +100,9 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(var(--vh, 1vh) * 100);
+  //min-height: calc(var(--vh, 1vh) * 100);
+  min-height: 43rem;
+  height: 100%;
   z-index: 10;
   pointer-events: none;
   &-open {
@@ -124,7 +127,7 @@ body {
 .login-form {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 80%;
   height: 100%;
   margin: 0 auto;
@@ -138,6 +141,7 @@ body {
     &:first-of-type {
       flex-grow: 3;
       justify-content: flex-end;
+      margin-top: 4rem;
       padding: 0 0 2rem 0;
     }
   }
@@ -162,11 +166,11 @@ body {
 }
 
 .login-submit-button {
-  @include primary-button(15rem);
+  @include primary-button(14rem);
   margin: 0 auto 2rem;
 }
 .back-button {
-  @include secondary-button(15rem);
+  @include secondary-button(14rem);
   margin: 0 auto 4rem;
 }
 
@@ -188,17 +192,21 @@ body {
     min-height: 2.8rem;
   }
   .signup-button {
-    width: 35rem;
+    width: 33rem;
     line-height: 5.5rem;
   }
 
+  .login-button {
+    width: 17rem;
+  }
+
   .login-submit-button {
-    width: 18rem;
+    width: 17rem;
     line-height: 5.5rem;
   }
 
   .back-button {
-    width: 18rem;
+    width: 17rem;
   }
 
   .header {
@@ -288,6 +296,7 @@ body {
   }
 
   .modal {
+    height: 100%;
     background: none;
     backdrop-filter: blur(0.5rem);
     justify-content: center;
@@ -307,6 +316,9 @@ body {
       width: 39rem;
       margin: 1rem auto;
       padding: 0;
+      &:first-of-type {
+        margin-top: 1rem;
+      }
     }
 
     .button-group {

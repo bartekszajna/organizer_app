@@ -11,9 +11,6 @@ const hamburgerButton = document.querySelector('.hamburger');
 const firstListEl = hamburgerButton;
 const lastListEl = document.querySelector('.list-item:last-child a');
 
-const title = document.querySelector('.title');
-const subtitle = document.querySelector('.subtitle');
-
 const modal = document.querySelector('.modal');
 const addTaskButton = document.querySelector('.addtask-button');
 const backButton = document.querySelector('.back-button');
@@ -21,7 +18,7 @@ const firstEl = document.querySelector('#title');
 const lastEl = backButton;
 
 const form = document.querySelector('.addtask-form');
-const inputsList = form.querySelectorAll('input[type="text"]');
+const inputsList = form.querySelectorAll('input:not([type=radio])');
 const titleInput = form.querySelector('#title');
 const titleError = form.querySelector('#title-error');
 const deadlineInput = form.querySelector('#deadline');
@@ -38,11 +35,11 @@ document.addEventListener('keydown', closeMenuWithEscape);
 let vh = window.innerHeight * 0.01;
 // Then we set the value in the --vh custom property to the root of the document
 document.documentElement.style.setProperty('--vh', `${vh}px`);
-// window.addEventListener('resize', () => {
-//   // We execute the same script as before
-//   let vh = window.innerHeight * 0.01;
-//   document.documentElement.style.setProperty('--vh', `${vh}px`);
-// });
+window.addEventListener('resize', () => {
+  // We execute the same script as before
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
 
 function closeMenuWithEscape(e) {
   if (hamburgerButton.ariaExpanded === 'true') {
@@ -104,9 +101,6 @@ function hideBody() {
 }
 
 hamburgerButton.addEventListener('click', (e) => {
-  // addTaskButton.classList.toggle('blurred');
-  // title.classList.toggle('blurred');
-  // subtitle.classList.toggle('blurred');
   hamburgerButton.classList.toggle('hamburger-open');
   hamburgerButton.setAttribute(
     'aria-expanded',
@@ -135,6 +129,7 @@ function openModal() {
   addTaskButton.setAttribute('aria-expanded', 'true');
   firstEl.addEventListener('focus', handleFirstEl);
   lastEl.addEventListener('focus', handleLastEl);
+  //body.style.backgroundImage = 'linear-gradient(#95bdef, #95bdef)';
 }
 
 function closeModal() {
@@ -143,6 +138,7 @@ function closeModal() {
   addTaskButton.setAttribute('aria-expanded', 'false');
   firstEl.removeEventListener('focus', handleFirstEl);
   lastEl.removeEventListener('focus', handleLastEl);
+  //body.style.backgroundImage = 'linear-gradient(to top, #95bdef 70%, #558cd2)';
 }
 
 function detectClickOutsideModal(e) {
@@ -205,20 +201,22 @@ form.addEventListener('submit', generalValidation);
 
 function generalValidation(e) {
   e.preventDefault();
+  console.log('validation works');
   inputsList.forEach((input) => {
     validateInput(input, input.getAttribute('name'));
   });
 
-  if ([...messagesList].every((message) => message.innerText === '')) {
-    Object.getPrototypeOf(e.target).submit.call(e.target);
-  }
+  // if ([...messagesList].every((message) => message.innerText === '')) {
+  //   Object.getPrototypeOf(e.target).submit.call(e.target);
+  // }
 }
 
 function validateInput(input, inputName) {
   //task title validation
   if (inputName === 'title') {
-    if (!input.value) {
+    if (!input.value.trim()) {
       titleError.innerText = 'Task title is required';
+      input.value = input.value.trim();
     } else if (!input.value.trim().match(regexPatterns.titlePattern)) {
       titleError.innerText = 'Please make it 50 chars at most';
       input.value = input.value.trim();
