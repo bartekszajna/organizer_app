@@ -142,7 +142,7 @@ function closeModal() {
 }
 
 function detectClickOutsideModal(e) {
-  if (!form.contains(e.target)) {
+  if (!form.contains(e.target) && window.innerWidth >= 1024) {
     backButton.click();
   }
 }

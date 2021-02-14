@@ -82,7 +82,10 @@ function closeModal() {
 }
 
 function detectClickOutsideModal(e) {
-  if (!form.contains(e.target)) {
+  // we check innerWidth for we want this behavior to occur only on desktops
+  // on mobiles it is instinctive to click outside the form to switch off the virtual
+  // keyboard and instead of this users experienced closing the whole modal
+  if (!form.contains(e.target) && window.innerWidth >= 1024) {
     backButton.click();
   }
 }

@@ -178,8 +178,12 @@ body {
   }
 }
 .sort-button {
-  @include primary-button(13.5rem);
+  @include primary-button(12rem);
   margin: 1rem auto 1rem;
+  font-size: 2rem;
+  height: 4rem;
+  min-height: 4rem;
+  line-height: 4rem;
 }
 
 .tasks-view {

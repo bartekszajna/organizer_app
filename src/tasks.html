@@ -6,9 +6,67 @@
     <title>Organizzzer App</title>
   </head>
   <body>
+    <div
+      aria-label="toolbar"
+      role="toolbar"
+      aria-orientation="vertical"
+      class="toolbar"
+    >
+      <h2 class="toolbar-header">Sort by:</h2>
+      <form action="" method="POST">
+        <div class="input">
+          <input
+            type="radio"
+            name="sort"
+            id="alphabetical"
+            value="alphabetical"
+          />
+          <label for="alphabetical">alphabetical order</label>
+        </div>
+        <div class="input">
+          <input type="radio" name="sort" id="newest" value="newest" />
+          <label for="newest">newest first</label>
+        </div>
+        <div class="input">
+          <input type="radio" name="sort" id="oldest" value="oldest" checked />
+          <label for="oldest">oldest first</label>
+        </div>
+        <div class="input">
+          <input type="radio" name="sort" id="least" value="least" />
+          <label for="least">least important</label>
+        </div>
+        <div class="input">
+          <input type="radio" name="sort" id="most" value="most" />
+          <label for="most">most important</label>
+        </div>
+        <button
+          type="submit"
+          name="sort_tasks"
+          value="sort"
+          class="sort-button"
+        >
+          Sort
+        </button>
+      </form>
+      <h2 class="toolbar-header">Change view:</h2>
+      <div class="tasks-view">
+        <input
+          type="radio"
+          name="view"
+          id="vertical"
+          value="vertical"
+          checked
+        />
+        <label for="vertical">One column view</label>
+
+        <input type="radio" name="view" id="horizontal" value="horizontal" />
+        <label for="horizontal">Two column view</label>
+      </div>
+    </div>
+
     <h1 class="title">Your current tasks</h1>
     <main class="tasks-list">
-      <!-- <article class="task">
+      <article class="task">
         <header class="task-title">
           Go shopping and do some laundry with mum and dad
         </header>
@@ -133,66 +191,9 @@
           </form>
           <div class="priority" data-priority="2">Medium</div>
         </div>
-      </article> -->
+      </article>
     </main>
 
-    <div
-      aria-label="toolbar"
-      role="toolbar"
-      aria-orientation="vertical"
-      class="toolbar"
-    >
-      <h2 class="toolbar-header">Sort by:</h2>
-      <form action="" method="POST">
-        <div class="input">
-          <input
-            type="radio"
-            name="sort"
-            id="alphabetical"
-            value="alphabetical"
-          />
-          <label for="alphabetical">alphabetical order</label>
-        </div>
-        <div class="input">
-          <input type="radio" name="sort" id="newest" value="newest" />
-          <label for="newest">newest first</label>
-        </div>
-        <div class="input">
-          <input type="radio" name="sort" id="oldest" value="oldest" checked />
-          <label for="oldest">oldest first</label>
-        </div>
-        <div class="input">
-          <input type="radio" name="sort" id="least" value="least" />
-          <label for="least">least important</label>
-        </div>
-        <div class="input">
-          <input type="radio" name="sort" id="most" value="most" />
-          <label for="most">most important</label>
-        </div>
-        <button
-          type="submit"
-          name="sort_tasks"
-          value="sort"
-          class="sort-button"
-        >
-          Sort
-        </button>
-      </form>
-      <h2 class="toolbar-header">Change view:</h2>
-      <div class="tasks-view">
-        <input
-          type="radio"
-          name="view"
-          id="vertical"
-          value="vertical"
-          checked
-        />
-        <label for="vertical">One column view</label>
-
-        <input type="radio" name="view" id="horizontal" value="horizontal" />
-        <label for="horizontal">Two column view</label>
-      </div>
-    </div>
     <div class="back-button-background">
       <a class="back-button" href="profile.html">Back</a>
     </div>
