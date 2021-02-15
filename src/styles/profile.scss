@@ -152,7 +152,7 @@ body {
 
 .addtask-button {
   @include secondary-button(17rem);
-  margin: 0 auto 4rem;
+  margin: 4rem auto;
 }
 
 .modal {
@@ -407,11 +407,11 @@ body {
   }
 
   .task-submit-button {
-    margin: 0;
+    margin: 0 0 2rem;
   }
 
   .back-button {
-    margin: 0;
+    margin: 0 0 2rem;
   }
 
   .addtask-button {
@@ -421,7 +421,7 @@ body {
   .button-group {
     display: flex;
     width: 100%;
-    margin-bottom: 4rem;
+    margin-top: 2rem;
     justify-content: space-between;
   }
   .error-message {
@@ -430,6 +430,9 @@ body {
 }
 
 @media (min-width: 1024px) {
+  html {
+    min-height: 65rem;
+  }
   body {
     display: block;
     background-color: $profile_blue;
@@ -476,6 +479,7 @@ body {
   }
 
   .modal {
+    height: 100%;
     background: rgba($profile_blue, 0.6);
     backdrop-filter: blur(0.5rem);
     justify-content: center;
@@ -516,5 +520,28 @@ body {
   }
   .addtask-button {
     margin-top: 20vh;
+  }
+}
+
+@media (min-width: 1920px) {
+  .title {
+    font-size: 8.6rem;
+  }
+  .subtitle {
+    font-size: 4.2rem;
+  }
+  .addtask-button {
+    min-height: 6.5rem;
+    font-size: 2.8rem;
+    width: 26rem;
+  }
+  .navigation {
+    height: 9rem;
+  }
+  .list {
+    font-size: 2.8rem;
+  }
+  .list-item:first-child {
+    font-size: 3.8rem;
   }
 }
