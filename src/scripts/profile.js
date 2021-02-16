@@ -129,7 +129,7 @@ function openModal() {
   addTaskButton.setAttribute('aria-expanded', 'true');
   firstEl.addEventListener('focus', handleFirstEl);
   lastEl.addEventListener('focus', handleLastEl);
-  //body.style.backgroundImage = 'linear-gradient(#95bdef, #95bdef)';
+  //body.style.backgroundImage = 'none';
 }
 
 function closeModal() {
