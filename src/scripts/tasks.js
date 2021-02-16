@@ -9,7 +9,16 @@ const links = document.querySelectorAll('a');
 const body = document.querySelector('body');
 const priorityIndicators = document.querySelectorAll('.priority');
 
-console.log(priorityIndicators);
+// matchMedia object to handle looks of the tasks list in case of resizing
+// better, much more efficient way than listening for resize event
+// with probable exception for throttling or debouncing
+let mediaQueryObject = window.matchMedia('(min-width: 1024px)');
+
+mediaQueryObject.addEventListener('change', function (e) {
+  if (!e.matches) {
+    verticalInput.click();
+  }
+});
 
 document.fonts.ready.then(showBody);
 

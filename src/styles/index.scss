@@ -246,6 +246,9 @@ body {
 }
 
 @media (min-width: 1024px) {
+  html {
+    min-height: 57rem;
+  }
   body {
     background-color: $signup_brown;
     background-size: cover;
@@ -333,8 +336,13 @@ body {
     }
     .login-submit-button,
     .back-button {
-      width: 18rem;
+      width: 15rem;
+      font-size: 2.2rem;
       margin: 0;
+      min-height: 5rem;
+    }
+    .login-submit-button {
+      line-height: 5rem;
     }
   }
 }

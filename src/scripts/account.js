@@ -131,8 +131,8 @@ function generalValidation(e) {
     (message) => message.innerText === ''
   );
   if (areMessagesEmpty) {
-    // submit the form
-    // Object.getPrototypeOf(e.target).submit.call(e.target);
+    //submit the form
+    Object.getPrototypeOf(e.target).submit.call(e.target);
   }
 }
 
