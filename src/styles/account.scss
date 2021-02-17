@@ -29,7 +29,7 @@ body {
   background-image: linear-gradient(to top, #95bdef 70%, #558cd2);
   background-repeat: no-repeat;
   overflow-x: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .visible {
@@ -51,14 +51,12 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  //justify-content: space-evenly;
   .input {
     margin-top: -0.5rem;
     display: flex;
     flex-direction: column;
     &:last-of-type {
       padding: 0;
-      //flex-grow: 1;
       margin: 0;
     }
   }
@@ -83,7 +81,7 @@ body {
 }
 
 .transition {
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease;
 }
 
 .error-message {
@@ -199,45 +197,13 @@ body {
 @media (min-width: 1024px) {
   html {
     min-height: 60rem;
-    background-color: $profile_blue;
-    background-size: cover;
-    background-image: linear-gradient(
-        rgba($profile_blue, 0.6),
-        rgba($profile_blue, 0.6)
-      ),
-      url('../assets/desktop_background2.jpg');
   }
   body {
-    background: none;
+    background-color: $profile_blue;
+    background-size: cover;
+    background-image: url('../assets/desktop_background2_blurred.jpg');
     width: 100%;
-    //position: relative;
     font-size: 2.4rem;
-    //min-height: unset;
-    // &::before {
-    //   display: block;
-    //   position: absolute;
-    //   content: '';
-    //   background: transparent;
-    //   top: 0;
-    //   //bottom: 0;
-    //   left: 0;
-    //   //right: 0;
-    //   width: 100%;
-    //   height: 100%;
-    //   z-index: -10;
-    //   backdrop-filter: blur(1rem);
-    // }
-    &::before {
-      width: 100%;
-      position: fixed;
-      content: '';
-      display: block;
-      height: 100vh;
-      top: 0;
-      left: 0;
-      z-index: -10;
-      backdrop-filter: blur(1rem);
-    }
   }
 
   .title {

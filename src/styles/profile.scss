@@ -29,7 +29,7 @@ body {
   background-image: linear-gradient(to top, #95bdef 70%, #558cd2);
   background-repeat: no-repeat;
   overflow-x: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .visible {
@@ -100,7 +100,7 @@ body {
   width: 100%;
   height: calc(var(--vh, 1vh) * 100);
   background: none;
-  background-color: rgba($blue, 0.85);
+  background-color: rgba($blue, 0.9);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -227,13 +227,13 @@ body {
       border-radius: 1rem;
       background: rgba($blue, 0.3);
       font-family: 'Poppins', sans-serif;
-      border: 2px solid transparent;
-      transition: border 0.5s ease;
+      border: 1px solid transparent;
+      transition: border 0.3s ease;
       &::placeholder {
         color: $faded_white;
       }
       &:focus {
-        border: 2px solid $faded_white;
+        border: 1px solid $faded_white;
       }
     }
   }
@@ -257,7 +257,7 @@ body {
       line-height: 1.4;
       transform: translateY(-100%);
       color: $faded_white;
-      transition: transform 0.5s ease;
+      transition: transform 0.4s ease;
     }
   }
   .radio-input {
@@ -298,6 +298,10 @@ body {
       margin-bottom: 0.5rem;
     }
   }
+}
+
+fieldset:focus-within legend {
+  color: $white;
 }
 
 .error-message {
@@ -363,10 +367,6 @@ body {
     font-size: 1.4rem;
     min-height: 2.8rem;
   }
-
-  // %button {
-  //   min-height: 5.5rem;
-  // }
 
   .task-submit-button {
     font-size: 1.8rem;
@@ -480,7 +480,6 @@ body {
   .modal {
     height: 100%;
     background: rgba($profile_blue, 0.6);
-    backdrop-filter: blur(0.5rem);
     justify-content: center;
     align-items: center;
     z-index: 2;
@@ -490,8 +489,9 @@ body {
     width: 70rem;
     height: 58rem;
     border-radius: 2rem;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.85);
     align-items: center;
+    backdrop-filter: blur(0.3rem);
     .input {
       width: 50rem;
       margin: 0 auto;
@@ -506,7 +506,7 @@ body {
       &:nth-child(4) {
         flex-grow: 3;
         textarea {
-          background: rgba(0, 0, 0, 0.6);
+          background: rgba($white, 0.03);
         }
       }
     }
@@ -517,11 +517,11 @@ body {
     }
   }
   .task-submit-button {
-    margin: 3rem 0;
+    margin: 2.5rem 0 3.5rem;
   }
 
   .back-button {
-    margin: 3rem 0;
+    margin: 2.5rem 0 3.5rem;
   }
 
   .addtask-button {
@@ -549,5 +549,20 @@ body {
   }
   .list-item:first-child {
     font-size: 3.8rem;
+  }
+
+  .addtask-form {
+    width: 73rem;
+    height: 62rem;
+  }
+  .task-submit-button {
+    height: 5.5rem;
+    font-size: 2.4rem;
+    width: 17rem;
+  }
+  .back-button {
+    height: 5.5rem;
+    font-size: 2.4rem;
+    width: 17rem;
   }
 }

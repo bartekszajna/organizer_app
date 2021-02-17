@@ -28,7 +28,7 @@ body {
   background-image: linear-gradient(to top, #95bdef 70%, #558cd2);
   background-repeat: no-repeat;
   overflow-x: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .visible {
@@ -101,7 +101,6 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  //min-height: calc(var(--vh, 1vh) * 100);
   min-height: 43rem;
   height: 100%;
   z-index: 10;
@@ -305,19 +304,19 @@ body {
   .modal {
     height: 100%;
     background: none;
-    backdrop-filter: blur(0.5rem);
     justify-content: center;
     align-items: center;
     z-index: 2;
   }
   .login-form {
+    backdrop-filter: blur(0.3rem);
     display: block;
     box-sizing: border-box;
     padding-top: 7rem;
     width: 60rem;
     height: 40rem;
     border-radius: 2rem;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.85);
     align-items: center;
     .input {
       width: 39rem;

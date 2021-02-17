@@ -12,44 +12,54 @@
       aria-orientation="vertical"
       class="toolbar"
     >
-      <h2 class="toolbar-header">Sort by:</h2>
+      <!-- <h2 class="toolbar-header">Sort by:</h2> -->
       <form action="" method="POST">
-        <div class="input">
-          <input
-            type="radio"
-            name="sort"
-            id="alphabetical"
-            value="alphabetical"
-          />
-          <label for="alphabetical">alphabetical order</label>
-        </div>
-        <div class="input">
-          <input type="radio" name="sort" id="newest" value="newest" />
-          <label for="newest">newest first</label>
-        </div>
-        <div class="input">
-          <input type="radio" name="sort" id="oldest" value="oldest" checked />
-          <label for="oldest">oldest first</label>
-        </div>
-        <div class="input">
-          <input type="radio" name="sort" id="least" value="least" />
-          <label for="least">least important</label>
-        </div>
-        <div class="input">
-          <input type="radio" name="sort" id="most" value="most" />
-          <label for="most">most important</label>
-        </div>
-        <button
-          type="submit"
-          name="sort_tasks"
-          value="sort"
-          class="sort-button"
-        >
-          Sort
-        </button>
+        <fieldset class="fieldset">
+          <legend class="toolbar-header">Sort by:</legend>
+          <div class="input">
+            <input
+              type="radio"
+              name="sort"
+              id="alphabetical"
+              value="alphabetical"
+            />
+            <label for="alphabetical">alphabetical order</label>
+          </div>
+          <div class="input">
+            <input type="radio" name="sort" id="newest" value="newest" />
+            <label for="newest">newest first</label>
+          </div>
+          <div class="input">
+            <input
+              type="radio"
+              name="sort"
+              id="oldest"
+              value="oldest"
+              checked
+            />
+            <label for="oldest">oldest first</label>
+          </div>
+          <div class="input">
+            <input type="radio" name="sort" id="least" value="least" />
+            <label for="least">least important</label>
+          </div>
+          <div class="input">
+            <input type="radio" name="sort" id="most" value="most" />
+            <label for="most">most important</label>
+          </div>
+          <button
+            type="submit"
+            name="sort_tasks"
+            value="sort"
+            class="sort-button"
+          >
+            Sort
+          </button>
+        </fieldset>
       </form>
-      <h2 class="toolbar-header">Change view:</h2>
-      <div class="tasks-view">
+      <!-- <h2 class="toolbar-header">Change view:</h2> -->
+      <fieldset class="fieldset tasks-view" role="presentation">
+        <legend class="toolbar-header">Change view:</legend>
         <input
           type="radio"
           name="view"
@@ -61,7 +71,7 @@
 
         <input type="radio" name="view" id="horizontal" value="horizontal" />
         <label for="horizontal">Two column view</label>
-      </div>
+      </fieldset>
     </div>
 
     <h1 class="title">Your current tasks</h1>

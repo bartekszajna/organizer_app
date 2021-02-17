@@ -28,7 +28,6 @@ body.addEventListener('transitionend', (e) => {
     window.location.href = address;
   }
   address = '';
-  removeBackdropFromBody();
 });
 
 priorityIndicators.forEach((indicator) => {
@@ -76,8 +75,4 @@ function showBody() {
 
 function hideBody() {
   body.classList.remove('visible');
-}
-
-function removeBackdropFromBody() {
-  body.style.backdropFilter = 'none';
 }
