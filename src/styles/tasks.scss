@@ -53,7 +53,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: rgba($blue, 0.3);
+  background-color: rgba($blue, 0.4);
   border-radius: 2.5rem;
 }
 .task:last-of-type {
@@ -233,6 +233,9 @@ body {
   height: 8.5rem;
   background-image: linear-gradient(to top, rgba($blue, 0.9) 97%, transparent);
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   bottom: 0;
   left: 0;
@@ -240,11 +243,6 @@ body {
 
 .back-button {
   @include secondary-button(15rem);
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0 auto 1.8rem;
   line-height: 4.1rem;
 }
 
@@ -265,7 +263,7 @@ body {
     margin: 0 auto;
   }
   .task:last-of-type {
-    margin-bottom: 13.5rem;
+    margin-bottom: 12.5rem;
   }
   .task-title {
     font-size: 2.4rem;
@@ -281,14 +279,35 @@ body {
   }
 
   .back-button-background {
-    height: 11.5rem;
+    height: 10.5rem;
   }
 
   .back-button {
     height: 5.5rem;
     min-height: 5.5rem;
     line-height: 5.1rem;
-    margin-bottom: 2.8rem;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 519px) {
+  .title {
+    margin: 2rem 0;
+  }
+
+  .task:last-of-type {
+    margin-bottom: 10rem;
+  }
+
+  .back-button-background {
+    //background-image: linear-gradient(red, red);
+    height: 8rem;
+  }
+  .back-button {
+    min-height: 4rem;
+    height: 4rem;
+    line-height: 3.6rem;
+    width: 13rem;
+    font-size: 1.8rem;
   }
 }
 

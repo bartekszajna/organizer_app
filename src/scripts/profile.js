@@ -24,6 +24,32 @@ const titleError = form.querySelector('#title-error');
 const deadlineInput = form.querySelector('#deadline');
 const deadlineError = form.querySelector('#deadline-error');
 
+const inputsForStorage = form.querySelectorAll('.local-storage-member');
+const checkboxes = form.querySelectorAll('[type=radio]');
+
+inputsForStorage.forEach((input) => {
+  const inputName = input.getAttribute('id');
+
+  if (localStorage.getItem(inputName)) {
+    let storageValue = localStorage.getItem(inputName);
+    if (inputName === 'fieldset') {
+      const checkedOne = [...checkboxes].find(
+        (checkbox) => checkbox.value === storageValue
+      );
+      checkedOne.checked = 'checked';
+    } else {
+      input.value = storageValue;
+    }
+  }
+});
+
+inputsForStorage.forEach((input) => {
+  const inputName = input.getAttribute('id');
+  input.addEventListener('change', function (e) {
+    localStorage.setItem(inputName, e.target.value);
+  });
+});
+
 const messagesList = form.querySelectorAll('p.error-message');
 
 firstListEl.addEventListener('keydown', handleFirstListEl);
@@ -101,6 +127,7 @@ function hideBody() {
 }
 
 hamburgerButton.addEventListener('click', (e) => {
+  e.stopPropagation();
   hamburgerButton.classList.toggle('hamburger-open');
   hamburgerButton.setAttribute(
     'aria-expanded',

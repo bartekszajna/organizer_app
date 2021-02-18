@@ -28,6 +28,14 @@ const inputsList = document.querySelectorAll('input');
 //   console.log(vh);
 // });
 
+if (sessionStorage.getItem('login_username')) {
+  usernameInput.value = sessionStorage.getItem('login_username');
+}
+
+usernameInput.addEventListener('input', (e) => {
+  sessionStorage.setItem('login_username', usernameInput.value);
+});
+
 let address = '';
 body.addEventListener('transitionend', (e) => {
   if (address) {

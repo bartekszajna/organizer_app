@@ -25,9 +25,9 @@
         aria-label="open menu"
         type="button"
       >
-        <div class="line line-1"></div>
-        <div class="line line-2"></div>
-        <div class="line line-3"></div>
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
       </button>
       <ul class="list">
         <li class="list-item">
@@ -71,12 +71,13 @@
             placeholder=" "
             aria-invalid="false"
             aria-errormessage="title-error"
+            class="local-storage-member"
           />
           <label for="title">Task title</label>
           <p aria-live="polite" id="title-error" class="error-message"></p>
         </div>
         <div class="input">
-          <fieldset>
+          <fieldset class="local-storage-member" id="fieldset">
             <legend>Priority level</legend>
             <div class="radio-group">
               <div class="radio-input">
@@ -108,7 +109,6 @@
                 <label for="priority_choice_3">High</label>
               </div>
             </div>
-            <!-- <p aria-live="polite" id="priority-error" class="error-message"></p> -->
           </fieldset>
         </div>
         <div class="input">
@@ -121,6 +121,7 @@
             placeholder=" "
             aria-invalid="false"
             aria-errormessage="deadline-error"
+            class="local-storage-member"
           />
           <label for="deadline">Deadline <span>(yyyy-mm-dd)</span></label>
           <p aria-live="polite" id="deadline-error" class="error-message"></p>
@@ -132,6 +133,7 @@
             name="description"
             id="description"
             placeholder="Optional, up to 300 characters..."
+            class="local-storage-member"
           ></textarea>
         </div>
         <div class="button-group">

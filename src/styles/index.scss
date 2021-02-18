@@ -161,7 +161,7 @@ body {
     line-height: 1.4;
     transform: translateY(-100%);
     color: $faded_white;
-    transition: transform 0.4s ease-out;
+    transition: transform 0.4s ease-out, color 0.4s ease-out;
   }
 }
 

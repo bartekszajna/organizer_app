@@ -19,6 +19,21 @@ const repeatPasswordError = form.querySelector('#repeat-password-error');
 const messagesList = form.querySelectorAll('p.error-message');
 console.log(repeatPasswordError);
 
+if (sessionStorage.getItem('signup_username')) {
+  usernameInput.value = sessionStorage.getItem('signup_username');
+}
+
+if (sessionStorage.getItem('signup_email')) {
+  emailInput.value = sessionStorage.getItem('signup_email');
+}
+
+usernameInput.addEventListener('input', (e) => {
+  sessionStorage.setItem('signup_username', usernameInput.value);
+});
+emailInput.addEventListener('input', (e) => {
+  sessionStorage.setItem('signup_email', emailInput.value);
+});
+
 let address = '';
 let pageRefreshed = true;
 body.addEventListener('transitionend', (e) => {
