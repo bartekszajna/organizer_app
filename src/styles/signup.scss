@@ -10,7 +10,7 @@
 }
 html,
 body {
-  min-height: 53rem;
+  min-height: 52rem;
   height: 100%;
 }
 body {
@@ -20,7 +20,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   font-size: 1.8rem;
-  width: 80%;
+  width: 85%;
   max-width: 140rem;
   margin: 0 auto;
   background-color: #95bdef;
@@ -63,6 +63,8 @@ body {
   flex-grow: 1;
   position: relative;
   display: flex;
+  width: 90%;
+  align-self: center;
   flex-direction: column;
   .input {
     display: flex;
@@ -126,8 +128,7 @@ body {
   }
 
   .signup-form {
-    width: 90%;
-    align-self: center;
+    width: 80%;
     .input {
       font-size: 2.4rem;
     }

@@ -22,7 +22,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   font-size: 1.8rem;
-  width: 75%;
+  width: 85%;
   max-width: 140rem;
   margin: 0 auto;
   background-color: #95bdef;
@@ -47,6 +47,8 @@ body {
 
 .account-form,
 .delete-form {
+  width: 90%;
+  align-self: center;
   flex-grow: 1;
   position: relative;
   display: flex;
@@ -124,8 +126,8 @@ body {
     font-size: 2.2rem;
   }
   .title {
-    margin: 2rem 0;
-    font-size: 3.2rem;
+    margin: 3rem 0;
+    font-size: 3.6rem;
   }
   .account-form,
   .delete-form {
@@ -140,6 +142,7 @@ body {
   .error-message {
     font-size: 1.4rem;
     line-height: 2;
+    min-height: 2.8rem;
   }
 
   .update-button {
@@ -147,7 +150,7 @@ body {
     min-height: 4.5rem;
     line-height: 4.5rem;
     width: 23rem;
-    margin-top: -3rem;
+    //margin-top: -3rem;
   }
 
   .delete-button {
@@ -177,8 +180,7 @@ body {
   }
   .account-form,
   .delete-form {
-    width: 90%;
-    align-self: center;
+    width: 80%;
     .input {
       font-size: 2.2rem;
     }

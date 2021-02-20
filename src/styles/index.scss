@@ -21,7 +21,7 @@ body {
   visibility: hidden;
   flex-direction: column;
   font-size: 1.8rem;
-  width: 80%;
+  width: 85%;
   max-width: 140rem;
   margin: 0 auto;
   background-color: #95bdef;
@@ -96,6 +96,7 @@ body {
   opacity: 0;
   visibility: hidden;
   display: flex;
+  justify-content: center;
   background: linear-gradient(to top, #95bdef 70%, #558cd2);
   position: absolute;
   top: 0;
@@ -128,9 +129,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 80%;
+  width: 75%;
   height: 100%;
-  margin: 0 auto;
+  align-self: center;
   .input {
     position: relative;
     flex-grow: 2;
@@ -177,6 +178,14 @@ body {
 ///////////////////////////////////////////
 // media queries
 
+@media (max-width: 300px) {
+  // exclusive purpose of galaxy fold (280px wide)
+  .signup-button {
+    font-size: 16px;
+    width: 23rem;
+  }
+}
+
 @media (min-width: 520px) {
   body {
     font-size: 2.4rem;
@@ -190,6 +199,9 @@ body {
     font-size: 1.4rem;
     line-height: 2;
     min-height: 2.8rem;
+  }
+  .button-group {
+    flex-grow: 2;
   }
   .signup-button {
     width: 33rem;
@@ -223,6 +235,7 @@ body {
     width: 70%;
     .input {
       font-size: 2.4rem;
+      flex-grow: unset;
     }
     input {
       font-size: 1.8rem;
@@ -231,6 +244,13 @@ body {
 }
 
 @media (min-width: 768px) {
+  .login-form {
+    width: 60%;
+    .input:first-of-type {
+      flex-grow: 2;
+    }
+  }
+
   .back-button,
   .login-submit-button {
     margin: 0;
@@ -239,8 +259,8 @@ body {
   .button-group {
     display: flex;
     width: 100%;
-    margin-bottom: 4rem;
-    justify-content: space-between;
+    flex-grow: 2;
+    justify-content: space-around;
   }
 }
 
