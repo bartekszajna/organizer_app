@@ -183,7 +183,7 @@ body {
   }
 }
 .sort-button {
-  @include primary-button(12rem);
+  //@include primary-button(12rem);
   margin: 1rem auto 1rem;
   font-size: 2rem;
   height: 4rem;
@@ -242,7 +242,7 @@ body {
 }
 
 .back-button {
-  @include secondary-button(15rem);
+  //@include secondary-button(15rem);
   line-height: 4.1rem;
 }
 

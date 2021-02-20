@@ -1,22 +1,18 @@
-%button {
+.button {
   display: block;
   box-sizing: border-box;
-  height: 4.5rem;
-  min-height: 4.5rem;
   color: white;
   outline: none;
   font-size: 1.8rem;
-  border-radius: 4.5rem;
-  line-height: 4.5rem;
+  border-radius: 5rem;
+  line-height: 1;
   text-align: center;
   font-family: 'Poppins', 'sans-serif';
   font-weight: 500;
 }
 
-@mixin primary-button($width) {
-  @extend %button;
+.button_primary {
   background-color: $blue;
-  width: $width;
   &:focus,
   &:active,
   &:hover {
@@ -29,12 +25,9 @@
   }
 }
 
-@mixin secondary-button($width) {
-  @extend %button;
+.button_secondary {
   background: none;
   border: 2px solid white;
-  width: $width;
-  line-height: 50%;
   &:focus,
   &:active,
   &:hover {
@@ -43,10 +36,8 @@
   }
 }
 
-@mixin delete-button($width) {
-  @extend %button;
+.button_delete {
   background-color: $faded_red;
-  width: $width;
   &:focus,
   &:active,
   &:hover {

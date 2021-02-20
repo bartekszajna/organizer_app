@@ -6,7 +6,6 @@
 
 .input_group {
   position: relative;
-  margin-bottom: 1.8rem;
 }
 
 .input {
@@ -42,8 +41,15 @@
   transition: transform 0.4s ease-out, color 0.4s ease-out;
 }
 
-@media (min-width: 520px) {
-  .input-group {
-    margin-bottom: 2.4rem;
-  }
+// error-message is class added to every input-following
+// paragraph denoting potential invalid inputs
+// those paragraphs are empty by default, optionally filled
+// either by JS validation or server-side PHP validation
+
+.error-message {
+  color: $red;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.7;
+  min-height: 2rem;
 }

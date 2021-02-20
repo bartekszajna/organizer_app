@@ -5,7 +5,6 @@
 @import 'buttons';
 @import 'forms';
 @import 'inputs';
-@import 'error_message';
 
 ::selection {
   background-color: $red;
@@ -53,31 +52,30 @@ body {
 .input {
   font-size: 1.4rem;
 }
+.input_group {
+  margin-bottom: 1.9rem;
+}
 .input_group:last-of-type {
   margin-bottom: 0.5rem;
 }
 
-.update-button {
-  @include primary-button(20rem);
-  min-height: 4rem;
-  line-height: 4rem;
-  height: 4rem;
-  margin: 0 auto 3.5rem;
+.button_primary,
+.button_delete,
+.button_secondary {
+  align-self: center;
+  padding: 1.1rem 3rem;
+}
+.button_primary {
+  margin-bottom: 3.5rem;
 }
 
-.delete-button {
-  @include delete-button(20rem);
-  min-height: 4rem;
-  line-height: 4rem;
-  height: 4rem;
-  margin: 0 auto 2rem;
+.button_delete {
+  margin-bottom: 1.5rem;
 }
 
-.back-button {
-  @include secondary-button(14rem);
-  margin: 0 auto 2rem;
-  line-height: 4.1rem;
-  z-index: 1;
+.button_secondary {
+  padding: 1.2rem 4rem;
+  margin-bottom: 2rem;
 }
 
 ///////////////////////////////////////////
@@ -102,32 +100,22 @@ body {
     min-height: 2.3rem;
   }
 
-  .update-button {
-    height: 4.5rem;
-    min-height: 4.5rem;
-    line-height: 4.5rem;
-    width: 23rem;
+  .button_primary,
+  .button_delete,
+  .button_secondary {
+    padding: 1.2rem 3.5rem;
+    font-size: 2.2rem;
   }
 
-  .delete-button {
-    height: 4.5rem;
-    min-height: 4.5rem;
-    line-height: 4.5rem;
-    width: 23rem;
+  .button_secondary {
+    padding: 1.2rem 4.5rem;
+    margin-bottom: 3rem;
   }
-
-  // .back-button {
-  //   width: 16rem;
-  //   height: 5.5rem;
-  //   min-height: 5.5rem;
-  //   line-height: 5.1rem;
-  //   margin-bottom: 3rem;
-  // }
 }
 
 @media (min-width: 520px) {
   html {
-    min-height: 64.5rem;
+    min-height: 71rem;
   }
   .title {
     margin: 3rem 0;
@@ -138,12 +126,37 @@ body {
     width: 75%;
   }
 
+  .input_group {
+    margin-bottom: 2.8rem;
+  }
+  .input_group:last-of-type {
+    margin-bottom: 0.4rem;
+  }
+
   .label {
     font-size: 2.4rem;
   }
 
   .input {
     font-size: 2rem;
+  }
+
+  .error-message {
+    font-size: 1.4rem;
+    min-height: 2.3rem;
+  }
+
+  .button_primary,
+  .button_delete,
+  .button_secondary {
+    font-size: 2.4rem;
+    padding: 1.5rem 4.5rem;
+  }
+}
+@media (min-width: 768px) {
+  .account-form,
+  .delete-form {
+    width: 60%;
   }
 }
 
@@ -163,11 +176,21 @@ body {
     margin: 2.5rem 0 0 3rem;
     text-align: left;
   }
+
+  .input_group:last-of-type {
+    margin-bottom: 1rem;
+  }
+
   .label {
     font-size: 2.6rem;
   }
+
   .input {
     font-size: 2.2rem;
+  }
+
+  .error-message {
+    color: $orange;
   }
 
   .account-form,
@@ -185,29 +208,9 @@ body {
     margin-bottom: -5rem;
   }
 
-  .update-button {
-    height: 4.5rem;
-    min-height: 4.5rem;
-    line-height: 4.5rem;
-    font-size: 2rem;
-    width: 22rem;
-  }
-
-  .delete-button {
-    height: 4.5rem;
-    min-height: 4.5rem;
-    line-height: 4.5rem;
-    font-size: 2rem;
-    width: 22rem;
-    margin-bottom: 0;
-  }
-
-  .back-button {
-    height: 5.5rem;
-    min-height: 5.5rem;
-    width: 16rem;
-    line-height: 5.1rem;
+  .button_secondary {
     margin: 0 0 3rem 3rem;
+    align-self: flex-start;
   }
 }
 
@@ -225,23 +228,19 @@ body {
     font-size: 2.4rem;
   }
 
-  .update-button {
-    width: 25rem;
-    height: 5.5rem;
-    font-size: 2.4rem;
+  .error-message {
+    font-size: 1.6rem;
+    min-height: 2.7rem;
   }
 
-  .delete-button {
-    width: 25rem;
-    height: 5.5rem;
-    font-size: 2.4rem;
-  }
-
-  .back-button {
-    min-height: 6.5rem;
-    width: 19rem;
-    line-height: 6.1rem;
+  .button_primary,
+  .button_delete,
+  .button_secondary {
     font-size: 2.6rem;
-    margin: 0 0 5rem 0;
+    padding: 1.8rem 4.5rem;
+  }
+  .button_secondary {
+    padding: 1.8rem 5.3rem;
+    margin-left: 0;
   }
 }

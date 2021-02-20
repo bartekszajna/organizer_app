@@ -154,7 +154,7 @@ body {
 }
 
 .addtask-button {
-  @include secondary-button(17rem);
+  //@include secondary-button(17rem);
   margin: 4rem auto;
 }
 
@@ -315,11 +315,11 @@ fieldset:focus-within legend {
 }
 
 .task-submit-button {
-  @include primary-button(15rem);
+  //@include primary-button(15rem);
   margin: 2rem auto;
 }
 .back-button {
-  @include secondary-button(15rem);
+  //@include secondary-button(15rem);
   margin: 0 auto 4rem;
 }
 

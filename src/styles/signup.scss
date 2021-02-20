@@ -103,12 +103,12 @@ body {
 }
 
 .signup-submit-button {
-  @include primary-button(20rem);
+  //@include primary-button(20rem);
   margin: 0 auto 2rem;
 }
 
 .back-button {
-  @include secondary-button(14rem);
+  //@include secondary-button(14rem);
   margin: 0 auto 4rem;
   line-height: 4.1rem;
 }
@@ -122,9 +122,9 @@ body {
     min-height: 63.5rem;
   }
 
-  %button {
-    min-height: 5.5rem;
-  }
+  // %button {
+  //   min-height: 5.5rem;
+  // }
 
   .signup-form {
     width: 80%;
