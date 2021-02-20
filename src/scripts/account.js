@@ -50,19 +50,19 @@ links.forEach((link) =>
 );
 
 function showBody() {
-  body.classList.add('visible');
-  addTransitionToLabels();
+  body.classList.add('body--visible');
+  //addTransitionToLabels();
 }
 
 function hideBody() {
   body.classList.remove('visible');
 }
 
-function addTransitionToLabels() {
-  inputLabels.forEach((label) => {
-    label.classList.add('transition');
-  });
-}
+// function addTransitionToLabels() {
+//   inputLabels.forEach((label) => {
+//     label.classList.add('transition');
+//   });
+// }
 ////////////////////////////////////////////
 
 // we provide our own client-side JS-based validation

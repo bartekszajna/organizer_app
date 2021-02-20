@@ -8,9 +8,10 @@
   <body>
     <h1 class="title">Account</h1>
 
-    <form method="POST" action="" class="account-form">
-      <div class="input">
+    <form method="POST" action="" class="form account-form">
+      <div class="input_group">
         <input
+          class="input"
           type="text"
           name="username"
           id="username"
@@ -21,11 +22,12 @@
           aria-invalid="false"
           aria-errormessage="username-error"
         />
-        <label for="username">Username</label>
+        <label class="label" for="username">Username</label>
         <p class="error-message" aria-live="polite" id="username-error"></p>
       </div>
-      <div class="input">
+      <div class="input_group">
         <input
+          class="input"
           type="email"
           name="email"
           id="email"
@@ -34,11 +36,12 @@
           aria-invalid="false"
           aria-errormessage="email-error"
         />
-        <label for="email">Email address</label>
+        <label class="label" for="email">Email address</label>
         <p class="error-message" aria-live="polite" id="email-error"></p>
       </div>
-      <div class="input">
+      <div class="input_group">
         <input
+          class="input"
           type="password"
           name="password"
           id="password"
@@ -50,11 +53,12 @@
           aria-invalid="false"
           aria-errormessage="password-error"
         />
-        <label for="password">Change password</label>
+        <label class="label" for="password">Change password</label>
         <p class="error-message" aria-live="polite" id="password-error"></p>
       </div>
-      <div class="input">
+      <div class="input_group">
         <input
+          class="input"
           type="password"
           name="repeat-password"
           id="repeat-password"
@@ -66,7 +70,7 @@
           aria-invalid="false"
           aria-errormessage="repeat-password-error"
         />
-        <label for="repeat-password">Repeat new password</label>
+        <label class="label" for="repeat-password">Repeat new password</label>
         <p
           class="error-message"
           aria-live="polite"
@@ -82,9 +86,10 @@
         Update account
       </button>
     </form>
-    <form method="POST" action="" class="delete-form">
-      <div class="input">
+    <form method="POST" action="" class="form delete-form">
+      <div class="input_group">
         <input
+          class="input"
           type="password"
           name="delete"
           id="delete"
@@ -97,7 +102,7 @@
           aria-invalid="false"
           aria-errormessage="delete-account-error"
         />
-        <label for="delete">Delete with password</label>
+        <label class="label" for="delete">Delete with password</label>
         <p
           class="error-message"
           aria-live="polite"

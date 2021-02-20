@@ -246,7 +246,6 @@ body {
 
   #title,
   #deadline {
-    @include text-input;
     &:focus + label {
       transform: translateY(-180%);
       color: $white;

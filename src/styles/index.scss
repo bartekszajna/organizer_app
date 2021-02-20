@@ -148,7 +148,6 @@ body {
   }
 
   input {
-    @include text-input;
     &:focus + label {
       transform: translateY(-180%);
       color: $white;

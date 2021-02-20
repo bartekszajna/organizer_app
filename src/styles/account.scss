@@ -3,7 +3,9 @@
 @import 'fonts';
 @import 'links';
 @import 'buttons';
+@import 'forms';
 @import 'inputs';
+@import 'error_message';
 
 ::selection {
   background-color: $red;
@@ -12,7 +14,7 @@
 html,
 body {
   height: 100%;
-  min-height: 53.6rem;
+  min-height: 53rem;
 }
 
 body {
@@ -21,7 +23,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 1.8rem;
   width: 85%;
   max-width: 140rem;
   margin: 0 auto;
@@ -32,7 +33,7 @@ body {
   transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-.visible {
+.body--visible {
   visibility: visible;
   opacity: 1;
 }
@@ -41,74 +42,35 @@ body {
   font-size: 2.6rem;
   font-weight: 700;
   text-align: center;
-  margin: 1rem 0 2rem;
+  margin: 1rem 0 2.2rem;
   flex-grow: 1;
 }
-
+// maybe this width should be moved into forms component
 .account-form,
 .delete-form {
   width: 90%;
-  align-self: center;
-  flex-grow: 1;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  .input {
-    margin-top: -0.5rem;
-    display: flex;
-    flex-direction: column;
-    &:last-of-type {
-      padding: 0;
-      margin: 0;
-    }
-  }
-
-  input {
-    @include text-input;
-    font-size: 1.4rem;
-    &:focus + label {
-      transform: translateY(-180%);
-      color: $white;
-    }
-    &:not(:placeholder-shown) + label {
-      transform: translateY(-180%);
-      color: $white;
-    }
-  }
-  label {
-    line-height: 1.4;
-    transform: translateY(-100%);
-    color: $faded_white;
-  }
 }
-
-.transition {
-  transition: transform 0.4s ease-out, color 0.4s ease-out;
+.input {
+  font-size: 1.4rem;
 }
-
-.error-message {
-  transform: translateY(-120%);
-  color: $red;
-  font-size: 1.2rem;
-  font-weight: 500;
-  line-height: 1.8;
-  min-height: 2.1rem;
+.input_group:last-of-type {
+  margin-bottom: 0.5rem;
 }
 
 .update-button {
-  @include primary-button(19rem);
+  @include primary-button(20rem);
   min-height: 4rem;
   line-height: 4rem;
   height: 4rem;
-  margin: -2rem auto 3rem;
+  margin: 0 auto 3.5rem;
 }
 
 .delete-button {
-  @include delete-button(19rem);
+  @include delete-button(20rem);
   min-height: 4rem;
   line-height: 4rem;
   height: 4rem;
-  margin: -2rem auto 2rem;
+  margin: 0 auto 2rem;
 }
 
 .back-button {
@@ -121,28 +83,23 @@ body {
 ///////////////////////////////////////////
 // media queries
 
-@media (min-height: 760px) {
-  body {
-    font-size: 2.2rem;
-  }
+@media (min-height: 670px) {
   .title {
     margin: 3rem 0;
     font-size: 3.6rem;
   }
-  .account-form,
-  .delete-form {
-    .input {
-      font-size: 2.2rem;
-    }
-    input {
-      font-size: 1.8rem;
-    }
+
+  .label {
+    font-size: 2rem;
+  }
+
+  .input {
+    font-size: 1.6rem;
   }
 
   .error-message {
     font-size: 1.4rem;
-    line-height: 2;
-    min-height: 2.8rem;
+    min-height: 2.3rem;
   }
 
   .update-button {
@@ -150,7 +107,6 @@ body {
     min-height: 4.5rem;
     line-height: 4.5rem;
     width: 23rem;
-    //margin-top: -3rem;
   }
 
   .delete-button {
@@ -160,14 +116,13 @@ body {
     width: 23rem;
   }
 
-  .back-button {
-    width: 16rem;
-    height: 5.5rem;
-    min-height: 5.5rem;
-    line-height: 5.1rem;
-    margin-top: -3rem;
-    margin-bottom: 3rem;
-  }
+  // .back-button {
+  //   width: 16rem;
+  //   height: 5.5rem;
+  //   min-height: 5.5rem;
+  //   line-height: 5.1rem;
+  //   margin-bottom: 3rem;
+  // }
 }
 
 @media (min-width: 520px) {
@@ -175,43 +130,44 @@ body {
     min-height: 64.5rem;
   }
   .title {
-    margin: 2rem 0;
-    font-size: 3.2rem;
+    margin: 3rem 0;
+    font-size: 3.6rem;
   }
   .account-form,
   .delete-form {
-    width: 80%;
-    .input {
-      font-size: 2.2rem;
-    }
-    input {
-      font-size: 1.8rem;
-    }
+    width: 75%;
   }
 
-  .error-message {
-    font-size: 1.4rem;
-    line-height: 2;
-    min-height: 2.8rem;
+  .label {
+    font-size: 2.4rem;
+  }
+
+  .input {
+    font-size: 2rem;
   }
 }
 
 @media (min-width: 1024px) {
   html {
-    min-height: 60rem;
+    min-height: 59rem;
   }
   body {
     background-color: $profile_blue;
     background-size: cover;
     background-image: url('../assets/desktop_background2_blurred.jpg');
     width: 100%;
-    font-size: 2.4rem;
   }
 
   .title {
     font-size: 4rem;
-    margin: 2rem 0 0 3rem;
+    margin: 2.5rem 0 0 3rem;
     text-align: left;
+  }
+  .label {
+    font-size: 2.6rem;
+  }
+  .input {
+    font-size: 2.2rem;
   }
 
   .account-form,
@@ -222,15 +178,11 @@ body {
 
   .account-form {
     justify-content: center;
-    margin-top: -1rem;
+    margin-top: -2rem;
   }
 
   .delete-form {
     margin-bottom: -5rem;
-  }
-
-  .error-message {
-    color: $orange;
   }
 
   .update-button {
@@ -239,7 +191,6 @@ body {
     line-height: 4.5rem;
     font-size: 2rem;
     width: 22rem;
-    margin-top: -3rem;
   }
 
   .delete-button {
@@ -248,7 +199,6 @@ body {
     line-height: 4.5rem;
     font-size: 2rem;
     width: 22rem;
-    margin-top: -3rem;
     margin-bottom: 0;
   }
 
@@ -267,17 +217,12 @@ body {
     font-size: 5.6rem;
   }
 
-  .account-form,
-  .delete-form {
-    .input {
-      font-size: 2.4rem;
-    }
+  .label {
+    font-size: 2.8rem;
   }
 
-  .error-message {
-    font-size: 1.6rem;
-    line-height: 2;
-    min-height: 3.2rem;
+  .input {
+    font-size: 2.4rem;
   }
 
   .update-button {
