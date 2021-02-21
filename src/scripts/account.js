@@ -55,7 +55,7 @@ function showBody() {
 }
 
 function hideBody() {
-  body.classList.remove('visible');
+  body.classList.remove('body--visible');
 }
 
 // function addTransitionToLabels() {

@@ -17,17 +17,17 @@
   font-size: 1.6rem;
   background: none;
   font-family: 'Poppins', sans-serif;
-  color: rgba(255, 255, 255, 0.7);
+  color: $faded_white;
   border: none;
   border-bottom: 1px solid white;
   outline: none;
 
   &:focus + .label {
-    transform: translateY(-100%);
+    transform: translateY(-100%) scale(1.02);
     color: $white;
   }
   &:not(:placeholder-shown) + .label {
-    transform: translateY(-100%);
+    transform: translateY(-100%) scale(1.02);
     color: $white;
   }
 }
@@ -38,6 +38,7 @@
   left: 0;
   font-size: 1.8rem;
   color: $faded_white;
+  transform-origin: top left;
   transition: transform 0.4s ease-out, color 0.4s ease-out;
 }
 

@@ -3,6 +3,7 @@
 @import 'fonts';
 @import 'links';
 @import 'buttons';
+@import 'forms';
 @import 'inputs';
 
 ::selection {
@@ -20,7 +21,6 @@ body {
   opacity: 0;
   visibility: hidden;
   flex-direction: column;
-  font-size: 1.8rem;
   width: 85%;
   max-width: 140rem;
   margin: 0 auto;
@@ -31,7 +31,7 @@ body {
   transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-.visible {
+.body--visible {
   visibility: visible;
   opacity: 1;
 }
@@ -44,23 +44,25 @@ body {
   z-index: 2;
   font-size: 2.6rem;
   font-family: 'Oleo Script', cursive;
-  .logo {
-    display: flex;
-    align-items: center;
-    margin-top: 1rem;
-    svg {
-      width: 48px;
-      height: auto;
-      margin-right: 1rem;
-      display: block;
-      fill: white;
-      &:hover {
-        fill: $orange;
-      }
-    }
-  }
-  span {
+}
+
+.header_text {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  &--colored {
     color: $orange;
+  }
+}
+
+.header_book {
+  width: 48px;
+  height: auto;
+  margin-right: 1rem;
+  display: block;
+  fill: white;
+  &:hover {
+    fill: $orange;
   }
 }
 
@@ -68,8 +70,8 @@ body {
   font-size: 3.2rem;
   font-weight: 500;
   margin: 1.5rem 0;
-  span {
-    font-size: 3.8rem;
+  &--colored {
+    font-size: 3.6rem;
     color: $brown;
     font-weight: 700;
   }
@@ -79,24 +81,17 @@ body {
   line-height: 1.8;
   color: $faded_white;
   flex-grow: 2;
+  font-size: 1.8rem;
   padding-bottom: 1rem;
-}
-
-.signup-button {
-  //@include primary-button(25rem);
-  margin: 0 auto 2rem;
-}
-
-.login-button {
-  //@include secondary-button(14rem);
-  margin: 0 auto 4rem;
 }
 
 .modal {
   opacity: 0;
   visibility: hidden;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
   background: linear-gradient(to top, #95bdef 70%, #558cd2);
   position: absolute;
   top: 0;
@@ -106,6 +101,7 @@ body {
   height: 100%;
   z-index: 10;
   pointer-events: none;
+
   &-open {
     visibility: visible;
     opacity: 1;
@@ -116,110 +112,59 @@ body {
   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
-.error-message {
-  transform: translateY(-120%);
-  color: $red;
-  font-size: 1.2rem;
-  font-weight: 500;
-  line-height: 1.8;
-  min-height: 2.1rem;
-}
-
 .login-form {
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 75%;
-  height: 100%;
-  align-self: center;
-  .input {
-    position: relative;
-    flex-grow: 2;
-    display: flex;
-    flex-direction: column;
-    font-size: 2rem;
-    padding: 2rem 0 0 0;
-    &:first-of-type {
-      flex-grow: 3;
-      justify-content: flex-end;
-      margin-top: 4rem;
-      padding: 0 0 2rem 0;
-    }
-  }
+  height: 65%;
+  flex-grow: unset;
+}
 
-  input {
-    &:focus + label {
-      transform: translateY(-180%);
-      color: $white;
-    }
-    &:not(:placeholder-shown) + label {
-      transform: translateY(-180%);
-      color: $white;
-    }
-  }
-  label {
-    line-height: 1.4;
-    transform: translateY(-100%);
-    color: $faded_white;
-    transition: transform 0.4s ease-out, color 0.4s ease-out;
+.input_group {
+  margin-bottom: 1rem;
+  &:first-of-type {
+    margin-bottom: 4rem;
   }
 }
 
-.login-submit-button {
-  //@include primary-button(14rem);
-  margin: 0 auto 2rem;
-}
-.back-button {
-  //@include secondary-button(14rem);
-  margin: 0 auto 4rem;
+.label {
+  font-size: 2rem;
 }
 
-///////////////////////////////////////////
-// media queries
-
-@media (max-width: 300px) {
-  // exclusive purpose of galaxy fold (280px wide)
-  .signup-button {
-    font-size: 16px;
-    width: 23rem;
-  }
+.button_primary {
+  margin-bottom: 2rem;
 }
+
+.button--signup {
+  padding: 1.2rem 2rem;
+}
+
+.button_secondary {
+  margin-bottom: 4rem;
+}
+
+.button--open-modal {
+  padding: 1.1rem 4rem;
+}
+
+.button--log-in,
+.button--close-modal {
+  font-size: 1.8rem;
+}
+
+.button--log-in {
+  padding: 1.2rem 4.5rem;
+}
+
+.button--close-modal {
+  padding: 1rem 4.1rem;
+}
+
+//////////////////////////////////
+//        media queries         //
+//////////////////////////////////
 
 @media (min-width: 520px) {
-  body {
-    font-size: 2.4rem;
-  }
-
-  // %button {
-  //   min-height: 5.5rem;
-  // }
-
-  .error-message {
-    font-size: 1.4rem;
-    line-height: 2;
-    min-height: 2.8rem;
-  }
-  .button-group {
-    flex-grow: 2;
-  }
-  .signup-button {
-    width: 33rem;
-    line-height: 5.5rem;
-  }
-
-  .login-button {
-    width: 17rem;
-  }
-
-  .login-submit-button {
-    width: 17rem;
-    line-height: 5.5rem;
-  }
-
-  .back-button {
-    width: 17rem;
-  }
-
   .header {
     font-size: 3.4rem;
   }
@@ -230,35 +175,82 @@ body {
       font-size: 5rem;
     }
   }
+
+  .subtitle {
+    font-size: 2.4rem;
+  }
+
   .login-form {
     width: 70%;
-    .input {
-      font-size: 2.4rem;
-      flex-grow: unset;
-    }
-    input {
-      font-size: 1.8rem;
-    }
+  }
+
+  .label {
+    font-size: 2.4rem;
+  }
+
+  .input {
+    font-size: 1.8rem;
+  }
+
+  .error-message {
+    font-size: 1.4rem;
+    min-height: 2.3rem;
+  }
+
+  .button {
+    font-size: 2.4rem;
+  }
+
+  .button--signup {
+    padding: 1.6rem 2.6rem;
+  }
+
+  .button--open-modal {
+    padding: 1.4rem 4.8rem;
+  }
+
+  .button--log-in {
+    padding: 1.6rem 5rem;
+  }
+
+  .button--close-modal {
+    padding: 1.4rem 5.3rem;
   }
 }
 
 @media (min-width: 768px) {
-  .login-form {
-    width: 60%;
-    .input:first-of-type {
-      flex-grow: 2;
+  .header {
+    font-size: 4.2rem;
+  }
+  .title {
+    font-size: 6rem;
+    span {
+      font-size: 7.2rem;
     }
   }
+  .subtitle {
+    font-size: 2.6rem;
+  }
+  .modal {
+    justify-content: center;
+  }
 
-  .back-button,
-  .login-submit-button {
+  .login-form {
+    width: 60%;
+    height: 100%;
+    justify-content: center;
+  }
+  .input_group:last-of-type {
+    margin-bottom: 5rem;
+  }
+  .button--log-in,
+  .button--close-modal {
     margin: 0;
   }
 
   .button-group {
     display: flex;
-    width: 100%;
-    flex-grow: 2;
+    align-items: center;
     justify-content: space-around;
   }
 }
@@ -281,7 +273,6 @@ body {
   }
 
   .header {
-    font-size: 4.2rem;
     justify-content: flex-start;
     padding-top: 3rem;
     flex-grow: 2;
@@ -291,33 +282,17 @@ body {
   }
 
   .title {
-    font-size: 6rem;
     margin-bottom: 2rem;
     span {
-      font-size: 7.2rem;
       color: $light_blue;
     }
   }
 
   .subtitle {
-    font-size: 2.6rem;
     color: $white;
     flex-grow: 2;
     width: 60%;
     margin-bottom: 3rem;
-  }
-
-  .signup-button {
-    margin: 0 0 3rem 0;
-  }
-
-  .login-button {
-    margin: 0;
-    margin-bottom: 8%;
-  }
-
-  .error-message {
-    color: $orange;
   }
 
   .modal {
@@ -329,55 +304,56 @@ body {
   }
   .login-form {
     backdrop-filter: blur(0.3rem);
-    display: block;
     box-sizing: border-box;
-    padding-top: 7rem;
     width: 60rem;
     height: 40rem;
     border-radius: 2rem;
     background-color: rgba(0, 0, 0, 0.85);
     align-items: center;
-    .input {
-      width: 39rem;
-      margin: 1rem auto;
-      padding: 0;
-      &:first-of-type {
-        margin-top: 1rem;
-      }
-    }
+    justify-content: center;
+  }
 
-    .button-group {
-      display: flex;
-      width: 39rem;
-      margin: 1rem auto;
-      justify-content: space-between;
-    }
-    .login-submit-button,
-    .back-button {
-      width: 15rem;
-      font-size: 2.2rem;
-      margin: 0;
-      min-height: 5rem;
-    }
-    .login-submit-button {
-      line-height: 5rem;
-    }
+  .input_group {
+    width: 40rem;
+    margin: 4rem 0 5rem;
+  }
+
+  .error-message {
+    color: $orange;
+  }
+
+  .button-group {
+    width: 40rem;
+    margin: 0;
+    justify-content: space-between;
+  }
+
+  .button--signup {
+    margin: 0 0 3rem 0;
+    align-self: flex-start;
+  }
+
+  .button--open-modal {
+    margin: 0;
+    margin-bottom: 8%;
+    align-self: flex-start;
   }
 }
 
 @media (min-width: 1920px) {
-  .header .logo {
+  .header_text {
     font-size: 5.6rem;
-    svg {
-      width: 72px;
-      height: auto;
-    }
+  }
+
+  .header_book {
+    width: 72px;
+    height: auto;
   }
 
   .title {
     font-size: 7.2rem;
     margin-bottom: 4rem;
-    span {
+    &--colored {
       font-size: 8.6rem;
     }
   }
@@ -386,16 +362,16 @@ body {
     font-size: 3.2rem;
   }
 
-  .signup-button {
-    min-height: 6.5rem;
-    width: 36rem;
-    line-height: 6.5rem;
+  .button--signup,
+  .button--open-modal {
     font-size: 2.6rem;
   }
 
-  .login-button {
-    min-height: 6.5rem;
-    width: 19rem;
-    font-size: 2.6rem;
+  .button--signup {
+    padding: 2rem 3.2rem;
+  }
+
+  .button--open-modal {
+    padding: 1.8rem 5.2rem;
   }
 }

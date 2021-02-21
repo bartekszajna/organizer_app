@@ -4,12 +4,12 @@ let isModalOpening = false;
 const body = document.querySelector('body');
 const links = document.querySelectorAll('a');
 
-const loginButton = document.querySelector('.login-button');
-const backButton = document.querySelector('.back-button');
+const loginButton = document.querySelector('.button--open-modal');
+const backButton = document.querySelector('.button--close-modal');
 
 const modal = document.querySelector('.modal');
 const firstEl = modal.querySelector('#username');
-const lastEl = modal.querySelector('.back-button');
+const lastEl = backButton;
 
 const form = modal.querySelector('.login-form');
 const usernameInput = form.querySelector('#username');
@@ -65,11 +65,11 @@ modal.addEventListener('click', detectClickOutsideModal);
 document.addEventListener('keydown', detectEscapeKeyEvent);
 
 function showBody() {
-  body.classList.add('visible');
+  body.classList.add('body--visible');
 }
 
 function hideBody() {
-  body.classList.remove('visible');
+  body.classList.remove('body--visible');
 }
 
 function openModal() {

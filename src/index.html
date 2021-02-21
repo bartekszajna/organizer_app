@@ -8,8 +8,9 @@
 
   <body>
     <h1 class="header">
-      <a href="index.html" class="logo">
+      <a href="index.html" class="header_text">
         <svg
+          class="header_book"
           width="60"
           height="60"
           viewBox="0 0 60 60"
@@ -30,12 +31,12 @@
             d="M10.2776 38.5671V18.379H9.11001C8.22243 18.379 7.5 19.1013 7.5 19.989V45.5795C7.5 46.0719 7.72061 46.5304 8.10515 46.8373C8.49076 47.1447 8.98804 47.2585 9.47046 47.1485C13.3281 46.2692 20.097 45.2474 26.5176 46.8195C22.8052 43.3059 17.5631 42.6844 14.3838 42.6768C12.1197 42.6713 10.2776 40.8278 10.2776 38.5671Z"
           />
         </svg>
-        Organi<span>zzz</span>er
+        Organi<span class="header_text--colored">zzz</span>er
       </a>
     </h1>
 
     <p class="title">
-      Your <span>work&nbsp;routine</span><br />
+      Your <span class="title--colored">work&nbsp;routine</span><br />
       now improved.
     </p>
     <p class="subtitle">
@@ -43,57 +44,61 @@
       done.
     </p>
 
-    <a class="button button_primary" href="signup.html"
+    <a class="button button_primary button--signup" href="signup.html"
       >Create account for free</a
     >
 
     <button
       aria-label="open modal"
       aria-expanded="false"
-      class="button button_secondary"
+      class="button button_secondary button--open-modal"
       type="button"
     >
       Log in
     </button>
 
     <div role="dialog" aria-modal="true" aria-label="login modal" class="modal">
-      <form class="login-form" method="POST" action="">
-        <div class="input">
-          <input
-            type="text"
-            name="username"
-            id="username"
-            value=""
-            required
-            placeholder=" "
-            aria-invalid="false"
-            aria-errormessage="username-error"
-          />
-          <label for="username">username</label>
-          <p aria-live="polite" id="username-error" class="error-message"></p>
-        </div>
-        <div class="input">
-          <!-- minlength, maxlength, pattern
-                    :valid :invalid CSS pseudo classes
-                    atrybur aria-invalid jeśli niepoprawnie wypełnione pole
-                -->
+      <form class="form login-form" method="POST" action="">
+        <div class="inputs_container">
+          <div class="input_group">
+            <input
+              class="input"
+              type="text"
+              name="username"
+              id="username"
+              value=""
+              required
+              placeholder=" "
+              aria-invalid="false"
+              aria-errormessage="username-error"
+            />
+            <label class="label" for="username">username</label>
+            <p aria-live="polite" id="username-error" class="error-message"></p>
+          </div>
+          <div class="input_group">
+            <!-- minlength, maxlength, pattern
+                      :valid :invalid CSS pseudo classes
+                      atrybur aria-invalid jeśli niepoprawnie wypełnione pole
+                  -->
 
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value=""
-            required
-            placeholder=" "
-            aria-invalid="false"
-            aria-errormessage="password-error"
-          />
-          <label for="password">password</label>
-          <p aria-live="polite" id="password-error" class="error-message"></p>
+            <input
+              class="input"
+              type="password"
+              name="password"
+              id="password"
+              value=""
+              required
+              placeholder=" "
+              aria-invalid="false"
+              aria-errormessage="password-error"
+            />
+            <label class="label" for="password">password</label>
+            <p aria-live="polite" id="password-error" class="error-message"></p>
+          </div>
         </div>
         <div class="button-group">
           <button
-            class="button button_primary"
+            class="button button_primary button--log-in"
             type="submit"
             name="asubmit"
             value="login"
@@ -102,7 +107,7 @@
           </button>
           <button
             aria-label="close modal"
-            class="button button_secondary"
+            class="button button_secondary button--close-modal"
             type="button"
           >
             Back
