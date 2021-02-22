@@ -4,7 +4,7 @@ const body = document.querySelector('body');
 const links = document.querySelectorAll('a');
 const firstEl = document.querySelector('input');
 
-const accountForm = document.querySelector('.account-form');
+const accountForm = document.querySelector('.account_form');
 const usernameInput = accountForm.querySelector('#username');
 const usernameError = accountForm.querySelector('#username-error');
 const emailInput = accountForm.querySelector('#email');
@@ -14,13 +14,13 @@ const passwordError = accountForm.querySelector('#password-error');
 const repeatPasswordInput = accountForm.querySelector('#repeat-password');
 const repeatPasswordError = accountForm.querySelector('#repeat-password-error');
 
-const deleteForm = document.querySelector('.delete-form');
+const deleteForm = document.querySelector('.delete_form');
 const deleteInput = deleteForm.querySelector('#delete');
 const deleteError = deleteForm.querySelector('#delete-account-error');
 
 const allInputsList = document.querySelectorAll('input');
 const inputsList = accountForm.querySelectorAll('input');
-const messagesList = accountForm.querySelectorAll('p.error-message');
+const messagesList = accountForm.querySelectorAll('p.error_message');
 
 const updateButton = accountForm.querySelector('.button_primary');
 const deleteButton = deleteForm.querySelector('.button_delete');
@@ -125,7 +125,7 @@ function generalValidation(e) {
   siblingInputsList.forEach((input) => {
     validateInput(input, input.getAttribute('name'));
   });
-  const formMessages = e.target.querySelectorAll('p.error-message');
+  const formMessages = e.target.querySelectorAll('p.error_message');
   const areMessagesEmpty = [...formMessages].every(
     (message) => message.innerText === ''
   );

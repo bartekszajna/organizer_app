@@ -55,38 +55,43 @@ body {
   align-items: flex-start;
   justify-content: space-between;
   z-index: 5;
-  .line {
-    display: block;
-    width: 4rem;
-    height: 0.4rem;
-    background: $white;
-    border-radius: 0.2rem;
-    transition: transform 0.7s ease, opacity 0.5s ease;
-    left: 1rem;
-    &--1 {
-      width: 5rem;
-      transition: transform 0.7s ease;
-    }
-    &--3 {
-      width: 5rem;
-      transition: transform 0.7s ease;
-    }
-  }
+
   &:focus .line,
   &:hover .line {
     background: $orange;
   }
 }
 
-.hamburger-open .line--2 {
-  transform: translateX(-100%);
-  opacity: 0;
+.line {
+  display: block;
+  width: 4rem;
+  height: 0.4rem;
+  background: $white;
+  border-radius: 0.2rem;
+  transition: transform 0.7s ease, opacity 0.5s ease;
+  left: 1rem;
+
+  &--1 {
+    width: 5rem;
+    transition: transform 0.7s ease;
+  }
+
+  &--3 {
+    width: 5rem;
+    transition: transform 0.7s ease;
+  }
 }
-.hamburger-open .line--1 {
+
+.hamburger--open .line--1 {
   transform: translateY(1.4rem) rotate(45deg);
 }
 
-.hamburger-open .line--3 {
+.hamburger--open .line--2 {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.hamburger--open .line--3 {
   transform: translateY(-1.4rem) rotate(-45deg);
 }
 
@@ -108,7 +113,7 @@ body {
     visibility 0s 0.8s;
 }
 
-.list-open {
+.list--open {
   transform: translateX(-100%);
   transition: transform 0.8s cubic-bezier(0.14, 0.25, 0.45, 0.97),
     visibility 0s 0s;
@@ -166,7 +171,6 @@ body {
   visibility: hidden;
   display: flex;
   flex-direction: column;
-  //justify-content: center;
   background: linear-gradient(to top, #95bdef 70%, #558cd2);
   position: absolute;
   top: 0;
@@ -176,13 +180,16 @@ body {
   height: calc(var(--vh, 1vh) * 100);
   z-index: 10;
   pointer-events: none;
-  &-open {
+
+  &--open {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
   }
 }
 
+// this class exists because we need our modal initially hidden and we do not want it
+// to fade away smoothly with page opened, so proper transition is added just after it
 .open {
   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
@@ -191,7 +198,7 @@ body {
   font-size: 2rem;
 }
 
-.addtask-form {
+.addtask_form {
   color: $faded_white;
   flex-grow: unset;
   width: 80%;
@@ -300,6 +307,7 @@ body {
   padding: 0.5rem;
   margin-top: 0.5rem;
   height: 100%;
+  min-height: 7.5rem;
   max-height: 18rem;
   border-radius: 1rem;
   background: rgba($blue, 0.3);
@@ -345,7 +353,7 @@ body {
     padding: 1.3rem 4rem;
   }
 
-  .addtask-form {
+  .addtask_form {
     width: 65%;
   }
 
@@ -383,7 +391,7 @@ body {
     margin-bottom: 3rem;
   }
 
-  .error-message {
+  .error_message {
     font-size: 1.4rem;
     min-height: 2.3rem;
   }
@@ -406,7 +414,7 @@ body {
     width: 50%;
   }
 
-  .addtask-form {
+  .addtask_form {
     width: 60%;
   }
 
@@ -485,7 +493,7 @@ body {
     flex-grow: 1;
   }
 
-  .error-message {
+  .error_message {
     color: $orange;
   }
 
@@ -497,7 +505,7 @@ body {
     z-index: 2;
   }
 
-  .addtask-form {
+  .addtask_form {
     box-sizing: border-box;
     width: 68rem;
     height: 60rem;
@@ -562,7 +570,7 @@ body {
     font-size: 3.8rem;
   }
 
-  .addtask-form {
+  .addtask_form {
     width: 73rem;
     height: 62rem;
   }
@@ -571,8 +579,4 @@ body {
   .button--close-modal {
     font-size: 2.6rem;
   }
-
-  // .button--addtask{
-  //   padding:
-  // }
 }

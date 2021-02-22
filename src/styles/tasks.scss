@@ -3,6 +3,7 @@
 @import 'fonts';
 @import 'links';
 @import 'buttons';
+@import 'forms';
 @import 'inputs';
 
 body {
@@ -10,7 +11,6 @@ body {
   opacity: 0;
   visibility: hidden;
   flex-direction: column;
-  font-size: 1.8rem;
   min-height: 100vh;
   width: 80%;
   margin: 0 auto;
@@ -22,7 +22,7 @@ body {
   transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-.visible {
+.body--visible {
   visibility: visible;
   opacity: 1;
 }
@@ -34,12 +34,13 @@ body {
   margin: 2rem 0;
 }
 
-.tasks-list-multicolumn {
+.tasks_list--multicolumn {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.task-multicolumn {
+
+.task--multicolumn {
   width: 48%;
 }
 
@@ -52,34 +53,39 @@ body {
   background-color: rgba($blue, 0.4);
   border-radius: 2.5rem;
 }
+
 .task:last-of-type {
   margin-bottom: 10.5rem;
 }
 
-.task-title {
+.task_title {
   font-size: 2rem;
   text-align: center;
   margin-bottom: 1rem;
   font-weight: 500;
 }
-.task-time {
+
+.task_time {
   color: rgba($white, 0.7);
   font-size: 1.2rem;
   margin: 0.5rem 0;
 }
-.task-description {
+
+.task_description {
   font-size: 1.4rem;
   margin: 1rem 0 2rem;
   line-height: 1.3;
   color: rgba($white, 0.8);
   flex-grow: 1;
 }
-.group {
+
+.task_container {
   display: flex;
   justify-content: space-between;
   font-size: 1.8rem;
 }
-.delete-button {
+
+.delete_task_button {
   color: $faded_red;
   background: none;
   border: none;
@@ -94,7 +100,7 @@ body {
   }
 }
 
-.priority {
+.task_priority {
   position: relative;
   display: flex;
   align-items: center;
@@ -111,6 +117,7 @@ body {
     transform: translateY(-50%);
     right: -3rem;
   }
+
   &-low {
     &::after {
       background-color: $green;
@@ -140,92 +147,98 @@ body {
   border-bottom-right-radius: 2.5rem;
 }
 
-.fieldset {
+.toolbar_fieldset {
   margin-top: 3rem;
 }
 
-.fieldset:focus-within legend {
+.toolbar_fieldset:focus-within .toolbar_header {
   color: $orange;
 }
 
-.toolbar-header {
+.toolbar_header {
   font-weight: 500;
   font-size: 2.6rem;
   margin: 0 0 1rem 3rem;
 }
-.input {
+
+.input_group {
   font-size: 1.6rem;
   margin: 2rem 0 2rem 2.5rem;
   display: flex;
   align-items: center;
+}
 
-  input {
-    appearance: none;
-    width: 2rem;
-    height: 2rem;
-    border: none;
-    border-radius: 50%;
-    outline: none;
-    background: $white;
-    margin-right: 1rem;
-  }
-  input:checked {
+.radio_input {
+  appearance: none;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  background: $white;
+  margin-right: 1rem;
+
+  &:checked {
     background: $orange;
   }
-  input:checked + label {
+
+  &:checked + .radio_label {
     color: $orange;
     font-size: 1.8rem;
     font-weight: 500;
   }
 }
-.sort-button {
-  //@include primary-button(12rem);
+
+.button_primary {
   margin: 1rem auto 1rem;
   font-size: 2rem;
-  height: 4rem;
-  min-height: 4rem;
-  line-height: 4rem;
+  padding: 1rem 4rem;
 }
 
-.tasks-view {
+.tasks_view {
   display: flex;
   justify-content: space-evenly;
   margin-top: 2rem;
-  input {
-    background-position: bottom;
-    background-size: cover;
-    appearance: none;
-    width: 2.6rem;
-    height: 2.6rem;
-    border: none;
-    outline: none;
+}
+
+.tasks_view_button {
+  background-position: bottom;
+  background-size: cover;
+  appearance: none;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: none;
+  outline: none;
+}
+
+.tasks_view_label {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.button--vertical {
+  background-image: url('../assets/vertical_icon.svg');
+
+  &:checked {
+    background-position: top;
   }
-  #vertical {
-    background-image: url('../assets/vertical_icon.svg');
-    &:checked {
-      background-position: top;
-    }
-  }
-  #horizontal {
-    background-image: url('../assets/horizontal_icon.svg');
-    &:checked {
-      background-position: top;
-    }
-  }
-  label {
-    border: 0;
-    clip: rect(0, 0, 0, 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
+}
+.button--horizontal {
+  background-image: url('../assets/horizontal_icon.svg');
+
+  &:checked {
+    background-position: top;
   }
 }
 
-.back-button-background {
+.back_button_background {
   height: 8.5rem;
   background-image: linear-gradient(to top, rgba($blue, 0.9) 97%, transparent);
   position: fixed;
@@ -237,51 +250,53 @@ body {
   left: 0;
 }
 
-.back-button {
-  //@include secondary-button(15rem);
-  line-height: 4.1rem;
+.button_secondary {
+  padding: 1.2rem 4.5rem;
+  font-size: 1.8rem;
 }
 
-///////////////////////////////////////////
-// media queries
+//////////////////////////////////
+//        media queries         //
+//////////////////////////////////
 
 @media (min-width: 520px) {
-  body {
-    font-size: 2.4rem;
-  }
   .title {
     font-size: 3.2rem;
     margin: 3rem 0;
   }
 
-  .tasks-list {
+  .tasks_list {
     width: 90%;
     margin: 0 auto;
   }
+
   .task:last-of-type {
     margin-bottom: 12.5rem;
   }
-  .task-title {
+
+  .task_title {
     font-size: 2.4rem;
   }
-  .task-time {
+
+  .task_time {
     font-size: 1.6rem;
   }
-  .task-description {
+
+  .task_description {
     font-size: 1.6rem;
   }
-  .group {
+
+  .task_container {
     font-size: 2rem;
   }
 
-  .back-button-background {
+  .back_button_background {
     height: 10.5rem;
   }
 
-  .back-button {
-    height: 5.5rem;
-    min-height: 5.5rem;
-    line-height: 5.1rem;
+  .button_secondary {
+    padding: 1.4rem 5.2rem;
+    font-size: 2.4rem;
   }
 }
 
@@ -294,15 +309,12 @@ body {
     margin-bottom: 10rem;
   }
 
-  .back-button-background {
-    //background-image: linear-gradient(red, red);
+  .back_button_background {
     height: 8rem;
   }
-  .back-button {
-    min-height: 4rem;
-    height: 4rem;
-    line-height: 3.6rem;
-    width: 13rem;
+
+  .button_secondary {
+    padding: 0.9rem 3.6rem;
     font-size: 1.8rem;
   }
 }
@@ -312,11 +324,12 @@ body {
     font-size: 4rem;
     margin: 4rem 0;
   }
-  .tasks-list {
+
+  .tasks_list {
     width: 75%;
   }
 
-  .priority::after {
+  .task_priority::after {
     width: 2.4rem;
     height: 2.4rem;
     right: -3rem;
@@ -334,19 +347,22 @@ body {
     padding-left: 26rem;
     max-width: 166rem;
   }
+
   .title {
     font-size: 5rem;
   }
-  .tasks-list {
+  .tasks_list {
     width: 85%;
     margin: 0 auto;
   }
+
   .task {
     background-color: rgba(0, 0, 0, 0.85);
     margin-bottom: 3rem;
     padding: 2.5rem 3rem;
   }
-  .task-title {
+
+  .task_title {
     margin-bottom: 1.5rem;
     font-size: 2.6rem;
   }
@@ -354,13 +370,16 @@ body {
   .task:last-of-type {
     margin-bottom: 3rem;
   }
-  .task-description {
+
+  .task_description {
     font-size: 1.8rem;
   }
-  .group {
+
+  .task_container {
     font-size: 2.4rem;
   }
-  .delete-button {
+
+  .delete_task_button {
     font-size: 2.4rem;
   }
 
@@ -368,11 +387,12 @@ body {
     display: block;
   }
 
-  .back-button-background {
+  .back_button_background {
     background: none;
     height: 1px;
   }
-  .back-button {
+
+  .button_secondary {
     position: fixed;
     transform: none;
     left: 3rem;
@@ -385,47 +405,52 @@ body {
   .title {
     font-size: 5.6rem;
   }
-  .task-title {
+
+  .task_title {
     font-size: 3rem;
   }
-  .task-time {
+
+  .task_time {
     font-size: 1.8rem;
   }
-  .task-description {
+
+  .task_description {
     font-size: 2.2rem;
   }
+
   .toolbar {
     width: 30rem;
     height: 56rem;
   }
-  .toolbar-header {
+
+  .toolbar_header {
     font-size: 3rem;
   }
-  .input {
+
+  .input_group {
     font-size: 2rem;
     margin: 2.5rem 0 2.5rem 3rem;
-    input {
-      width: 2.4rem;
-      height: 2.4rem;
-    }
-    input:checked + label {
-      font-size: 2.2rem;
-    }
   }
-  .sort-button {
-    width: 14rem;
+
+  .radio_input {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .radio_input:checked + .radio_label {
+    font-size: 2.2rem;
+  }
+
+  .button_primary {
+    padding: 1.1rem 4.4rem;
     font-size: 2.4rem;
-    height: 4.5rem;
-    min-height: 4.5rem;
-    line-height: 4.5rem;
   }
-  .back-button {
-    width: 19rem;
-    line-height: 6.5rem;
+
+  .button_secondary {
+    padding: 1.8rem 6rem;
     font-size: 2.6rem;
-    min-height: 6.5rem;
   }
-  .tasks-view input {
+  .tasks_view_button {
     width: 3rem;
     height: 3rem;
   }

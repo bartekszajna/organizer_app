@@ -65,10 +65,10 @@
       aria-label="addtask modal"
       class="modal"
     >
-      <form method="POST" action="" class="form addtask-form">
+      <form method="POST" action="" class="form addtask_form">
         <div class="input_group">
           <input
-            class="input local-storage-member"
+            class="input local_storage_member"
             type="text"
             name="title"
             id="title"
@@ -81,10 +81,10 @@
             aria-errormessage="title-error"
           />
           <label class="label" for="title">Task title</label>
-          <p aria-live="polite" id="title-error" class="error-message"></p>
+          <p aria-live="polite" id="title-error" class="error_message"></p>
         </div>
         <div class="input_group">
-          <fieldset class="fieldset local-storage-member" id="fieldset">
+          <fieldset class="fieldset local_storage_member" id="fieldset">
             <legend class="fieldset_legend">Priority level</legend>
             <div class="radio_container">
               <div class="radio_input_group">
@@ -125,7 +125,7 @@
         </div>
         <div class="input_group">
           <input
-            class="input local-storage-member"
+            class="input local_storage_member"
             type="text"
             id="deadline"
             name="deadline"
@@ -139,12 +139,12 @@
             >Deadline
             <span class="deadline--date-format">(yyyy-mm-dd)</span></label
           >
-          <p aria-live="polite" id="deadline-error" class="error-message"></p>
+          <p aria-live="polite" id="deadline-error" class="error_message"></p>
         </div>
         <div class="input_group input_group--last">
           <label for="Description">Description</label>
           <textarea
-            class="local-storage-member textarea"
+            class="local_storage_member textarea"
             maxlength="300"
             name="description"
             id="description"

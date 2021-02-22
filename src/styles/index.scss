@@ -100,17 +100,20 @@ body {
   z-index: 10;
   pointer-events: none;
 
-  &-open {
+  &--open {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
   }
 }
+
+// this class exists because we need our modal initially hidden and we do not want it
+// to fade away smoothly with page opened, so proper transition is added just after it
 .open {
   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
-.login-form {
+.login_form {
   justify-content: space-between;
   width: 75%;
   height: 65%;
@@ -177,7 +180,7 @@ body {
     font-size: 2.4rem;
   }
 
-  .login-form {
+  .login_form {
     width: 70%;
   }
 
@@ -189,7 +192,7 @@ body {
     font-size: 1.8rem;
   }
 
-  .error-message {
+  .error_message {
     font-size: 1.4rem;
     min-height: 2.3rem;
   }
@@ -232,7 +235,7 @@ body {
     justify-content: center;
   }
 
-  .login-form {
+  .login_form {
     width: 60%;
     height: 100%;
     justify-content: center;
@@ -299,7 +302,7 @@ body {
     align-items: center;
     z-index: 2;
   }
-  .login-form {
+  .login_form {
     backdrop-filter: blur(0.3rem);
     box-sizing: border-box;
     width: 60rem;
@@ -315,7 +318,7 @@ body {
     margin: 4rem 0 5rem;
   }
 
-  .error-message {
+  .error_message {
     color: $orange;
   }
 

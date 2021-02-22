@@ -11,7 +11,7 @@ const modal = document.querySelector('.modal');
 const firstEl = modal.querySelector('#username');
 const lastEl = backButton;
 
-const form = modal.querySelector('.login-form');
+const form = modal.querySelector('.login_form');
 const usernameInput = form.querySelector('#username');
 const usernameError = form.querySelector('#username-error');
 const passwordInput = form.querySelector('#password');
@@ -75,14 +75,14 @@ function hideBody() {
 function openModal() {
   isModalOpening = true;
   modal.classList.add('open');
-  modal.classList.add('modal-open');
+  modal.classList.add('modal--open');
   loginButton.setAttribute('aria-expanded', 'true');
   firstEl.addEventListener('focus', handleFirstEl);
   lastEl.addEventListener('focus', handleLastEl);
 }
 
 function closeModal() {
-  modal.classList.remove('modal-open');
+  modal.classList.remove('modal--open');
   loginButton.focus();
   loginButton.setAttribute('aria-expanded', 'false');
   firstEl.removeEventListener('focus', handleFirstEl);

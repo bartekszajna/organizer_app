@@ -17,14 +17,14 @@ const backButton = document.querySelector('.button--close-modal');
 const firstEl = document.querySelector('#title');
 const lastEl = backButton;
 
-const form = document.querySelector('.addtask-form');
+const form = document.querySelector('.addtask_form');
 const inputsList = form.querySelectorAll('input:not([type=radio])');
 const titleInput = form.querySelector('#title');
 const titleError = form.querySelector('#title-error');
 const deadlineInput = form.querySelector('#deadline');
 const deadlineError = form.querySelector('#deadline-error');
 
-const inputsForStorage = form.querySelectorAll('.local-storage-member');
+const inputsForStorage = form.querySelectorAll('.local_storage_member');
 const checkboxes = form.querySelectorAll('[type=radio]');
 
 inputsForStorage.forEach((input) => {
@@ -128,12 +128,12 @@ function hideBody() {
 
 hamburgerButton.addEventListener('click', (e) => {
   e.stopPropagation();
-  hamburgerButton.classList.toggle('hamburger-open');
+  hamburgerButton.classList.toggle('hamburger--open');
   hamburgerButton.setAttribute(
     'aria-expanded',
-    hamburgerButton.classList.contains('hamburger-open')
+    hamburgerButton.classList.contains('hamburger--open')
   );
-  navigation.classList.toggle('list-open');
+  navigation.classList.toggle('list--open');
   isMenuClosing = !isMenuClosing;
 });
 
@@ -152,20 +152,18 @@ document.addEventListener('keydown', detectEscapeKeyEvent);
 function openModal() {
   isModalOpening = true;
   modal.classList.add('open');
-  modal.classList.add('modal-open');
+  modal.classList.add('modal--open');
   addTaskButton.setAttribute('aria-expanded', 'true');
   firstEl.addEventListener('focus', handleFirstEl);
   lastEl.addEventListener('focus', handleLastEl);
-  //body.style.backgroundImage = 'none';
 }
 
 function closeModal() {
-  modal.classList.remove('modal-open');
+  modal.classList.remove('modal--open');
   addTaskButton.focus();
   addTaskButton.setAttribute('aria-expanded', 'false');
   firstEl.removeEventListener('focus', handleFirstEl);
   lastEl.removeEventListener('focus', handleLastEl);
-  //body.style.backgroundImage = 'linear-gradient(to top, #95bdef 70%, #558cd2)';
 }
 
 function detectClickOutsideModal(e) {

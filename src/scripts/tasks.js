@@ -1,13 +1,15 @@
 import '../styles/tasks.scss';
 
-const tasksView = document.querySelector('.tasks-view');
-const verticalInput = document.querySelector('#vertical');
-const horizontalInput = document.querySelector('#horizontal');
-const tasksList = document.querySelector('.tasks-list');
-const tasks = document.querySelectorAll('.task');
-const links = document.querySelectorAll('a');
 const body = document.querySelector('body');
-const priorityIndicators = document.querySelectorAll('.priority');
+const links = document.querySelectorAll('a');
+
+const tasksList = document.querySelector('.tasks_list');
+const tasksView = document.querySelector('.tasks_view');
+const tasks = document.querySelectorAll('.task');
+const priorityIndicators = document.querySelectorAll('.task_priority');
+
+const verticalInput = document.querySelector('.button--vertical');
+const horizontalInput = document.querySelector('.button--horizontal');
 
 // matchMedia object to handle looks of the tasks list in case of resizing
 // better, much more efficient way than listening for resize event
@@ -50,29 +52,29 @@ links.forEach((link) =>
 );
 
 if (verticalInput.checked) {
-  tasksList.classList.remove('tasks-list-multicolumn');
+  tasksList.classList.remove('tasks_list--multicolumn');
   tasks.forEach((task) => task.classList.remove('task-multicolumn'));
 }
 if (horizontalInput.checked) {
-  tasksList.classList.add('tasks-list-multicolumn');
-  tasks.forEach((task) => task.classList.add('task-multicolumn'));
+  tasksList.classList.add('tasks_list--multicolumn');
+  tasks.forEach((task) => task.classList.add('task--multicolumn'));
 }
 
 tasksView.addEventListener('change', (e) => {
   if (verticalInput.checked) {
-    tasksList.classList.remove('tasks-list-multicolumn');
-    tasks.forEach((task) => task.classList.remove('task-multicolumn'));
+    tasksList.classList.remove('tasks_list--multicolumn');
+    tasks.forEach((task) => task.classList.remove('task--multicolumn'));
   }
   if (horizontalInput.checked) {
-    tasksList.classList.add('tasks-list-multicolumn');
-    tasks.forEach((task) => task.classList.add('task-multicolumn'));
+    tasksList.classList.add('tasks_list--multicolumn');
+    tasks.forEach((task) => task.classList.add('task--multicolumn'));
   }
 });
 
 function showBody() {
-  body.classList.add('visible');
+  body.classList.add('body--visible');
 }
 
 function hideBody() {
-  body.classList.remove('visible');
+  body.classList.remove('body--visible');
 }

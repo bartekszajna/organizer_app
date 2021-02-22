@@ -5,7 +5,7 @@ const links = document.querySelectorAll('a');
 
 const firstEl = document.querySelector('input');
 
-const form = document.querySelector('.signup-form');
+const form = document.querySelector('.signup_form');
 const inputsList = form.querySelectorAll('input');
 const usernameInput = form.querySelector('#username');
 const usernameError = form.querySelector('#username-error');
@@ -15,7 +15,7 @@ const passwordInput = form.querySelector('#password');
 const passwordError = form.querySelector('#password-error');
 const repeatPasswordInput = form.querySelector('#repeat-password');
 const repeatPasswordError = form.querySelector('#repeat-password-error');
-const messagesList = form.querySelectorAll('p.error-message');
+const messagesList = form.querySelectorAll('p.error_message');
 
 if (sessionStorage.getItem('signup_username')) {
   usernameInput.value = sessionStorage.getItem('signup_username');
