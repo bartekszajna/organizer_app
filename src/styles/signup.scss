@@ -3,6 +3,7 @@
 @import 'fonts';
 @import 'links';
 @import 'buttons';
+@import 'forms';
 @import 'inputs';
 
 ::selection {
@@ -19,7 +20,6 @@ body {
   visibility: hidden;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 1.8rem;
   width: 85%;
   max-width: 140rem;
   margin: 0 auto;
@@ -30,7 +30,7 @@ body {
   transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-.visible {
+.body--visible {
   visibility: visible;
   opacity: 1;
 }
@@ -43,20 +43,23 @@ body {
   font-size: 2.6rem;
   font-family: 'Oleo Script', cursive;
   padding: 1rem 0 2rem;
-  a {
-    display: flex;
-    align-items: center;
-    svg {
-      width: 48px;
-      height: auto;
-      margin-right: 1rem;
-      display: block;
-      fill: $white;
-    }
-  }
-  span {
+}
+
+.header_text {
+  display: flex;
+  align-items: center;
+
+  &--colored {
     color: $orange;
   }
+}
+
+.header_book {
+  width: 48px;
+  height: auto;
+  margin-right: 1rem;
+  display: block;
+  fill: $white;
 }
 
 .signup-form {
@@ -66,103 +69,78 @@ body {
   width: 90%;
   align-self: center;
   flex-direction: column;
-  .input {
-    display: flex;
-    flex-direction: column;
-    font-size: 2rem;
-  }
-
-  input {
-    &:focus + label {
-      transform: translateY(-180%);
-      color: $white;
-    }
-    &:not(:placeholder-shown) + label {
-      transform: translateY(-180%);
-      color: $white;
-    }
-  }
-  label {
-    line-height: 1.4;
-    transform: translateY(-100%);
-    color: $faded_white;
-  }
+}
+.input_group {
+  margin-bottom: 2.2rem;
+}
+.label {
+  font-size: 2rem;
 }
 
-.transition {
-  transition: transform 0.4s ease-out, color 0.4s ease-out;
+.button {
+  font-size: 1.8rem;
 }
 
-.error-message {
-  transform: translateY(-120%);
-  color: $red;
-  font-size: 1.2rem;
-  font-weight: 500;
-  line-height: 1.8;
-  min-height: 2.1rem;
+.button_primary {
+  padding: 1.1rem 2.6rem;
+  margin-bottom: 2rem;
 }
 
-.signup-submit-button {
-  //@include primary-button(20rem);
-  margin: 0 auto 2rem;
+.button_secondary {
+  padding: 0.9rem 4.1rem;
+  margin-bottom: 4rem;
 }
 
-.back-button {
-  //@include secondary-button(14rem);
-  margin: 0 auto 4rem;
-  line-height: 4.1rem;
-}
-
-///////////////////////////////////////////
-// media queries
+//////////////////////////////////
+//        media queries         //
+//////////////////////////////////
 
 @media (min-width: 520px) {
   body {
-    font-size: 2.4rem;
     min-height: 63.5rem;
   }
 
-  // %button {
-  //   min-height: 5.5rem;
-  // }
-
   .signup-form {
     width: 80%;
-    .input {
-      font-size: 2.4rem;
-    }
-    input {
-      font-size: 1.8rem;
-    }
+  }
+
+  .input_group {
+    margin-bottom: 2.8rem;
+  }
+
+  .label {
+    font-size: 2.4rem;
+  }
+
+  .input {
+    font-size: 1.8rem;
   }
 
   .error-message {
     font-size: 1.4rem;
-    line-height: 2;
-    min-height: 2.8rem;
-  }
-  .signup-submit-button {
-    width: 26rem;
-    line-height: 5.5rem;
+    min-height: 2.3rem;
   }
 
-  .back-button {
-    width: 17rem;
-    line-height: 5.1rem;
+  .button {
+    font-size: 2.4rem;
+  }
+
+  .button_primary {
+    padding: 1.6rem 3.4rem;
+  }
+
+  .button_secondary {
+    padding: 1.4rem 5.4rem;
   }
 
   .header {
     font-size: 3.4rem;
   }
+}
 
-  .title {
-    font-size: 4.5rem;
-    span {
-      font-size: 5rem;
-    }
-  }
-  .signup-form .input {
-    margin: 0.5rem 0;
+@media (min-width: 768px) {
+  .signup-form {
+    width: 65%;
   }
 }
 
@@ -179,7 +157,8 @@ body {
   .header {
     padding: 0;
   }
-  .logo {
+
+  .header_text {
     font-size: 4.2rem;
     padding: 2rem 4rem 0 0;
   }
@@ -193,10 +172,12 @@ body {
     color: $orange;
   }
 
-  .signup-submit-button {
+  .button_primary {
     margin-bottom: 0;
   }
-  .back-button {
+
+  .button_secondary {
+    align-self: flex-start;
     margin: 0 0 3rem 3rem;
   }
 }
@@ -204,34 +185,32 @@ body {
 @media (min-width: 1920px) {
   .header {
     justify-content: flex-start;
-    .logo {
-      font-size: 5.6rem;
-      padding: 3rem 0 0 0;
-      svg {
-        width: 72px;
-        height: auto;
-      }
-    }
+  }
+
+  .header_text {
+    font-size: 5.6rem;
+    padding: 3rem 0 0 0;
+  }
+
+  .header_book {
+    width: 72px;
+    height: auto;
   }
 
   .error-message {
     font-size: 1.6rem;
-    line-height: 2;
-    min-height: 3.2rem;
+    min-height: 2.7rem;
   }
-
-  .signup-submit-button {
-    min-height: 6.5rem;
-    width: 30rem;
-    line-height: 6.5rem;
+  .button {
     font-size: 2.6rem;
   }
 
-  .back-button {
-    min-height: 6.5rem;
-    width: 19rem;
-    line-height: 6.1rem;
-    font-size: 2.6rem;
+  .button_primary {
+    padding: 2rem 4.2rem;
+  }
+
+  .button_secondary {
+    padding: 1.8rem 5.2rem;
     margin: 0 0 5rem 0;
   }
 }

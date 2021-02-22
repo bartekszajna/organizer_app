@@ -3,7 +3,6 @@ import '../styles/signup.scss';
 const body = document.querySelector('body');
 const links = document.querySelectorAll('a');
 
-const inputLabels = document.querySelectorAll('.input > label');
 const firstEl = document.querySelector('input');
 
 const form = document.querySelector('.signup-form');
@@ -17,7 +16,6 @@ const passwordError = form.querySelector('#password-error');
 const repeatPasswordInput = form.querySelector('#repeat-password');
 const repeatPasswordError = form.querySelector('#repeat-password-error');
 const messagesList = form.querySelectorAll('p.error-message');
-console.log(repeatPasswordError);
 
 if (sessionStorage.getItem('signup_username')) {
   usernameInput.value = sessionStorage.getItem('signup_username');
@@ -58,19 +56,18 @@ links.forEach((link) =>
 document.fonts.ready.then(showBody);
 
 function showBody() {
-  body.classList.add('visible');
-  addTransitionToLabels();
+  body.classList.add('body--visible');
 }
 
 function hideBody() {
-  body.classList.remove('visible');
+  body.classList.remove('body--visible');
 }
 
-function addTransitionToLabels() {
-  inputLabels.forEach((label) => {
-    label.classList.add('transition');
-  });
-}
+// function addTransitionToLabels() {
+//   inputLabels.forEach((label) => {
+//     label.classList.add('transition');
+//   });
+// }
 
 // form.addEventListener('submit', function (e) {
 //   e.preventDefault();

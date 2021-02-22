@@ -2,7 +2,6 @@ import '../styles/account.scss';
 
 const body = document.querySelector('body');
 const links = document.querySelectorAll('a');
-const inputLabels = document.querySelectorAll('.input > label');
 const firstEl = document.querySelector('input');
 
 const accountForm = document.querySelector('.account-form');

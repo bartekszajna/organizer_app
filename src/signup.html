@@ -8,8 +8,9 @@
 
   <body>
     <h1 class="header">
-      <a href="index.html" class="logo">
+      <a href="index.html" class="header_text">
         <svg
+          class="header_book"
           width="60"
           height="60"
           viewBox="0 0 60 60"
@@ -30,12 +31,13 @@
             d="M10.2776 38.5671V18.379H9.11001C8.22243 18.379 7.5 19.1013 7.5 19.989V45.5795C7.5 46.0719 7.72061 46.5304 8.10515 46.8373C8.49076 47.1447 8.98804 47.2585 9.47046 47.1485C13.3281 46.2692 20.097 45.2474 26.5176 46.8195C22.8052 43.3059 17.5631 42.6844 14.3838 42.6768C12.1197 42.6713 10.2776 40.8278 10.2776 38.5671Z"
           />
         </svg>
-        Organi<span>zzz</span>er
+        Organi<span class="header_text--colored">zzz</span>er
       </a>
     </h1>
-    <form method="POST" action="" class="signup-form">
-      <div class="input">
+    <form method="POST" action="" class="form signup-form">
+      <div class="input_group">
         <input
+          class="input"
           type="text"
           name="username"
           id="username"
@@ -47,11 +49,12 @@
           aria-invalid="false"
           aria-errormessage="username-error"
         />
-        <label for="username" class="first_label">Username</label>
+        <label class="label" for="username" class="first_label">Username</label>
         <p aria-live="polite" id="username-error" class="error-message"></p>
       </div>
-      <div class="input">
+      <div class="input_group">
         <input
+          class="input"
           type="email"
           name="email"
           id="email"
@@ -62,11 +65,12 @@
           aria-invalid="false"
           aria-errormessage="email-error"
         />
-        <label for="email">E-mail address</label>
+        <label class="label" for="email">E-mail address</label>
         <p aria-live="polite" id="email-error" class="error-message"></p>
       </div>
-      <div class="input">
+      <div class="input_group">
         <input
+          class="input"
           type="password"
           name="password"
           id="password"
@@ -79,11 +83,12 @@
           aria-invalid="false"
           aria-errormessage="password-error"
         />
-        <label for="password">Password</label>
+        <label class="label" for="password">Password</label>
         <p aria-live="polite" id="password-error" class="error-message"></p>
       </div>
-      <div class="input">
+      <div class="input_group">
         <input
+          class="input"
           type="password"
           name="repeat-password"
           id="repeat-password"
@@ -96,7 +101,7 @@
           aria-invalid="false"
           aria-errormessage="repeat-password-error"
         />
-        <label for="repeat-password">Repeat password</label>
+        <label class="label" for="repeat-password">Repeat password</label>
         <p
           aria-live="polite"
           id="repeat-password-error"
