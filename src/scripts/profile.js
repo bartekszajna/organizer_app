@@ -9,11 +9,11 @@ const links = document.querySelectorAll('a');
 const navigation = document.querySelector('.list');
 const hamburgerButton = document.querySelector('.hamburger');
 const firstListEl = hamburgerButton;
-const lastListEl = document.querySelector('.list-item:last-child a');
+const lastListEl = document.querySelector('.list_item:last-child a');
 
 const modal = document.querySelector('.modal');
-const addTaskButton = document.querySelector('.addtask-button');
-const backButton = document.querySelector('.back-button');
+const addTaskButton = document.querySelector('.button--open-modal');
+const backButton = document.querySelector('.button--close-modal');
 const firstEl = document.querySelector('#title');
 const lastEl = backButton;
 
@@ -119,11 +119,11 @@ links.forEach((link) =>
 document.fonts.ready.then(showBody);
 
 function showBody() {
-  body.classList.add('visible');
+  body.classList.add('body--visible');
 }
 
 function hideBody() {
-  body.classList.remove('visible');
+  body.classList.remove('body--visible');
 }
 
 hamburgerButton.addEventListener('click', (e) => {

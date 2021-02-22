@@ -22,8 +22,8 @@ const allInputsList = document.querySelectorAll('input');
 const inputsList = accountForm.querySelectorAll('input');
 const messagesList = accountForm.querySelectorAll('p.error-message');
 
-const updateButton = accountForm.querySelector('.update-button');
-const deleteButton = deleteForm.querySelector('.delete-button');
+const updateButton = accountForm.querySelector('.button_primary');
+const deleteButton = deleteForm.querySelector('.button_delete');
 
 document.fonts.ready.then(showBody);
 

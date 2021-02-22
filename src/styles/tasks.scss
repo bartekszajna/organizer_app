@@ -5,10 +5,6 @@
 @import 'buttons';
 @import 'inputs';
 
-::selection {
-  background-color: $red;
-}
-
 body {
   display: flex;
   opacity: 0;

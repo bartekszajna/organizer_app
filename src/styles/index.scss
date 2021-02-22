@@ -6,10 +6,6 @@
 @import 'forms';
 @import 'inputs';
 
-::selection {
-  background-color: $red;
-}
-
 html,
 body {
   min-height: 43rem;
@@ -93,7 +89,6 @@ body {
   visibility: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: flex-end;
   background: linear-gradient(to top, #95bdef 70%, #558cd2);
   position: absolute;
@@ -116,7 +111,6 @@ body {
 }
 
 .login-form {
-  flex-direction: column;
   justify-content: space-between;
   width: 75%;
   height: 65%;

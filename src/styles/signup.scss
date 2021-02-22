@@ -6,14 +6,12 @@
 @import 'forms';
 @import 'inputs';
 
-::selection {
-  background-color: $red;
-}
 html,
 body {
   min-height: 52rem;
   height: 100%;
 }
+
 body {
   display: flex;
   opacity: 0;

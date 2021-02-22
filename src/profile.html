@@ -25,42 +25,50 @@
         aria-label="open menu"
         type="button"
       >
-        <span class="line line-1"></span>
-        <span class="line line-2"></span>
-        <span class="line line-3"></span>
+        <span class="line line--1"></span>
+        <span class="line line--2"></span>
+        <span class="line line--3"></span>
       </button>
       <ul class="list">
-        <li class="list-item">
-          <a href="index.html"> Organi<span>zzz</span>er </a>
+        <li class="list_item">
+          <a class="list_link" href="index.html">
+            Organi<span class="list_link--colored">zzz</span>er
+          </a>
         </li>
-        <li class="list-item">
-          <a href="account.html">Account</a>
+        <li class="list_item">
+          <a class="list_link" href="account.html">Account</a>
         </li>
-        <li class="list-item">
-          <a href="tasks.html">Your tasks</a>
+        <li class="list_item">
+          <a class="list_link" href="tasks.html">Your tasks</a>
         </li>
-        <li class="list-item">
-          <a href="logout.html">Log out</a>
+        <li class="list_item">
+          <a class="list_link" href="logout.html">Log out</a>
         </li>
       </ul>
     </nav>
 
-    <p class="title">Hey, <span>explosion95</span></p>
+    <p class="title">Hey, <span class="title--colored">explosion95</span></p>
     <p class="subtitle">What is the plan for today?</p>
 
     <button
       aria-label="open modal"
       aria-expanded="false"
       type="button"
-      class="button button_secondary"
+      class="button button_secondary button--open-modal"
     >
       Add new task
     </button>
 
-    <div role="dialog" aria-modal="true" aria-label="login modal" class="modal">
-      <form method="POST" action="" class="addtask-form">
-        <div class="input">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="addtask modal"
+      class="modal"
+    >
+      <form method="POST" action="" class="form addtask-form">
+        <div class="input_group">
           <input
+            class="input local-storage-member"
             type="text"
             name="title"
             id="title"
@@ -71,48 +79,53 @@
             placeholder=" "
             aria-invalid="false"
             aria-errormessage="title-error"
-            class="local-storage-member"
           />
-          <label for="title">Task title</label>
+          <label class="label" for="title">Task title</label>
           <p aria-live="polite" id="title-error" class="error-message"></p>
         </div>
-        <div class="input">
-          <fieldset class="local-storage-member" id="fieldset">
-            <legend>Priority level</legend>
-            <div class="radio-group">
-              <div class="radio-input">
+        <div class="input_group">
+          <fieldset class="fieldset local-storage-member" id="fieldset">
+            <legend class="fieldset_legend">Priority level</legend>
+            <div class="radio_container">
+              <div class="radio_input_group">
                 <input
+                  class="radio_input"
                   type="radio"
                   id="priority_choice_1"
                   name="priority"
                   value="1"
                 />
-                <label for="priority_choice_1">Low</label>
+                <label class="radio_label" for="priority_choice_1">Low</label>
               </div>
-              <div class="radio-input">
+              <div class="radio_input_group">
                 <input
+                  class="radio_input"
                   type="radio"
                   id="priority_choice_2"
                   name="priority"
                   value="2"
                   checked
                 />
-                <label for="priority_choice_2">Medium</label>
+                <label class="radio_label" for="priority_choice_2"
+                  >Medium</label
+                >
               </div>
-              <div class="radio-input">
+              <div class="radio_input_group">
                 <input
+                  class="radio_input"
                   type="radio"
                   id="priority_choice_3"
                   name="priority"
                   value="3"
                 />
-                <label for="priority_choice_3">High</label>
+                <label class="radio_label" for="priority_choice_3">High</label>
               </div>
             </div>
           </fieldset>
         </div>
-        <div class="input">
+        <div class="input_group">
           <input
+            class="input local-storage-member"
             type="text"
             id="deadline"
             name="deadline"
@@ -121,19 +134,21 @@
             placeholder=" "
             aria-invalid="false"
             aria-errormessage="deadline-error"
-            class="local-storage-member"
           />
-          <label for="deadline">Deadline <span>(yyyy-mm-dd)</span></label>
+          <label class="label" for="deadline"
+            >Deadline
+            <span class="deadline--date-format">(yyyy-mm-dd)</span></label
+          >
           <p aria-live="polite" id="deadline-error" class="error-message"></p>
         </div>
-        <div class="input">
+        <div class="input_group input_group--last">
           <label for="Description">Description</label>
           <textarea
+            class="local-storage-member textarea"
             maxlength="300"
             name="description"
             id="description"
             placeholder="Optional, up to 300 characters..."
-            class="local-storage-member"
           ></textarea>
         </div>
         <div class="button-group">
@@ -141,13 +156,13 @@
             type="submit"
             name="submit"
             value="add"
-            class="button button_primary"
+            class="button button_primary button--addtask"
           >
             Add task
           </button>
           <button
             aria-label="close modal"
-            class="button button_secondary"
+            class="button button_secondary button--close-modal"
             type="button"
           >
             Back
