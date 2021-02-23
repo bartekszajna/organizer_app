@@ -1,10 +1,10 @@
 {
-  "name": "webpack_project_template",
-  "version": "1.0.0",
-  "description": "",
+  "name": "organizzer_app",
+  "version": "1.0",
+  "description": "Front end of PHP+MySQL App for administrating and managing tasks and priorities with registration feature",
   "private": true,
   "keywords": [],
-  "author": "",
+  "author": "bartekszajna",
   "license": "ISC",
   "browserslist": [
     "last 2 versions",

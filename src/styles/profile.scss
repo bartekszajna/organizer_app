@@ -138,6 +138,17 @@ body {
   font-weight: 500;
 }
 
+@keyframes animateMenuItems {
+  from {
+    transform: translateX(150px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .title {
   overflow-wrap: break-word;
   width: 100%;

@@ -1,53 +1,35 @@
-# Webpack 5 project template
+# Organizzzer App
 
-### Very simple and basic ready-to-start project template. Based on Webpack 5 bundler, processes SCSS and JS files, minifies them, bundles and spites out to ./dist directory as ready for deploying. For more information and extensive documentation please visit https://webpack.js.org/.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/bartekszajna/organizer_app_design/master/design/desktop_views/main_view.jpg" width="60%"/>
+</p>
 
-**Includes:**
+### Client-side code of PHP + MySQL website, which allows you to maintain, manage and keep track of your tasks and other priorities. With [Figma design version](https://github.com/bartekszajna/organizer_app_design) of the app together those repos make up a front-end part of project.
 
-- scss/sass -> css compilation
-- styles minification
-- sourcemaps
-- using ./src/template.html as a source for dynamicly created markdown in ./dist
-- renaming (includes cache-busting)
-- autoprefixers (with postcss-loader)
-- scripts minification and transpiling through babel (preset-env)
-- dynamic style.css inject to DOM
-- bundling styles, scripts and images together
-- images minification (albeit using web tools like (tinypng.com) is highly recommended and works much better)
-- local server and automated live-reload thanks to webpack-dev-server
+#
 
-Inside of the project you will encounter two separate webpack config files - one serves as a development config and the other as a building one. Their names are optional, you only need to include them with `--config` flag in npm scripts to tell webpack which configuration file should it use. I found it pretty sufficient for my current needs but to keep up with DRY method you probably should separate mutual pieces to a third file (i.e. webpack.common.js) and it is possible by webpack-merge package.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/bartekszajna/organizer_app_design/master/design/desktop_views/profile_view.jpg" width="60%" />
+</p>
 
-In `src/styles` you'll find \_reset.scss - it is .scss file created
-by Eric A. Meyer (meyerweb.com) and resets all default browser problematic styles like padding, margin, box-sizing.
+## Features:
 
-In `src/assets` you'll find .jpg file used during configuration to check if images minification and injecting works.
-Source/author: Photo by Michael Dam on Unsplash
+- PHP on server-side, PDO API for database connection
+- registration, login features
+- server-side session and cookies to keep the user logged in throughout the website
+- simple DB for users and their tasks management
+- users passwords stored as irreversible hashes
+- account data update possibility from the inside
+- deleting account possibility
+- local&session storage for durable inputs data
+- full responsiveness in width range of 280px (Galaxy Fold) to over 2k px
+- main data validation on server-side
+- client-side JS custom validation to reduce amount of futile requests
+- HTML default validation as a fallback of last resort for users with browser-JS disabled(not much of a feature though)
+- tasks view with sorting option (requires new http request fo fetching list sorted by db)
 
-    To start project, node.js & npm are required. You can download these from node website. Follow instructions.
+## Above photographs come from [Unsplash](https://unsplash.com). Credits:
 
-`npm init -y`
-Initiates npm management over your project. Creates package.json. `-y` sets all properties to default values. You can change them manually at any time by modifying package.json file.
+<span>Photo by <a href="https://unsplash.com/@vadimpng?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Vadim Fomenok</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 
-`npm install / npm i`
-This commands (either) should install all required dependencies listed in package.json file. Therefore node_modules directory is created.
-
-`npm run start` one time script to create ./dist directory with readable scripts (difference lies in webpack-dev-server which works "in memory" so doesn't create that folder until you specifically build it)
-
-`npm run dev` npm script for development process, opens local server (port 8000), opens your index.html and keeps looking for changes in project files. Enter command and work without interruptions for hours :) Webpack server - unlike tools like Gulp - can manage repetitive development tasks straight in the memory -> faster dev process, but be aware that it won't create ./dist folder on itself - you need to build app at the end
-
-`npm run build` building script, not for repetitive evoke. Bundles all files, separates styles to external file, minifies scripts, injects style and script tags to markdown head, spites out ready for deployment ./dist folder
-
-`./src`
-Directory for all source subdirectories (styles, scripts, template.html and assets)
-
-`./src/styles`
-Source style files
-
-`./src/scripts`
-Source script files
-
-`./dist`
-Steady production directory for styles, images, html and scripts
-
-PS. be aware of package.json file and data (author, project name, etc). Feel free to change it and use in your projects.
+<span>Photo by <a href="https://unsplash.com/@alexisrbrown?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Alexis Brown</a> on <a href="https://unsplash.com/s/photos/studying-people?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>

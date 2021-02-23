@@ -1,22 +1,30 @@
 import '../styles/signup.scss';
+import showBody from './utilities/showBody.js';
+import hideBody from './utilities/hideBody.js';
+import validationPatterns from './utilities/validationPatterns.js';
+
+// prevents FOUT issue
+// fonts.ready IS NOT equal to DOMContentLoaded, which happens
+// earlier, without custom fonts loaded
+document.fonts.ready.then(showBody);
 
 const body = document.querySelector('body');
 const links = document.querySelectorAll('a');
 
-const firstEl = document.querySelector('input');
+const firstInputEl = document.querySelector('.input');
 
 const form = document.querySelector('.signup_form');
-const inputsList = form.querySelectorAll('input');
+const inputsList = form.querySelectorAll('.input');
 const usernameInput = form.querySelector('#username');
 const usernameError = form.querySelector('#username-error');
 const emailInput = form.querySelector('#email');
 const emailError = form.querySelector('#email-error');
 const passwordInput = form.querySelector('#password');
 const passwordError = form.querySelector('#password-error');
-const repeatPasswordInput = form.querySelector('#repeat-password');
 const repeatPasswordError = form.querySelector('#repeat-password-error');
-const messagesList = form.querySelectorAll('p.error_message');
+const errorMessagesList = form.querySelectorAll('.error_message');
 
+// storage handling
 if (sessionStorage.getItem('signup_username')) {
   usernameInput.value = sessionStorage.getItem('signup_username');
 }
@@ -32,70 +40,46 @@ emailInput.addEventListener('input', (e) => {
   sessionStorage.setItem('signup_email', emailInput.value);
 });
 
-let address = '';
-let pageRefreshed = true;
-body.addEventListener('transitionend', (e) => {
-  if (pageRefreshed) {
-    firstEl.focus();
-    pageRefreshed = false;
-  }
-  if (address) {
-    window.location.href = address;
-  }
-  address = '';
-});
-
+// for every link redirecting us outside we need to make sure to pospone its action
+// until the body hides smoothly, so we prevent their default behavior, store
+// the address inside of navigationAddress variable and start hiding the body with transition
 links.forEach((link) =>
   link.addEventListener('click', (e) => {
     e.preventDefault();
-    address = e.currentTarget.href;
+    navigationAddress = e.currentTarget.href;
     hideBody();
   })
 );
 
-document.fonts.ready.then(showBody);
+// contents of this viarable determine whether we clicked <a> link redirecting
+// us to other page or not. If that is the case, it will contain the url
+let navigationAddress = '';
 
-function showBody() {
-  body.classList.add('body--visible');
-}
+// ... so now we wait for finishing of body hiding (hence the transitionend event)
+// to finally swap window.location.href with our pre-saved location taken from
+// link clicked before, which causes immediate redirection to given page
+// pageRefreshed is to prevent transitionend event from focusing on firstEl
+// over and over again (which is the case since every transition inside modal
+// is effectively also transition on body)
+let pageRefreshed = true;
+body.addEventListener('transitionend', (e) => {
+  if (pageRefreshed) {
+    firstInputEl.focus();
+    pageRefreshed = false;
+  }
+  if (navigationAddress) {
+    window.location.href = navigationAddress;
+  }
+  navigationAddress = '';
+});
 
-function hideBody() {
-  body.classList.remove('body--visible');
-}
+// we turn default HTML5 validation off as a progressive enhancement
+// people with their browser JS disabled will still take some benefit
+// (not so much) from default HMTL validation
+// but ideally, we want to take care of it in our own way
+form.setAttribute('novalidate', 'true');
 
-// function addTransitionToLabels() {
-//   inputLabels.forEach((label) => {
-//     label.classList.add('transition');
-//   });
-// }
-
-// form.addEventListener('submit', function (e) {
-//   e.preventDefault();
-//   checkEmptyInputValues(e);
-// });
-
-// function checkEmptyInputValues(e) {
-//   if (!usernameInput.value) {
-//     usernameError.innerText = 'Username is required';
-//   } else {
-//     usernameError.innerText = '';
-//   }
-//   if (!emailInput.value) {
-//     emailError.innerText = 'Email address is required';
-//   } else {
-//     emailError.innerText = '';
-//   }
-//   if (!passwordInput.value) {
-//     passwordError.innerText = 'Password is required';
-//   } else {
-//     passwordError.innerText = '';
-//   }
-//   if (!repeatPasswordInput.value) {
-//     repeatPasswordError.innerText = 'Repeated password is required';
-//   } else {
-//     repeatPasswordError.innerText = '';
-//   }
-// }
+form.addEventListener('submit', generalValidation);
 
 //function generalValidation(input, pattern) {
 //check if empty input value
@@ -107,36 +91,44 @@ function hideBody() {
 // after all input being checked, check if any error message paragraph contains any content
 // if so, prevent submission
 // otherwise submit
-//}
-
-form.setAttribute('novalidate', 'true');
-
-const regexPatterns = {
-  usernamePattern: '^[a-zA-Z0-9_ ]{3,12}$',
-  emailPattern: '^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+).([a-zA-Z]{2,5})$',
-  passwordPattern: '[a-zA-Z0-9_ ]{8,30}',
-};
-
-form.addEventListener('submit', generalValidation);
 
 function generalValidation(e) {
   e.preventDefault();
   inputsList.forEach((input) => {
     validateInput(input, input.getAttribute('name'));
+    // here we switch our aria-invalid value due to
+    // existing any corresponding error message
+    // p.error_message is always the last child in every input group
+    input.setAttribute(
+      'aria-invalid',
+      !!input.parentNode.lastElementChild.innerText
+    );
   });
 
-  if ([...messagesList].every((message) => message.innerText === '')) {
+  // and test them against being empty - since it is the condition
+  // for the form to be submited
+  const areMessagesEmpty = [...errorMessagesList].every(
+    (message) => !message.innerText
+  );
+
+  // main purpose of this validation is to fill the corresponding
+  // error messages (or not if valid inputs)
+  // so after that we simply look for any errors left
+  // if there is none, submit
+  if (areMessagesEmpty) {
     Object.getPrototypeOf(e.target).submit.call(e.target);
   }
 }
 
+// general solitary function for all types of input, kind of verbose
+// but convenient to evoke it against every entered input field
 function validateInput(input, inputName) {
   //username validation
   if (inputName === 'username') {
     input.value = input.value.trim();
     if (!input.value) {
       usernameError.innerText = 'Username is required';
-    } else if (!input.value.trim().match(regexPatterns.usernamePattern)) {
+    } else if (!input.value.trim().match(validationPatterns.usernamePattern)) {
       usernameError.innerText = 'Please make it 3-12 chars long';
       input.value = input.value.trim();
     } else {
@@ -148,7 +140,7 @@ function validateInput(input, inputName) {
   if (inputName === 'email') {
     if (!input.value) {
       emailError.innerText = 'Email is required';
-    } else if (!input.value.match(regexPatterns.emailPattern)) {
+    } else if (!input.value.match(validationPatterns.emailPattern)) {
       emailError.innerText = 'Invalid email address';
       input.value = input.value.trim();
     } else {
@@ -160,7 +152,7 @@ function validateInput(input, inputName) {
   if (inputName === 'password' && input.getAttribute('id') === 'password') {
     if (!input.value) {
       passwordError.innerText = 'Password is required';
-    } else if (!input.value.match(regexPatterns.passwordPattern)) {
+    } else if (!input.value.match(validationPatterns.passwordPattern)) {
       passwordError.innerText = 'Provide between 8 and 30 chars';
     } else {
       passwordError.innerText = '';
@@ -169,7 +161,7 @@ function validateInput(input, inputName) {
 
   //repeated password validation
   if (
-    inputName === 'repeat-password' &&
+    inputName === 'repeat_password' &&
     input.getAttribute('id') === 'repeat-password'
   ) {
     if (input.value !== passwordInput.value) {
@@ -182,6 +174,8 @@ function validateInput(input, inputName) {
   }
 }
 
+// we detect inserting some data into input so we clear out the corresponding
+// error value (if any) to give the user a little bit better UX
 inputsList.forEach((input) =>
   input.addEventListener('input', function (e) {
     e.target.parentNode.lastElementChild.innerText = '';

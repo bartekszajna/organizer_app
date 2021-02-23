@@ -118,17 +118,17 @@ body {
     right: -3rem;
   }
 
-  &-low {
+  &--low {
     &::after {
       background-color: $green;
     }
   }
-  &-medium {
+  &--medium {
     &::after {
       background-color: $yellow;
     }
   }
-  &-high {
+  &--high {
     &::after {
       background-color: $red;
     }

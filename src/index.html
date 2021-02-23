@@ -3,7 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./website-logo.png" type="image/x-icon" />
     <title>Organizzzer App</title>
+    <meta
+      name="description"
+      content="The Organizzzer App lets you manage and keep track of all your priorities 
+      in one place. Sign up absolutely for free and get more important stuff done!"
+    />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/bartekszajna/organizer_app_design/master/design/desktop_views/main_view.jpg"
+    />
+    <meta
+      property="og:description"
+      content="Your work routine now improved. Take notes, add things that your prioritize
+      and get more stuff done"
+    />
+    <meta property="og:title" content="Organizzzer App" />
   </head>
 
   <body>
@@ -76,11 +92,6 @@
             <p aria-live="polite" id="username-error" class="error_message"></p>
           </div>
           <div class="input_group">
-            <!-- minlength, maxlength, pattern
-                      :valid :invalid CSS pseudo classes
-                      atrybur aria-invalid jeśli niepoprawnie wypełnione pole
-                  -->
-
             <input
               class="input"
               type="password"
@@ -100,7 +111,7 @@
           <button
             class="button button_primary button--log-in"
             type="submit"
-            name="asubmit"
+            name="submit"
             value="login"
           >
             Log in
