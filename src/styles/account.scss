@@ -44,35 +44,97 @@ body {
 .account_form,
 .delete_form {
   width: 90%;
+  position: static;
 }
 .input {
   font-size: 1.4rem;
 }
 .input_group {
-  margin-bottom: 1.9rem;
+  margin-bottom: 1.8rem;
 }
 .input_group:last-of-type {
   margin-bottom: 0.5rem;
 }
 
-.button_primary,
-.button_delete,
-.button_secondary {
-  //align-self: center;
-  font-size: 1.8rem;
-  padding: 1.1rem 3rem;
-}
-.button_primary {
-  margin-bottom: 3.5rem;
+.delete_form .input_group {
+  margin-bottom: 0.5rem;
 }
 
-.button_delete {
+.button {
+  font-size: 1.8rem;
+  padding: 1.1rem 2.4rem;
+}
+
+.button_primary {
+  margin-bottom: 3rem;
+}
+
+.button--open-modal {
   margin-bottom: 1.5rem;
 }
 
-.button_secondary {
-  padding: 1.2rem 4rem;
+.button--confirm-delete {
+  padding: 1.1rem 2.5rem;
   margin-bottom: 2rem;
+}
+
+.button--close-modal {
+  padding: 0.9rem 2.6rem;
+}
+
+.button--back {
+  padding: 1.1rem 3.6rem;
+  margin-bottom: 2rem;
+}
+
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  // here
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to top, #95bdef 70%, #558cd2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 10%;
+  min-height: 40rem;
+  height: calc(var(--vh, 1vh) * 100);
+  z-index: 10;
+  pointer-events: none;
+
+  &--open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+// this class exists because we need our modal initially hidden and we do not want it
+// to fade away smoothly with page opened, so proper transition is added just after it
+.open {
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.modal_icon {
+  margin: -2rem 12rem 2rem 0;
+}
+
+.modal_title {
+  font-size: 2.2rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.modal_subtitle {
+  font-size: 2rem;
+  color: $faded_white;
+  text-align: center;
+  margin-bottom: 4rem;
 }
 
 //////////////////////////////////
@@ -98,14 +160,16 @@ body {
     min-height: 2.3rem;
   }
 
-  .button_primary,
-  .button_delete,
-  .button_secondary {
-    padding: 1.2rem 3.5rem;
+  .button {
+    padding: 1.2rem 3rem;
     font-size: 2.2rem;
   }
 
-  .button_secondary {
+  .button--close-modal {
+    padding: 1rem 3.5rem;
+  }
+
+  .button--back {
     padding: 1.2rem 4.5rem;
     margin-bottom: 3rem;
   }
@@ -122,6 +186,14 @@ body {
   .account_form,
   .delete_form {
     width: 75%;
+  }
+
+  .modal_title {
+    font-size: 2.8rem;
+  }
+
+  .modal_subtitle {
+    font-size: 2.4rem;
   }
 
   .input_group {
@@ -144,11 +216,18 @@ body {
     min-height: 2.3rem;
   }
 
-  .button_primary,
-  .button_delete,
-  .button_secondary {
+  .button {
     font-size: 2.4rem;
+    padding: 1.5rem 3.6rem;
+  }
+
+  .button--close-modal {
+    padding: 1.3rem 4rem;
+  }
+
+  .button--back {
     padding: 1.5rem 4.5rem;
+    margin-bottom: 3rem;
   }
 }
 @media (min-width: 768px) {
@@ -156,11 +235,20 @@ body {
   .delete_form {
     width: 60%;
   }
+
+  .modal_title {
+    font-size: 3.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .modal_subtitle {
+    font-size: 2.8rem;
+  }
 }
 
 @media (min-width: 1024px) {
   html {
-    min-height: 59rem;
+    min-height: 62.5rem;
   }
   body {
     background-color: $profile_blue;
@@ -206,7 +294,37 @@ body {
     margin-bottom: -5rem;
   }
 
-  .button_secondary {
+  .modal {
+    backdrop-filter: blur(0.3rem);
+    box-sizing: border-box;
+    width: 55rem;
+    height: 45rem;
+    top: 50%;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    border-radius: 2rem;
+    padding: 4rem;
+    background: rgba(0, 0, 0, 0.9);
+    //align-items: center;
+    //justify-content: center;
+  }
+
+  .modal_icon {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .modal_title {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .modal_subtitle {
+    font-size: 2.4rem;
+    margin-bottom: 3rem;
+  }
+
+  .button--back {
     margin: 0 0 3rem 3rem;
     align-self: flex-start;
   }
@@ -232,12 +350,12 @@ body {
   }
 
   .button_primary,
-  .button_delete,
-  .button_secondary {
+  .button--open-modal,
+  .button--back {
     font-size: 2.6rem;
     padding: 1.8rem 4.5rem;
   }
-  .button_secondary {
+  .button--back {
     padding: 1.8rem 5.3rem;
     margin-left: 0;
   }

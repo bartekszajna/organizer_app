@@ -115,16 +115,60 @@
           id="delete-account-error"
         ></p>
       </div>
-      <button
-        type="submit"
-        name="delete_account"
-        value="delete"
-        class="button button_delete"
-      >
+      <button type="submit" class="button button_delete button--open-modal">
         Delete account
       </button>
+
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="login modal"
+        class="modal"
+      >
+        <svg
+          class="modal_icon"
+          width="100"
+          height="100"
+          viewBox="0 0 100 100"
+          fill="none"
+        >
+          <path
+            d="M50.0778 0C22.4724 0 0 20.2592 0 45.1637C0 70.0683 22.4724 90.3274 50.0778 90.3274C55.2426 90.3213 60.382 89.5831 65.3516 88.1338L82.6597 99.4892C83.1322 99.8017 83.6776 99.9774 84.2386 99.998C84.7997 100.019 85.3558 99.8832 85.8486 99.6061C86.3415 99.329 86.7529 98.9204 87.0399 98.4231C87.3269 97.9258 87.4788 97.358 87.4797 96.7794V75.0686C91.3959 71.1963 94.5211 66.5558 96.6711 61.42C98.8212 56.2842 99.9527 50.757 99.9992 45.1637C100.156 20.2592 77.6832 0 50.0778 0ZM82.2842 71.3264C81.9695 71.6272 81.7182 71.9915 81.5459 72.3966C81.3736 72.8017 81.284 73.239 81.2826 73.6814V90.9081L67.5738 81.9076C67.1914 81.6585 66.7611 81.4977 66.3127 81.4365C65.8642 81.3752 65.4082 81.4149 64.976 81.5528C60.152 83.097 55.1291 83.8801 50.0778 83.8755C25.9153 83.8755 6.25973 66.5197 6.25973 45.1637C6.25973 23.8077 25.9153 6.45196 50.0778 6.45196C74.2404 6.45196 93.8959 23.8077 93.8959 45.1637C93.8246 50.1158 92.7556 54.9986 90.7567 59.5024C88.7578 64.0062 85.8726 68.0326 82.2842 71.3264Z"
+            fill="white"
+            fill-opacity="0.4"
+          />
+          <path
+            d="M49.6662 59.1719C50.4963 59.1719 51.2924 58.832 51.8793 58.227C52.4663 57.622 52.7961 56.8015 52.7961 55.9459V19.9762C52.7961 19.1206 52.4663 18.3001 51.8793 17.6951C51.2924 17.0901 50.4963 16.7502 49.6662 16.7502C48.8361 16.7502 48.04 17.0901 47.453 17.6951C46.8661 18.3001 46.5363 19.1206 46.5363 19.9762V55.8814C46.528 56.3104 46.6028 56.7369 46.7564 57.1357C46.9099 57.5346 47.1391 57.8979 47.4306 58.2043C47.7221 58.5107 48.0699 58.7542 48.4538 58.9203C48.8377 59.0864 49.2499 59.172 49.6662 59.1719V59.1719Z"
+            fill="white"
+            fill-opacity="0.4"
+          />
+          <path
+            d="M49.6661 74.4628C51.9651 74.4628 53.8289 72.5419 53.8289 70.1723C53.8289 67.8027 51.9651 65.8817 49.6661 65.8817C47.3671 65.8817 45.5034 67.8027 45.5034 70.1723C45.5034 72.5419 47.3671 74.4628 49.6661 74.4628Z"
+            fill="white"
+            fill-opacity="0.4"
+          />
+        </svg>
+
+        <p class="modal_title">You're about to delete your account</p>
+        <p class="modal_subtitle">This decision is irreversible</p>
+
+        <button
+          type="submit"
+          name="delete_account"
+          value="delete"
+          class="button button_delete button--confirm-delete"
+        >
+          Understood
+        </button>
+        <button
+          type="button"
+          class="button button_secondary button--close-modal"
+        >
+          Cancel
+        </button>
+      </div>
     </form>
 
-    <a class="button button_secondary" href="profile.html">Back</a>
+    <a class="button button_secondary button--back" href="profile.html">Back</a>
   </body>
 </html>
