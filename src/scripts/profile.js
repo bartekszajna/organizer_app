@@ -8,6 +8,7 @@ import validationPatterns from './utilities/validationPatterns.js';
 // earlier, without custom fonts loaded
 document.fonts.ready.then(showBody);
 
+const html = document.querySelector('html');
 const body = document.querySelector('body');
 const links = document.querySelectorAll('.list_link');
 const listItems = document.querySelectorAll('.list_item');
@@ -101,6 +102,7 @@ document.documentElement.style.setProperty('--vh', `${vh}px`);
 window.addEventListener('resize', () => {
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
+  console.log(vh);
 });
 // now we have vh related to visible piece of our display (and not including
 // unstable navigations which change during page scrolling)
@@ -207,15 +209,25 @@ function detectClickOutsideMenu(e) {
 }
 
 addTaskButton.addEventListener('click', openModal);
-modal.addEventListener('transitionend', focusOnFirstInput);
 backButton.addEventListener('click', closeModal);
+modal.addEventListener('transitionend', focusOnFirstInput);
 document.addEventListener('keydown', detectEscapeKeyEvent);
 modal.addEventListener('click', detectClickOutsideModal);
 
 function openModal() {
   isModalOpening = true;
+
+  if (window.innerWidth > 520 && window.innerWidth < 768) {
+    html.classList.add('modal--opened-m');
+    //body.classList.add('modal--opened-m');
+    modal.classList.add('modal--open-m');
+  } else {
+    html.classList.add('modal--opened-xs');
+    //body.classList.add('modal--opened-xs');
+    modal.classList.add('modal--open-xs');
+  }
   modal.classList.add('open');
-  modal.classList.add('modal--open');
+
   addTaskButton.setAttribute('aria-expanded', 'true');
   firstModalEl.addEventListener('focus', handleFirstModalEl);
   lastModalEl.addEventListener('focus', handleLastModalEl);
@@ -232,6 +244,13 @@ function focusOnFirstInput() {
 
 function closeModal() {
   modal.classList.remove('modal--open');
+  html.classList.remove('modal--opened-xs');
+  //body.classList.remove('modal--opened-xs');
+  html.classList.remove('modal--opened-m');
+  //body.classList.remove('modal--opened-m');
+  modal.classList.remove('modal--open-xs');
+  modal.classList.remove('modal--open-m');
+  modal.classList.remove('open');
   addTaskButton.focus();
   addTaskButton.setAttribute('aria-expanded', 'false');
   firstModalEl.removeEventListener('focus', handleFirstModalEl);

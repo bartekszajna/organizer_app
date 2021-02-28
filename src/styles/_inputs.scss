@@ -13,7 +13,7 @@
   display: block;
   margin: 0;
   padding: 0;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 1.6rem;
   background: none;
   font-family: 'Poppins', sans-serif;
@@ -23,11 +23,11 @@
   outline: none;
 
   &:focus + .label {
-    transform: translateY(-100%) scale(1.02);
+    transform: translateY(-90%) scale(1.02);
     color: $white;
   }
   &:not(:placeholder-shown) + .label {
-    transform: translateY(-100%) scale(1.02);
+    transform: translateY(-90%) scale(1.02);
     color: $white;
   }
 }
@@ -36,7 +36,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: $faded_white;
   transform-origin: top left;
   transition: transform 0.4s ease-out, color 0.4s ease-out;
@@ -51,6 +51,6 @@
   color: $red;
   font-size: 1.2rem;
   font-weight: 500;
-  line-height: 1.7;
-  min-height: 2rem;
+  line-height: 1.5;
+  min-height: 1.8rem;
 }

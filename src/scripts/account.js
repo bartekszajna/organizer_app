@@ -8,6 +8,7 @@ import validationPatterns from './utilities/validationPatterns.js';
 // earlier, without custom fonts loaded
 document.fonts.ready.then(showBody);
 
+const html = document.querySelector('html');
 const body = document.querySelector('body');
 const links = document.querySelectorAll('a');
 
@@ -89,6 +90,7 @@ function openModal() {
   isModalOpening = true;
   modal.classList.add('open');
   modal.classList.add('modal--open');
+  html.classList.add('html--modal-opened');
   //addTaskButton.setAttribute('aria-expanded', 'true');
   firstModalEl.addEventListener('focus', handleFirstModalEl);
   lastModalEl.addEventListener('focus', handleLastModalEl);
@@ -105,6 +107,7 @@ function focusOnCancelButton() {
 
 function closeModal() {
   modal.classList.remove('modal--open');
+  html.classList.remove('html--modal-opened');
   deleteButton.focus();
   //addTaskButton.setAttribute('aria-expanded', 'false');
   firstModalEl.removeEventListener('focus', handleFirstModalEl);

@@ -7,9 +7,18 @@
 @import 'inputs';
 
 html {
-  min-height: 32rem;
   height: 100%;
   overflow-x: hidden;
+}
+
+.modal--opened-xs {
+  min-height: 52.5rem;
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+.modal--opened-m {
+  min-height: 57.5rem;
+  height: calc(var(--vh, 1vh) * 100);
 }
 
 body {
@@ -22,8 +31,12 @@ body {
   align-items: center;
   height: 100%;
   padding: 0 10%;
-  background-color: #95bdef;
-  background-image: linear-gradient(to top, #95bdef 70%, #558cd2);
+  background-color: $mobile_background_light;
+  background-image: linear-gradient(
+    to top,
+    $mobile_background_light 70%,
+    $mobile_background_dark
+  );
   background-repeat: no-repeat;
   overflow-x: hidden;
   transition: opacity 0.5s ease, visibility 0.5s ease;
@@ -102,7 +115,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  font-size: 2rem;
+  font-size: 2.2rem;
   top: 0;
   left: 100%;
   width: 100%;
@@ -140,7 +153,7 @@ body {
 
 @keyframes animateMenuItems {
   from {
-    transform: translateX(150px);
+    transform: translateX(15rem);
     opacity: 0;
   }
   to {
@@ -155,7 +168,7 @@ body {
   font-weight: 500;
   text-align: center;
   font-size: 3.8rem;
-  margin: calc(45vh - 6rem) 0 3rem 0;
+  margin: calc(45vh - 6rem) 0 2rem 0;
 
   &--colored {
     color: $orange;
@@ -174,6 +187,7 @@ body {
 
 .button--open-modal {
   padding: 1.1rem 3rem;
+  margin-top: 1rem;
   margin-bottom: 4rem;
 }
 
@@ -182,20 +196,42 @@ body {
   visibility: hidden;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to top, #95bdef 70%, #558cd2);
+  background: linear-gradient(
+    to top,
+    $mobile_background_light 70%,
+    $mobile_background_dark
+  );
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 32rem;
+  overflow-y: hidden;
+  min-height: 52.5rem;
+  transform: scale(0);
   height: calc(var(--vh, 1vh) * 100);
   z-index: 10;
   pointer-events: none;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out,
+    transform 0s 0.5s;
 
-  &--open {
+  &--open-xs {
+    min-height: 52.5rem;
+    height: calc(var(--vh, 1vh) * 100);
     visibility: visible;
     opacity: 1;
+    overflow-y: auto;
     pointer-events: auto;
+    transform: scale(1);
+  }
+
+  &--open-m {
+    min-height: 57.5rem;
+    height: calc(var(--vh, 1vh) * 100);
+    visibility: visible;
+    opacity: 1;
+    overflow-y: auto;
+    pointer-events: auto;
+    transform: scale(1);
   }
 }
 
@@ -387,7 +423,7 @@ body {
   }
 
   .input {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   .label {
@@ -404,11 +440,38 @@ body {
 
   .error_message {
     font-size: 1.4rem;
-    min-height: 2.3rem;
+    min-height: 2.1rem;
   }
 
   .button--addtask,
   .button--close-modal {
+    font-size: 2rem;
+  }
+}
+
+@media (max-height: 360px) and (min-width: 520px) and (max-width: 768px) {
+  body {
+    justify-content: center;
+  }
+
+  .title {
+    font-size: 4.2rem;
+    margin: 4rem 0 2rem;
+  }
+
+  .subtitle {
+    font-size: 2.4rem;
+    flex-grow: unset;
+    margin: 0;
+  }
+
+  .list {
+    width: 60%;
+    font-size: 2.2rem;
+  }
+  .button--open-modal {
+    margin: 2rem auto;
+    padding: 1.1rem 3rem;
     font-size: 2rem;
   }
 }
@@ -429,12 +492,23 @@ body {
     width: 60%;
   }
 
+  .label {
+    font-size: 2.6rem;
+  }
+
+  .input {
+    font-size: 2.2rem;
+  }
+
   .textarea {
     font-size: 1.6rem;
+    min-height: 9rem;
   }
 
   .button--open-modal {
+    font-size: 2.6rem;
     margin: 6rem auto;
+    padding: 1.5rem 4.4rem;
   }
 
   .button-group {
@@ -460,17 +534,18 @@ body {
 
 @media (min-width: 1024px) {
   html {
+    font-weight: 300;
     min-height: 62rem;
   }
   body {
     display: block;
-    background-color: $profile_blue;
+    background-color: $desktop_background_blue;
     background-size: cover;
     background-image: linear-gradient(
         45deg,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.3) 50%,
-        rgba(0, 0, 0, 0.8)
+        rgba($black, 0),
+        rgba($black, 0.3) 50%,
+        rgba($black, 0.8)
       ),
       url('../assets/desktop_background2.jpg');
   }
@@ -510,7 +585,7 @@ body {
 
   .modal {
     height: 100%;
-    background: rgba($profile_blue, 0.6);
+    background: rgba($desktop_background_blue, 0.6);
     justify-content: center;
     align-items: center;
     z-index: 2;
@@ -521,7 +596,7 @@ body {
     width: 68rem;
     height: 60rem;
     border-radius: 2rem;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba($black, 0.85);
     align-items: center;
     backdrop-filter: blur(0.3rem);
   }
@@ -537,6 +612,10 @@ body {
 
   .input {
     font-size: 2rem;
+    font-weight: 300;
+  }
+  label {
+    font-size: 2.4rem;
   }
 
   .textarea {

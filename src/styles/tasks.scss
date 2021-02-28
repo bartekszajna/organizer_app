@@ -14,8 +14,12 @@ body {
   min-height: 100vh;
   width: 80%;
   margin: 0 auto;
-  background-color: #95bdef;
-  background-image: linear-gradient(to top, #95bdef 70%, #558cd2);
+  background-color: $mobile_background_light;
+  background-image: linear-gradient(
+    to top,
+    $mobile_background_light 70%,
+    $mobile_background_dark
+  );
   background-attachment: fixed;
   background-repeat: no-repeat;
   overflow-x: hidden;
@@ -138,7 +142,7 @@ body {
 
 .toolbar {
   display: none;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba($black, 0.85);
   position: fixed;
   top: 0;
   left: 0;
@@ -338,8 +342,11 @@ body {
 }
 
 @media (min-width: 1024px) {
+  html {
+    font-weight: 300;
+  }
   body {
-    background-color: $profile_blue;
+    background-color: $desktop_background_blue;
     background-size: cover;
     background-image: url('../assets/desktop_background2_blurred.jpg');
     background-attachment: fixed;
@@ -358,7 +365,7 @@ body {
   }
 
   .task {
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba($black, 0.85);
     margin-bottom: 3rem;
     padding: 2.5rem 3rem;
   }

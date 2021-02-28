@@ -20,9 +20,12 @@ body {
   width: 85%;
   max-width: 140rem;
   margin: 0 auto;
-  background-color: #95bdef;
-  background-image: linear-gradient(to top, #95bdef 70%, #558cd2);
-  background-repeat: no-repeat;
+  background-color: $mobile_background_light;
+  background-image: linear-gradient(
+    to top,
+    $mobile_background_light 70%,
+    $mobile_background_dark
+  );
   overflow-x: hidden;
   transition: opacity 0.5s ease, visibility 0.5s ease;
 }
@@ -90,7 +93,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background: linear-gradient(to top, #95bdef 70%, #558cd2);
+  background-image: linear-gradient(
+    to top,
+    $mobile_background_light 70%,
+    $mobile_background_dark
+  );
   position: absolute;
   top: 0;
   left: 0;
@@ -128,7 +135,11 @@ body {
 }
 
 .label {
-  font-size: 2rem;
+  font-size: 2.2rem;
+}
+
+.input {
+  font-size: 1.8rem;
 }
 
 .button_primary {
@@ -171,7 +182,7 @@ body {
 
   .title {
     font-size: 4.5rem;
-    span {
+    &--colored {
       font-size: 5rem;
     }
   }
@@ -189,12 +200,12 @@ body {
   }
 
   .input {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   .error_message {
     font-size: 1.4rem;
-    min-height: 2.3rem;
+    min-height: 2.1rem;
   }
 
   .button {
@@ -218,16 +229,71 @@ body {
   }
 }
 
+@media (max-height: 420px) and (min-width: 520px) and (max-width: 768px) {
+  html,
+  body {
+    min-height: 38rem;
+  }
+  .header {
+    font-size: 2.6rem;
+    flex-grow: unset;
+  }
+
+  .title {
+    font-size: 3.2rem;
+  }
+
+  .title--colored {
+    font-size: 3.6rem;
+  }
+
+  .subtitle {
+    font-size: 1.8rem;
+  }
+  .modal {
+    min-height: 38rem;
+    justify-content: center;
+  }
+
+  .button {
+    font-size: 1.8rem;
+  }
+
+  .button--signup {
+    padding: 1.3rem 2.2rem;
+  }
+
+  .button--open-modal {
+    padding: 1.1rem 4.4rem;
+  }
+
+  .button-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .button--log-in {
+    padding: 1.3rem 4.6rem;
+  }
+
+  .button--close-modal {
+    padding: 1.1rem 4.9rem;
+    margin-bottom: 2rem;
+  }
+}
+
 @media (min-width: 768px) {
   .header {
     font-size: 4.2rem;
   }
   .title {
     font-size: 6rem;
-    span {
-      font-size: 7.2rem;
-    }
   }
+
+  .title--colored {
+    font-size: 7.2rem;
+  }
+
   .subtitle {
     font-size: 2.6rem;
   }
@@ -239,6 +305,14 @@ body {
     width: 60%;
     height: 100%;
     justify-content: center;
+  }
+
+  .label {
+    font-size: 2.6rem;
+  }
+
+  .input {
+    font-size: 2.2rem;
   }
   .input_group:last-of-type {
     margin-bottom: 5rem;
@@ -257,16 +331,17 @@ body {
 
 @media (min-width: 1024px) {
   html {
+    font-weight: 300;
     min-height: 57rem;
   }
   body {
-    background-color: $signup_brown;
+    background-color: $desktop_background_brown;
     background-size: cover;
     background-image: linear-gradient(
         -45deg,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0) 35%,
-        rgba(0, 0, 0, 1)
+        rgba($black, 0),
+        rgba($black, 0) 35%,
+        rgba($black, 1)
       ),
       url('../assets/desktop_background1.jpg');
     background-position-x: right;
@@ -283,9 +358,10 @@ body {
 
   .title {
     margin-bottom: 2rem;
-    span {
-      color: $light_blue;
-    }
+  }
+
+  .title--colored {
+    color: $light_blue;
   }
 
   .subtitle {
