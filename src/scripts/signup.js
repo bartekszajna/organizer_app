@@ -116,6 +116,7 @@ function generalValidation(e) {
   // so after that we simply look for any errors left
   // if there is none, submit
   if (areMessagesEmpty) {
+    sessionStorage.clear();
     Object.getPrototypeOf(e.target).submit.call(e.target);
   }
 }
@@ -177,7 +178,9 @@ function validateInput(input, inputName) {
 // we detect inserting some data into input so we clear out the corresponding
 // error value (if any) to give the user a little bit better UX
 inputsList.forEach((input) =>
-  input.addEventListener('input', function (e) {
-    e.target.parentNode.lastElementChild.innerText = '';
-  })
+  input.addEventListener('input', clearErrorMessage)
 );
+
+function clearErrorMessage(e) {
+  e.target.parentNode.lastElementChild.innerText = '';
+}

@@ -104,20 +104,20 @@ body {
   width: 100%;
   min-height: 43rem;
   height: 100%;
+  transform: scale(0);
   z-index: 10;
   pointer-events: none;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out,
+    transform 0s 0.5s;
 
   &--open {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
+    transform: scale(1);
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out,
+      transform 0s 0s;
   }
-}
-
-// this class exists because we need our modal initially hidden and we do not want it
-// to fade away smoothly with page opened, so proper transition is added just after it
-.open {
-  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
 .login_form {
@@ -392,6 +392,10 @@ body {
   .input_group {
     width: 40rem;
     margin: 4rem 0 5rem;
+  }
+
+  .input {
+    font-weight: 300;
   }
 
   .error_message {

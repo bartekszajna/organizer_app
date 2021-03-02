@@ -12,7 +12,9 @@ body {
   min-height: 53rem;
 }
 
-.html--modal-opened {
+.modal--opened {
+  min-height: unset;
+  height: calc(var(--vh, 1vh) * 100);
   overflow-y: hidden;
 }
 
@@ -109,24 +111,29 @@ body {
   left: 0;
   width: 100%;
   padding: 0 10%;
-  //overflow-y: hidden;
-  //min-height: 53rem;
   height: calc(var(--vh, 1vh) * 100);
   z-index: 10;
+  transform: scale(0);
   pointer-events: none;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out,
+    transform 0s 0.5s;
+}
 
-  &--open {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
-  }
+.show--modal {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out,
+    transform 0s 0s;
 }
 
 // this class exists because we need our modal initially hidden and we do not want it
 // to fade away smoothly with page opened, so proper transition is added just after it
-.open {
-  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-}
+// .open {
+//   //transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+//   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+// }
 
 .modal_icon {
   margin: -2rem 12rem 2rem 0;

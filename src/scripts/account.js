@@ -84,16 +84,17 @@ body.addEventListener('transitionend', (e) => {
 let isModalOpening = false;
 
 // for bigger width, when modal wont be 100% wide and high
-body.addEventListener('click', detectClickOutsideModal);
 
 function openModal() {
   isModalOpening = true;
-  modal.classList.add('open');
-  modal.classList.add('modal--open');
-  html.classList.add('html--modal-opened');
-  //addTaskButton.setAttribute('aria-expanded', 'true');
+  modal.classList.add('show--modal');
+
+  body.addEventListener('click', detectClickOutsideModal);
+  modal.addEventListener('transitionend', focusOnCancelButton);
+  document.addEventListener('keydown', detectEscapeKeyEvent);
   firstModalEl.addEventListener('focus', handleFirstModalEl);
   lastModalEl.addEventListener('focus', handleLastModalEl);
+  closeModalButton.addEventListener('click', closeModal);
 }
 
 //whenever we open the modal, we want the first
@@ -101,17 +102,36 @@ function openModal() {
 function focusOnCancelButton() {
   if (isModalOpening) {
     lastModalEl.focus();
+    preventBodyScroll();
     isModalOpening = false;
   }
 }
 
+// when modal is opened, we do not want the body to be scrollable
+// to prevent its resizing due to mobile browser bar detecting it
+// and showing/hiding
+function preventBodyScroll() {
+  html.classList.add('modal--opened');
+  body.classList.add('modal--opened');
+}
+
+function enableBodyScroll() {
+  html.classList.remove('modal--opened');
+  body.classList.remove('modal--opened');
+}
+
 function closeModal() {
-  modal.classList.remove('modal--open');
-  html.classList.remove('html--modal-opened');
+  modal.classList.remove('show--modal');
+  enableBodyScroll();
   deleteButton.focus();
-  //addTaskButton.setAttribute('aria-expanded', 'false');
+
+  body.removeEventListener('click', detectClickOutsideModal);
+  modal.removeEventListener('transitionend', focusOnCancelButton);
+  closeModalButton.removeEventListener('click', closeModal);
+  document.removeEventListener('keydown', detectEscapeKeyEvent);
   firstModalEl.removeEventListener('focus', handleFirstModalEl);
   lastModalEl.removeEventListener('focus', handleLastModalEl);
+  confirmDeleteButton.removeEventListener('click', deleteFormSubmission);
 }
 
 // to close the modal with escape button
@@ -213,9 +233,8 @@ accountForm.addEventListener('submit', generalValidation);
 deleteForm.addEventListener('submit', generalValidation);
 
 function generalValidation(e) {
-  console.log('XD');
   e.preventDefault();
-  console.log('XDD');
+
   // since we have two unrelated forms, we have to grab only
   // the ones inside this particular validated form
   const siblingInputsList = e.target.querySelectorAll('.input');
@@ -232,7 +251,7 @@ function generalValidation(e) {
       !!input.parentNode.lastElementChild.innerText
     );
   });
-  console.log('XDDD');
+
   // we need to grab error messages only inside of this form
   const formErrorMessages = e.target.querySelectorAll('.error_message');
 
@@ -246,7 +265,7 @@ function generalValidation(e) {
   // error messages (or not if valid inputs)
   // so after that we simply look for any errors left
   // if there is none, submit
-  console.log('XDDDD');
+
   if (areMessagesEmpty && e.target === accountForm) {
     // and now, since the programmatic JS form submission doesn't include the submit button
     // name and value pair (which is essential on server-side to differentiate which form - update, or delete
@@ -274,8 +293,8 @@ function generalValidation(e) {
     );
     hiddenInput.setAttribute('type', 'hidden');
     e.target.appendChild(hiddenInput);
-    console.log('XDDDDD');
-    //Object.getPrototypeOf(e.target).submit.call(e.target);
+
+    Object.getPrototypeOf(e.target).submit.call(e.target);
   }
 }
 
@@ -317,25 +336,30 @@ function validateInput(input, inputName) {
       if (!input.value.match(validationPatterns.passwordPattern)) {
         deleteError.innerText = 'You provided the wrong password';
       } else {
-        // here
-        modal.addEventListener('transitionend', focusOnCancelButton);
-        closeModalButton.addEventListener('click', closeModal);
-        document.addEventListener('keydown', detectEscapeKeyEvent);
-
         openModal();
-
-        confirmDeleteButton.addEventListener('click', (e) => {
-          deleteForm.submit();
-        });
+        confirmDeleteButton.addEventListener('click', deleteFormSubmission);
       }
     }
   }
 }
 
+function deleteFormSubmission() {
+  // since we submit our form programmaticaly, hidden input with proper
+  // atributes needs to be created to emulate normal button-clicked submit
+  const hiddenInput = document.createElement('input');
+  hiddenInput.setAttribute('name', 'delete_account');
+  hiddenInput.setAttribute('value', 'delete');
+  hiddenInput.setAttribute('type', 'hidden');
+  deleteForm.appendChild(hiddenInput);
+  deleteForm.submit();
+}
+
 // we detect inserting some data into input so we clear out the corresponding
 // error value (if any) to give the user a little bit better UX
 inputsList.forEach((input) =>
-  input.addEventListener('input', function (e) {
-    e.target.parentNode.lastElementChild.innerText = '';
-  })
+  input.addEventListener('input', clearErrorMessage)
 );
+
+function clearErrorMessage(e) {
+  e.target.parentNode.lastElementChild.innerText = '';
+}

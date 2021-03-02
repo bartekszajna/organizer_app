@@ -10,7 +10,7 @@ document.fonts.ready.then(showBody);
 const body = document.querySelector('body');
 const links = document.querySelectorAll('a');
 
-const loginButton = document.querySelector('.button--open-modal');
+const loginButton = document.querySelector('button.button--open-modal');
 const backButton = document.querySelector('.button--close-modal');
 
 const modal = document.querySelector('.modal');
@@ -59,31 +59,28 @@ body.addEventListener('transitionend', (e) => {
   navigationAddress = '';
 });
 
-// simple flag to denote opening the modal moment
-let isModalOpening = false;
-
-loginButton.addEventListener('click', openModal);
-
-modal.addEventListener('transitionend', focusOnFirstInput);
-
-backButton.addEventListener('click', closeModal);
-
-modal.addEventListener('click', detectClickOutsideModal);
-
-document.addEventListener('keydown', detectEscapeKeyEvent);
-
-function openModal() {
-  isModalOpening = true;
-  modal.classList.add('open');
-  modal.classList.add('modal--open');
-  loginButton.setAttribute('aria-expanded', 'true');
-  firstModalEl.addEventListener('focus', handleFirstModalEl);
-  lastModalEl.addEventListener('focus', handleLastModalEl);
-}
-
 // we want to check if server filled any errors into our messages bound to respective inputs
 // if that is the case, open modal so the user can see them instantly
 document.addEventListener('DOMContentLoaded', checkErrorsFromServer);
+
+// simple flag to denote opening the modal moment
+let isModalOpening = false;
+if (loginButton) {
+  loginButton.addEventListener('click', openModal);
+}
+backButton.addEventListener('click', closeModal);
+
+function openModal() {
+  isModalOpening = true;
+  modal.classList.add('modal--open');
+  loginButton.setAttribute('aria-expanded', 'true');
+
+  modal.addEventListener('transitionend', focusOnFirstInput);
+  modal.addEventListener('click', detectClickOutsideModal);
+  document.addEventListener('keydown', detectEscapeKeyEvent);
+  firstModalEl.addEventListener('focus', handleFirstModalEl);
+  lastModalEl.addEventListener('focus', handleLastModalEl);
+}
 
 function checkErrorsFromServer() {
   let areThereAnyErrors = [...errorMessages].some((error) => error.textContent);
@@ -107,6 +104,10 @@ function closeModal() {
   modal.classList.remove('modal--open');
   loginButton.focus();
   loginButton.setAttribute('aria-expanded', 'false');
+
+  modal.removeEventListener('transitionend', focusOnFirstInput);
+  modal.removeEventListener('click', detectClickOutsideModal);
+  document.removeEventListener('keydown', detectEscapeKeyEvent);
   firstModalEl.removeEventListener('focus', handleFirstModalEl);
   lastModalEl.removeEventListener('focus', handleLastModalEl);
 }
@@ -184,7 +185,9 @@ function checkEmptyInputValues(e) {
 // we detect inserting some data into input so we clear out the corresponding
 // error value (if any) to give little bit better UX to user
 inputsList.forEach((input) =>
-  input.addEventListener('input', function (e) {
-    e.target.parentNode.lastElementChild.innerText = '';
-  })
+  input.addEventListener('input', clearErrorMessage)
 );
+
+function clearErrorMessage(e) {
+  e.target.parentNode.lastElementChild.innerText = '';
+}

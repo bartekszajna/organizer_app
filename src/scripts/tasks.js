@@ -10,6 +10,9 @@ document.fonts.ready.then(showBody);
 const body = document.querySelector('body');
 const links = document.querySelectorAll('a');
 
+const tasksSortFieldset = document.querySelector('.toolbar_fieldset');
+const tasksViewFieldset = document.querySelector('.tasks_view');
+
 const tasksList = document.querySelector('.tasks_list');
 const tasksView = document.querySelector('.tasks_view');
 const tasks = document.querySelectorAll('.task');
@@ -17,6 +20,17 @@ const priorityIndicators = document.querySelectorAll('.task_priority');
 
 const verticalInput = document.querySelector('.button--vertical');
 const horizontalInput = document.querySelector('.button--horizontal');
+
+// local storage handling
+if (localStorage.getItem('tasks_view')) {
+  const tasksViewId = localStorage.getItem('tasks_view');
+  tasksViewFieldset.querySelector(`#${tasksViewId}`).checked = true;
+}
+
+tasksViewFieldset.addEventListener('change', (e) => {
+  const tasksViewId = e.target.getAttribute('id');
+  localStorage.setItem('tasks_view', tasksViewId);
+});
 
 // matchMedia object to handle looks of the tasks list in case of resizing.
 // Better, much more efficient way than listening for resize event
@@ -60,7 +74,9 @@ body.addEventListener('transitionend', (e) => {
 // color of task priority indicators handling
 // based on server-side information stored inside
 // every dataset attribute
-priorityIndicators.forEach((indicator) => {
+priorityIndicators.forEach(setColorToIndicator);
+
+function setColorToIndicator(indicator) {
   const priority = indicator.dataset.priority;
   if (priority === '1') {
     indicator.classList.add('task_priority--low');
@@ -69,7 +85,7 @@ priorityIndicators.forEach((indicator) => {
   } else {
     indicator.classList.add('task_priority--high');
   }
-});
+}
 
 // tasks view handling
 if (verticalInput.checked) {

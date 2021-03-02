@@ -102,10 +102,9 @@ document.documentElement.style.setProperty('--vh', `${vh}px`);
 window.addEventListener('resize', () => {
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
-  console.log(vh);
 });
-// now we have vh related to visible piece of our display (and not including
-// unstable navigations which change during page scrolling)
+// now we have vh related to visible piece of our screen (and not including
+// unstable navigations which fold/unfold during page scrolling)
 
 // we want to check if server filled any errors into our messages bound to respective inputs
 // if that is the case, open modal so the user can see them instantly
@@ -210,25 +209,24 @@ function detectClickOutsideMenu(e) {
 
 addTaskButton.addEventListener('click', openModal);
 backButton.addEventListener('click', closeModal);
-modal.addEventListener('transitionend', focusOnFirstInput);
-document.addEventListener('keydown', detectEscapeKeyEvent);
-modal.addEventListener('click', detectClickOutsideModal);
 
 function openModal() {
   isModalOpening = true;
 
+  modal.addEventListener('transitionend', focusOnFirstInput);
+  document.addEventListener('keydown', detectEscapeKeyEvent);
+  modal.addEventListener('click', detectClickOutsideModal);
+
   if (window.innerWidth > 520 && window.innerWidth < 768) {
     html.classList.add('modal--opened-m');
-    //body.classList.add('modal--opened-m');
-    modal.classList.add('modal--open-m');
+    modal.classList.add('show--modal-m');
   } else {
     html.classList.add('modal--opened-xs');
-    //body.classList.add('modal--opened-xs');
-    modal.classList.add('modal--open-xs');
+    modal.classList.add('show--modal-xs');
   }
-  modal.classList.add('open');
 
   addTaskButton.setAttribute('aria-expanded', 'true');
+
   firstModalEl.addEventListener('focus', handleFirstModalEl);
   lastModalEl.addEventListener('focus', handleLastModalEl);
 }
@@ -243,16 +241,17 @@ function focusOnFirstInput() {
 }
 
 function closeModal() {
-  modal.classList.remove('modal--open');
   html.classList.remove('modal--opened-xs');
-  //body.classList.remove('modal--opened-xs');
   html.classList.remove('modal--opened-m');
-  //body.classList.remove('modal--opened-m');
-  modal.classList.remove('modal--open-xs');
-  modal.classList.remove('modal--open-m');
-  modal.classList.remove('open');
+  modal.classList.remove('show--modal-xs');
+  modal.classList.remove('show--modal-m');
+
   addTaskButton.focus();
   addTaskButton.setAttribute('aria-expanded', 'false');
+
+  modal.removeEventListener('transitionend', focusOnFirstInput);
+  document.removeEventListener('keydown', detectEscapeKeyEvent);
+  modal.removeEventListener('click', detectClickOutsideModal);
   firstModalEl.removeEventListener('focus', handleFirstModalEl);
   lastModalEl.removeEventListener('focus', handleLastModalEl);
 }
@@ -328,6 +327,7 @@ function generalValidation(e) {
   // so after that we simply look for any errors left
   // if there is none, submit
   if (areMessagesEmpty) {
+    localStorage.clear();
     Object.getPrototypeOf(e.target).submit.call(e.target);
   }
 }
@@ -358,7 +358,9 @@ function validateInput(input, inputName) {
 // we detect inserting some data into input so we clear out the corresponding
 // error value (if any) to give the user a little bit better UX
 inputsList.forEach((input) =>
-  input.addEventListener('input', function (e) {
-    e.target.parentNode.lastElementChild.innerText = '';
-  })
+  input.addEventListener('input', clearErrorMessage)
 );
+
+function clearErrorMessage(e) {
+  e.target.parentNode.lastElementChild.innerText = '';
+}

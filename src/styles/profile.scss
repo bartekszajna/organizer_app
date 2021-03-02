@@ -11,6 +11,11 @@ html {
   overflow-x: hidden;
 }
 
+// both classes below are being attached to html tag whenever the modal is opened
+// which one we choose depends on the current screen size - under 520px width we apply --xs,
+// above: --m. Relying on default html styling leads to strange bug with its dynamic
+// resizing and jumpy, lagging scrolling experience when modal opened, so we ensure the document to be
+// at least the height of the addtask modal - respectively to it current height
 .modal--opened-xs {
   min-height: 52.5rem;
   height: calc(var(--vh, 1vh) * 100);
@@ -213,32 +218,30 @@ body {
   pointer-events: none;
   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out,
     transform 0s 0.5s;
-
-  &--open-xs {
-    min-height: 52.5rem;
-    height: calc(var(--vh, 1vh) * 100);
-    visibility: visible;
-    opacity: 1;
-    overflow-y: auto;
-    pointer-events: auto;
-    transform: scale(1);
-  }
-
-  &--open-m {
-    min-height: 57.5rem;
-    height: calc(var(--vh, 1vh) * 100);
-    visibility: visible;
-    opacity: 1;
-    overflow-y: auto;
-    pointer-events: auto;
-    transform: scale(1);
-  }
 }
 
-// this class exists because we need our modal initially hidden and we do not want it
-// to fade away smoothly with page opened, so proper transition is added just after it
-.open {
-  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+.show--modal-xs {
+  min-height: 52.5rem;
+  height: calc(var(--vh, 1vh) * 100);
+  visibility: visible;
+  opacity: 1;
+  overflow-y: auto;
+  pointer-events: auto;
+  transform: scale(1);
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out,
+    transform 0s 0s;
+}
+
+.show--modal-m {
+  min-height: 57.5rem;
+  height: calc(var(--vh, 1vh) * 100);
+  visibility: visible;
+  opacity: 1;
+  overflow-y: auto;
+  pointer-events: auto;
+  transform: scale(1);
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out,
+    transform 0s 0s;
 }
 
 .label {
