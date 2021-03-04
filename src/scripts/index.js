@@ -34,6 +34,33 @@ usernameInput.addEventListener('input', (e) => {
   sessionStorage.setItem('login_username', usernameInput.value);
 });
 
+function fetchQuotesToStorage() {
+  const url =
+    'https://api.quotable.io/quotes?tags=inspirational&maxLength=80&limit=100';
+
+  fetch(url)
+    .then((response) => {
+      if (response.ok) return response.json();
+      else return Promise.reject(`Error: ${response.status}`);
+    })
+    .then((json) => {
+      const trimmedObjects = json.results.map((obj) => {
+        for (const prop in obj) {
+          if (prop !== 'author' && prop !== 'content') {
+            delete obj[prop];
+          }
+        }
+        return obj;
+      });
+      sessionStorage.setItem('quotes', JSON.stringify(trimmedObjects));
+    });
+}
+
+// so we do not fetch then every time we visit index.html
+if (!sessionStorage.getItem('quotes')) {
+  fetchQuotesToStorage();
+}
+
 // for every link redirecting us outside we need to make sure to pospone its action
 // until the body hides smoothly, so we prevent their default behavior, store
 // the address inside of navigationAddress variable and start hiding the body with transition
@@ -161,7 +188,7 @@ function checkEmptyInputValues(e) {
   e.preventDefault();
   if (!usernameInput.value) {
     usernameInput.setAttribute('aria-invalid', 'true');
-    usernameError.innerText = "You need to provide user's name";
+    usernameError.innerText = "Please provide user's name";
   } else {
     usernameError.innerText = '';
   }

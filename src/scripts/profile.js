@@ -68,6 +68,29 @@ inputsForStorage.forEach((input) => {
   });
 });
 
+// quotes handling, we pull all the quotes only once for every logging
+// so they do not fetch them every time they enter a profile.html
+// I've tried that, takes to long and it's unnecessary delay
+const quoteContent = document.querySelector('.quote_container--text');
+const quoteAuthor = document.querySelector('.quote_container--author');
+
+function takeRandomQuoteFromStorage() {
+  if (sessionStorage.getItem('quotes')) {
+    const objects = JSON.parse(sessionStorage.getItem('quotes'));
+    const objectsLength = objects.length;
+    const randomNumber = getRandomNumber(objectsLength);
+
+    quoteContent.innerText = `"${objects[randomNumber].content}"`;
+    quoteAuthor.innerText = `${objects[randomNumber].author}`;
+  }
+}
+
+function getRandomNumber(range) {
+  return Math.floor(Math.random() * (range + 1));
+}
+
+takeRandomQuoteFromStorage();
+
 // for every link redirecting us outside we need to make sure to pospone its action
 // until the body hides smoothly, so we prevent their default behavior, store
 // the address inside of navigationAddress variable and start hiding the body with transition
@@ -172,7 +195,7 @@ function animateMenuItems(item, index) {
 // to keep focus inside of opened menu and to create so-to-say
 // looped state, where only entering the hamburger can break it
 function handleFirstListEl(e) {
-  if (hamburgerButton.ariaExpanded === 'true') {
+  if (hamburgerButton.getAttribute('aria-expanded') === 'true') {
     if (e.shiftKey && e.code === 'Tab') {
       e.preventDefault();
       lastListEl.focus();
@@ -181,7 +204,7 @@ function handleFirstListEl(e) {
 }
 
 function handleLastListEl(e) {
-  if (hamburgerButton.ariaExpanded === 'true') {
+  if (hamburgerButton.getAttribute('aria-expanded') === 'true') {
     if (e.code === 'Tab' && !e.shiftKey) {
       e.preventDefault();
       firstListEl.focus();
@@ -191,7 +214,7 @@ function handleLastListEl(e) {
 
 // self-explanatory
 function closeMenuWithEscape(e) {
-  if (hamburgerButton.ariaExpanded === 'true') {
+  if (hamburgerButton.getAttribute('aria-expanded') === 'true') {
     if (e.code === 'Escape') {
       hamburgerButton.click();
     }
@@ -200,7 +223,7 @@ function closeMenuWithEscape(e) {
 
 // to be able to close te menu by clicking outside of it
 function detectClickOutsideMenu(e) {
-  if (hamburgerButton.ariaExpanded === 'true') {
+  if (hamburgerButton.getAttribute('aria-expanded') === 'true') {
     if (e.target !== navigation && e.target !== hamburgerButton) {
       hamburgerButton.click();
     }
@@ -345,10 +368,15 @@ function validateInput(input, inputName) {
       titleError.innerText = '';
     }
   }
-  //deadline validation
+  // rudimentary deadline validation, not for real month-validation
+  // and past dates (although technically these are possible)
   if (inputName === 'deadline') {
+    let dateArray = input.value.split('-');
+
     if (input.value && !input.value.match(validationPatterns.deadlinePattern)) {
       deadlineError.innerText = 'Please keep the given format';
+    } else if (dateArray[1] > 12 || dateArray[2] > 31) {
+      deadlineError.innerText = 'The date looks invalid';
     } else {
       deadlineError.innerText = '';
     }

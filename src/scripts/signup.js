@@ -130,7 +130,7 @@ function validateInput(input, inputName) {
     if (!input.value) {
       usernameError.innerText = 'Username is required';
     } else if (!input.value.trim().match(validationPatterns.usernamePattern)) {
-      usernameError.innerText = 'Please make it 3-12 chars long';
+      usernameError.innerText = 'Please make it 3-16 chars long';
       input.value = input.value.trim();
     } else {
       usernameError.innerText = '';

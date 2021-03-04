@@ -27,6 +27,9 @@
 - client-side JS custom validation to reduce amount of futile requests
 - HTML default validation as a fallback of last resort for users with browser-JS disabled(not much of a feature though)
 - tasks view with sorting option (requires new http request fo fetching list sorted by db)
+- confirmation modal for deleting account
+- inspirational quotes at profile page fetched asynchronously from
+  [quotable](https://github.com/lukePeavey/quotable)
 
 ## Above photographs come from [Unsplash](https://unsplash.com). Credits:
 

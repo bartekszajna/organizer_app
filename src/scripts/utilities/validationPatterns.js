@@ -1,5 +1,5 @@
 const validationPatterns = {
-  usernamePattern: '^[a-zA-Z0-9_ ]{3,12}$',
+  usernamePattern: '^[a-zA-Z0-9_ ]{3,16}$',
   emailPattern: '^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+).([a-zA-Z]{2,5})$',
   passwordPattern: '[a-zA-Z0-9_ ]{8,30}',
   titlePattern: '^.{1,50}$',

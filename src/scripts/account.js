@@ -272,7 +272,7 @@ function generalValidation(e) {
     // was submited), we need to send that pair some other way.
     // I went with dynamic creating of the hidden input with those attributes to emulate
     // default submit button behavior, but we probably also could do something with FormData and AJAX calls
-    // like: (and it worked)
+    // like: (and it somewhat worked, but doesn't refresh the page on it own - therefore the reload at the end)
     // let FD = new FormData(e.target);
     // FD.append(e.target.lastElementChild.getAttribute('name'), e.target.lastElementChild.getAttribute('value));
     // let xhr = new XMLHttpRequest();
@@ -306,7 +306,7 @@ function validateInput(input, inputName) {
     if (inputName === 'username') {
       input.value = input.value.trim();
       if (!input.value.match(validationPatterns.usernamePattern)) {
-        usernameError.innerText = 'Please make it 3-12 chars long';
+        usernameError.innerText = 'Please make it 3-16 chars long';
       }
     }
     // email validation
