@@ -1,11 +1,7 @@
 import '../styles/index.scss';
-import showBody from './utilities/showBody.js';
-import hideBody from './utilities/hideBody.js';
-
-// prevents FOUT issue
-// fonts.ready IS NOT equal to DOMContentLoaded, which happens
-// earlier, without custom fonts loaded
-document.fonts.ready.then(showBody);
+import bodyHandler from './utilities/bodyHandler.js';
+import checkErrorsFromServer from './utilities/checkErrorsFromServer';
+import fetchQuotesToStorage from './utilities/fetchQuotesToStorage.js';
 
 const body = document.querySelector('body');
 const links = document.querySelectorAll('a');
@@ -23,9 +19,10 @@ const usernameError = form.querySelector('#username-error');
 const passwordInput = form.querySelector('#password');
 const passwordError = form.querySelector('#password-error');
 const inputsList = document.querySelectorAll('input');
-const errorMessages = form.querySelectorAll('.error_message');
+const errorMessagesList = form.querySelectorAll('.error_message');
 
-// storage handling
+/* ---------- storage handling ------------- */
+
 if (sessionStorage.getItem('login_username')) {
   usernameInput.value = sessionStorage.getItem('login_username');
 }
@@ -34,64 +31,22 @@ usernameInput.addEventListener('input', (e) => {
   sessionStorage.setItem('login_username', usernameInput.value);
 });
 
-function fetchQuotesToStorage() {
-  const url =
-    'https://api.quotable.io/quotes?tags=inspirational&maxLength=80&limit=100';
+/* ----------------------------------------- */
 
-  fetch(url)
-    .then((response) => {
-      if (response.ok) return response.json();
-      else return Promise.reject(`Error: ${response.status}`);
-    })
-    .then((json) => {
-      const trimmedObjects = json.results.map((obj) => {
-        for (const prop in obj) {
-          if (prop !== 'author' && prop !== 'content') {
-            delete obj[prop];
-          }
-        }
-        return obj;
-      });
-      sessionStorage.setItem('quotes', JSON.stringify(trimmedObjects));
-    });
-}
-
-// so we do not fetch then every time we visit index.html
 if (!sessionStorage.getItem('quotes')) {
   fetchQuotesToStorage();
 }
 
-// for every link redirecting us outside we need to make sure to pospone its action
-// until the body hides smoothly, so we prevent their default behavior, store
-// the address inside of navigationAddress variable and start hiding the body with transition
-links.forEach((link) =>
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    navigationAddress = e.currentTarget.href;
-    hideBody();
-  })
-);
+bodyHandler(body, links);
 
-// contents of this viarable determine whether we clicked <a> link redirecting
-// us to other page or not. If that is the case, it will contain the url
-let navigationAddress = '';
-
-// ... so now we wait for finishing of body hiding (hence the transitionend event)
-// to finally swap window.location.href with our pre-saved location taken from
-// link clicked before, which causes immediate redirection to given page
-body.addEventListener('transitionend', (e) => {
-  if (navigationAddress) {
-    window.location.href = navigationAddress;
-  }
-  navigationAddress = '';
+document.addEventListener('DOMContentLoaded', () => {
+  checkErrorsFromServer(errorMessagesList, loginButton);
 });
 
-// we want to check if server filled any errors into our messages bound to respective inputs
-// if that is the case, open modal so the user can see them instantly
-document.addEventListener('DOMContentLoaded', checkErrorsFromServer);
-
-// simple flag to denote opening the modal moment
 let isModalOpening = false;
+
+// if we are already logged in, loginButton is swapped by PHP to a link to profile page
+// when it is the case, we don't want to open any modal
 if (loginButton) {
   loginButton.addEventListener('click', openModal);
 }
@@ -109,17 +64,6 @@ function openModal() {
   lastModalEl.addEventListener('focus', handleLastModalEl);
 }
 
-function checkErrorsFromServer() {
-  let areThereAnyErrors = [...errorMessages].some((error) => error.textContent);
-  if (areThereAnyErrors) {
-    loginButton.click();
-  }
-}
-
-// without checking the isModalOpening flag, this eventListener fired
-// and focused on this input over and over (apparently detecting smoothness of input focusing every time)
-// nevertheless, its purpose is to bring automatic focus to first input element
-// inside modal but only when opening it
 function focusOnFirstInput() {
   if (isModalOpening) {
     isModalOpening = false;
@@ -139,25 +83,20 @@ function closeModal() {
   lastModalEl.removeEventListener('focus', handleLastModalEl);
 }
 
-// we check innerWidth for we want this behavior to occur only on desktops
-// on mobiles form is not 100% wide (with transparent sides) and clicking on those sides of form
-// (i.e. to close the virtual keyboard) made users actually closing the whole modal
 function detectClickOutsideModal(e) {
   if (!form.contains(e.target) && window.innerWidth >= 1024) {
     backButton.click();
   }
 }
 
-// function to enable escape-key-based modal closing feature
 function detectEscapeKeyEvent(e) {
   if (e.code === 'Escape') {
     backButton.click();
   }
 }
 
-// handleFirstModalEl & handleLastModalEl are supposed to keep modal focused between first and last
-// focusable elements, therefore creating the feeling of infinite tab loop when modal opened
-// in both directions -> hence  the e.shiftKey condition
+// hangleFirstListEl&handleLastListEl have one purpose -
+// to keep focus inside of opened menu
 function handleFirstModalEl(e) {
   e.target.addEventListener('keydown', (e) => {
     if (e.shiftKey && e.code === 'Tab') {

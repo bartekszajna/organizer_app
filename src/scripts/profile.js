@@ -1,12 +1,9 @@
 import '../styles/profile.scss';
-import showBody from './utilities/showBody.js';
-import hideBody from './utilities/hideBody.js';
+import bodyHandler from './utilities/bodyHandler.js';
+import checkErrorsFromServer from './utilities/checkErrorsFromServer';
+import resizeVhUnit from './utilities/resizeVhUnit.js';
+import takeRandomQuoteFromStorage from './utilities/takeRandomQuoteFromStorage.js';
 import validationPatterns from './utilities/validationPatterns.js';
-
-// prevents FOUT issue
-// fonts.ready IS NOT equal to DOMContentLoaded, which happens
-// earlier, without custom fonts loaded
-document.fonts.ready.then(showBody);
 
 const html = document.querySelector('html');
 const body = document.querySelector('body');
@@ -32,16 +29,17 @@ const errorMessagesList = form.querySelectorAll(
 const titleError = form.querySelector('#title-error');
 const deadlineError = form.querySelector('#deadline-error');
 
-// local storage handling
+const quoteContent = document.querySelector('.quote_container--text');
+const quoteAuthor = document.querySelector('.quote_container--author');
+
+/* ---------- storage handling ------------- */
+
 const inputsForStorage = form.querySelectorAll('.local_storage_member');
 const checkboxes = form.querySelectorAll('.radio_input');
 
-// we check all items which
-// we want to hold the value persistently
 inputsForStorage.forEach((input) => {
   const inputName = input.getAttribute('id');
 
-  // check whether there exists a value for given input
   if (localStorage.getItem(inputName)) {
     let storageValue = localStorage.getItem(inputName);
     if (inputName === 'fieldset') {
@@ -55,12 +53,6 @@ inputsForStorage.forEach((input) => {
   }
 });
 
-// then we add proper listener to adjust and
-// update the storage value
-// we have set "change" rather than "input" listener
-// because one of the inputsForStorage is actually
-// a checkbox fieldset, not the input itself
-// so it doesn't have "input" one
 inputsForStorage.forEach((input) => {
   const inputName = input.getAttribute('id');
   input.addEventListener('change', function (e) {
@@ -68,79 +60,18 @@ inputsForStorage.forEach((input) => {
   });
 });
 
-// quotes handling, we pull all the quotes only once for every logging
-// so they do not fetch them every time they enter a profile.html
-// I've tried that, takes to long and it's unnecessary delay
-const quoteContent = document.querySelector('.quote_container--text');
-const quoteAuthor = document.querySelector('.quote_container--author');
+/* ----------------------------------------- */
 
-function takeRandomQuoteFromStorage() {
-  if (sessionStorage.getItem('quotes')) {
-    const objects = JSON.parse(sessionStorage.getItem('quotes'));
-    const objectsLength = objects.length;
-    const randomNumber = getRandomNumber(objectsLength);
+// provide user with random quote from sessionStorage with every page refresh
+takeRandomQuoteFromStorage(quoteContent, quoteAuthor);
 
-    quoteContent.innerText = `"${objects[randomNumber].content}"`;
-    quoteAuthor.innerText = `${objects[randomNumber].author}`;
-  }
-}
+bodyHandler(body, links);
 
-function getRandomNumber(range) {
-  return Math.floor(Math.random() * (range + 1));
-}
+resizeVhUnit();
 
-takeRandomQuoteFromStorage();
-
-// for every link redirecting us outside we need to make sure to pospone its action
-// until the body hides smoothly, so we prevent their default behavior, store
-// the address inside of navigationAddress variable and start hiding the body with transition
-links.forEach((link) =>
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    navigationAddress = e.currentTarget.href;
-    hideBody();
-  })
-);
-
-// contents of this viarable determine whether we clicked <a> link redirecting
-// us to other page or not. If that is the case, it will contain the url
-let navigationAddress = '';
-
-// ... so now we wait for finishing of body hiding (hence the transitionend event)
-// to finally swap window.location.href with our pre-saved location taken from
-// link clicked before, which causes immediate redirection to given page
-body.addEventListener('transitionend', (e) => {
-  if (navigationAddress) {
-    window.location.href = navigationAddress;
-  }
-  navigationAddress = '';
+document.addEventListener('DOMContentLoaded', () => {
+  checkErrorsFromServer(errorMessagesList, addTaskButton);
 });
-
-// this piece of code comes from
-// https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
-// and solves the tricky issue of native vh unit
-// changing its value dynamically due to the mobile browsers navigation
-let vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty('--vh', `${vh}px`);
-window.addEventListener('resize', () => {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
-// now we have vh related to visible piece of our screen (and not including
-// unstable navigations which fold/unfold during page scrolling)
-
-// we want to check if server filled any errors into our messages bound to respective inputs
-// if that is the case, open modal so the user can see them instantly
-document.addEventListener('DOMContentLoaded', checkErrorsFromServer);
-
-function checkErrorsFromServer() {
-  let areThereAnyErrors = [...errorMessagesList].some(
-    (error) => error.textContent
-  );
-  if (areThereAnyErrors) {
-    addTaskButton.click();
-  }
-}
 
 let isModalOpening = false;
 let isMenuClosing = false;
@@ -151,9 +82,6 @@ lastListEl.addEventListener('keydown', handleLastListEl);
 document.addEventListener('keydown', closeMenuWithEscape);
 body.addEventListener('click', detectClickOutsideMenu);
 
-// when we close the nav, we want to make sure
-// that hamburger stays focused, the same state
-// as when we opened this menu
 navigation.addEventListener('transitionend', (e) => {
   if (isMenuClosing) {
     hamburgerButton.focus();
@@ -161,11 +89,8 @@ navigation.addEventListener('transitionend', (e) => {
   isMenuClosing = false;
 });
 
-// function evoked every time we click hamburger,
-// whether to open or to close the menu
 function navigationToggler(e) {
-  // following animation script with nice smooth per-index
-  // delayed transition is derived from:
+  // following animation is derived from:
   // https://www.youtube.com/watch?v=gXkqy0b4M5g&t=1702s
   listItems.forEach(animateMenuItems);
 
@@ -179,8 +104,6 @@ function navigationToggler(e) {
   isMenuClosing = !isMenuClosing;
 }
 
-// just to smoothly and gently fade all list items in when menu opened
-// with customizable delay specific for every item
 function animateMenuItems(item, index) {
   if (item.style.animation) {
     item.style.opacity = 1;
@@ -192,8 +115,7 @@ function animateMenuItems(item, index) {
 }
 
 // hangleFirstListEl&handleLastListEl have one purpose -
-// to keep focus inside of opened menu and to create so-to-say
-// looped state, where only entering the hamburger can break it
+// to keep focus inside of opened menu
 function handleFirstListEl(e) {
   if (hamburgerButton.getAttribute('aria-expanded') === 'true') {
     if (e.shiftKey && e.code === 'Tab') {
@@ -212,7 +134,6 @@ function handleLastListEl(e) {
   }
 }
 
-// self-explanatory
 function closeMenuWithEscape(e) {
   if (hamburgerButton.getAttribute('aria-expanded') === 'true') {
     if (e.code === 'Escape') {
@@ -221,7 +142,6 @@ function closeMenuWithEscape(e) {
   }
 }
 
-// to be able to close te menu by clicking outside of it
 function detectClickOutsideMenu(e) {
   if (hamburgerButton.getAttribute('aria-expanded') === 'true') {
     if (e.target !== navigation && e.target !== hamburgerButton) {
@@ -254,8 +174,6 @@ function openModal() {
   lastModalEl.addEventListener('focus', handleLastModalEl);
 }
 
-//whenever we open the modal, we want the first
-// input to receive focus
 function focusOnFirstInput() {
   if (isModalOpening) {
     firstModalEl.focus();
@@ -279,27 +197,18 @@ function closeModal() {
   lastModalEl.removeEventListener('focus', handleLastModalEl);
 }
 
-// to close the modal with escape button
 function detectEscapeKeyEvent(e) {
   if (e.code === 'Escape') {
     backButton.click();
   }
 }
 
-// to be able to close te modal by clicking outside of it
-// but only on desktops
-// on mobiles due to form transparent sides this behavior
-// proved to be counter-intuitive
 function detectClickOutsideModal(e) {
   if (!form.contains(e.target) && window.innerWidth >= 1024) {
     backButton.click();
   }
 }
 
-// as above, both following functions are expected to
-// hold the focus state inside modal and not to let
-// it catch any focusable element outside of it
-// while it is opened
 function handleFirstModalEl(e) {
   e.target.addEventListener('keydown', (e) => {
     if (e.shiftKey && e.code === 'Tab') {

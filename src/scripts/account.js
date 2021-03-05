@@ -1,12 +1,7 @@
 import '../styles/account.scss';
-import showBody from './utilities/showBody.js';
-import hideBody from './utilities/hideBody.js';
+import bodyHandler from './utilities/bodyHandler.js';
+import resizeVhUnit from './utilities/resizeVhUnit.js';
 import validationPatterns from './utilities/validationPatterns.js';
-
-// prevents FOUT issue
-// fonts.ready IS NOT equal to DOMContentLoaded, which happens
-// earlier, without custom fonts loaded
-document.fonts.ready.then(showBody);
 
 const html = document.querySelector('html');
 const body = document.querySelector('body');
@@ -35,55 +30,11 @@ const closeModalButton = modal.querySelector('.button--close-modal');
 const firstModalEl = confirmDeleteButton;
 const lastModalEl = closeModalButton;
 
-// this piece of code comes from
-// https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
-// and solves the tricky issue of native vh unit
-// changing its value dynamically due to the mobile browsers navigation
-let vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty('--vh', `${vh}px`);
-window.addEventListener('resize', () => {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
-// now we have vh related to visible piece of our display (and not including
-// unstable navigations which change during page scrolling)
+bodyHandler(body, links, firstInputEl, true);
 
-// for every link redirecting us outside we need to make sure to pospone its action
-// until the body hides smoothly, so we prevent their default behavior, store
-// the address inside of navigationAddress variable and start hiding the body with transition
-links.forEach((link) =>
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    navigationAddress = e.currentTarget.href;
-    hideBody();
-  })
-);
-
-// contents of this viarable determine whether we clicked <a> link redirecting
-// us to other page or not. If that is the case, it will contain the url
-let navigationAddress = '';
-
-// ... so now we wait for finishing of body hiding (hence the transitionend event)
-// to finally swap window.location.href with our pre-saved location taken from
-// link clicked before, which causes immediate redirection to given page
-// pageRefreshed is to prevent transitionend event from focusing on firstEl
-// over and over again (which is the case since every transition inside modal
-// is effectively also transition on body)
-let pageRefreshed = true;
-body.addEventListener('transitionend', (e) => {
-  if (pageRefreshed) {
-    firstInputEl.focus();
-    pageRefreshed = false;
-  }
-  if (navigationAddress) {
-    window.location.href = navigationAddress;
-  }
-  navigationAddress = '';
-});
+resizeVhUnit();
 
 let isModalOpening = false;
-
-// for bigger width, when modal wont be 100% wide and high
 
 function openModal() {
   isModalOpening = true;
@@ -97,8 +48,7 @@ function openModal() {
   closeModalButton.addEventListener('click', closeModal);
 }
 
-//whenever we open the modal, we want the first
-// input to receive focus
+// default focus not on delete, but on cancel button, for the better UX
 function focusOnCancelButton() {
   if (isModalOpening) {
     lastModalEl.focus();
@@ -134,26 +84,20 @@ function closeModal() {
   confirmDeleteButton.removeEventListener('click', deleteFormSubmission);
 }
 
-// to close the modal with escape button
 function detectEscapeKeyEvent(e) {
   if (e.code === 'Escape') {
     closeModalButton.click();
   }
 }
-// to be able to close te modal by clicking outside of it
-// but only on desktops
-// on mobiles due to form transparent sides this behavior
-// proved to be counter-intuitive
+
 function detectClickOutsideModal(e) {
   if (!modal.contains(e.target) && window.innerWidth >= 1024) {
     closeModalButton.click();
   }
 }
 
-// as above, both following functions are expected to
-// hold the focus state inside modal and not to let
-// it catch any focusable element outside of it
-// while it is opened
+// hangleFirstListEl&handleLastListEl have one purpose -
+// to keep focus inside of opened menu
 function handleFirstModalEl(e) {
   e.target.addEventListener('keydown', (e) => {
     if (e.shiftKey && e.code === 'Tab') {

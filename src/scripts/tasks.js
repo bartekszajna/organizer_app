@@ -1,16 +1,9 @@
 import '../styles/tasks.scss';
-import showBody from './utilities/showBody.js';
-import hideBody from './utilities/hideBody.js';
-
-// prevents FOUT issue
-// fonts.ready IS NOT equal to DOMContentLoaded, which happens
-// earlier, without custom fonts loaded
-document.fonts.ready.then(showBody);
+import bodyHandler from './utilities/bodyHandler.js';
 
 const body = document.querySelector('body');
 const links = document.querySelectorAll('a');
 
-const tasksSortFieldset = document.querySelector('.toolbar_fieldset');
 const tasksViewFieldset = document.querySelector('.tasks_view');
 
 const tasksList = document.querySelector('.tasks_list');
@@ -21,7 +14,8 @@ const priorityIndicators = document.querySelectorAll('.task_priority');
 const verticalInput = document.querySelector('.button--vertical');
 const horizontalInput = document.querySelector('.button--horizontal');
 
-// local storage handling
+/* ---------- storage handling ------------- */
+
 if (localStorage.getItem('tasks_view')) {
   const tasksViewId = localStorage.getItem('tasks_view');
   tasksViewFieldset.querySelector(`#${tasksViewId}`).checked = true;
@@ -31,6 +25,8 @@ tasksViewFieldset.addEventListener('change', (e) => {
   const tasksViewId = e.target.getAttribute('id');
   localStorage.setItem('tasks_view', tasksViewId);
 });
+
+/* ----------------------------------------- */
 
 // matchMedia object to handle looks of the tasks list in case of resizing.
 // Better, much more efficient way than listening for resize event
@@ -43,33 +39,7 @@ mediaQueryObject.addEventListener('change', function (e) {
   }
 });
 
-// for every link redirecting us outside we need to make sure to pospone its action
-// until the body hides smoothly, so we prevent their default behavior, store
-// the address inside of navigationAddress variable and start hiding the body with transition
-links.forEach((link) =>
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    navigationAddress = e.currentTarget.href;
-    hideBody();
-  })
-);
-
-// contents of this viarable determine whether we clicked <a> link redirecting
-// us to other page or not. If that is the case, it will contain the url
-let navigationAddress = '';
-
-// ... so now we wait for finishing of body hiding (hence the transitionend event)
-// to finally swap window.location.href with our pre-saved location taken from
-// link clicked before, which causes immediate redirection to given page
-// pageRefreshed is to prevent transitionend event from focusing on firstEl
-// over and over again (which is the case since every transition inside modal
-// is effectively also transition on body)
-body.addEventListener('transitionend', (e) => {
-  if (navigationAddress) {
-    window.location.href = navigationAddress;
-  }
-  navigationAddress = '';
-});
+bodyHandler(body, links);
 
 // color of task priority indicators handling
 // based on server-side information stored inside
@@ -87,7 +57,8 @@ function setColorToIndicator(indicator) {
   }
 }
 
-// tasks view handling
+/* -------------- tasks view handling --------------- */
+
 if (verticalInput.checked) {
   tasksList.classList.remove('tasks_list--multicolumn');
   tasks.forEach((task) => task.classList.remove('task--multicolumn'));
